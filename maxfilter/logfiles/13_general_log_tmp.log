@@ -1,0 +1,41 @@
+/meg16_0056/160314
+
+/megdata/cbu/semnet/meg16_0056/160314/block_ld1_raw.fif
+Created: /imaging/rf02/Semnet/meg16_0056/160314/block_LD1_raw_bad.fif
+1105192898  15-Mar-2016 18:56:22
+!/hpc-software/neuromag/bin/util/maxfilter-2.2.12  -f /megdata/cbu/semnet/meg16_0056/160314/block_ld1_raw.fif -o /imaging/rf02/Semnet/meg16_0056/160314/block_LD1_raw.fif -ctc /neuro/databases/ctc/ct_sparse.fif -cal /neuro/databases/sss/sss_cal.dat -linefreq 50  -force -autobad 960 -badlimit 7  -bad 723  1031  1111  1731  2212   -st 10 -corr 0.98 -movecomp inter  -hpisubt amp -origin 2 -1 40 -frame head -v | tee /imaging/rf02/Semnet/meg16_0056/160314/block_LD1_raw.log
+
+Created new: /imaging/rf02/Semnet/meg16_0056/160314/block_LD1_raw.fif
+Successfully downsampled: /imaging/rf02/Semnet/meg16_0056/160314/block_LD1_raw_ds.fif
+279815776  15-Mar-2016 19:40:42
+
+/megdata/cbu/semnet/meg16_0056/160314/block_ld2_raw.fif
+Created: /imaging/rf02/Semnet/meg16_0056/160314/block_LD2_raw_bad.fif
+1108448966  15-Mar-2016 20:16:20
+Created new: /imaging/rf02/Semnet/meg16_0056/160314/block_LD2_raw.fif
+Successfully downsampled: /imaging/rf02/Semnet/meg16_0056/160314/block_LD2_raw_ds.fif
+281443812  15-Mar-2016 21:00:56
+
+/megdata/cbu/semnet/meg16_0056/160314/block_fruit_raw.fif
+Created: /imaging/rf02/Semnet/meg16_0056/160314/block_fruit_raw_bad.fif
+1240318066  15-Mar-2016 21:41:37
+Created new: /imaging/rf02/Semnet/meg16_0056/160314/block_fruit_raw.fif
+Successfully downsampled: /imaging/rf02/Semnet/meg16_0056/160314/block_fruit_raw_ds.fif
+314002960  15-Mar-2016 22:32:16
+
+/megdata/cbu/semnet/meg16_0056/160314/block_milk_raw.fif
+Created: /imaging/rf02/Semnet/meg16_0056/160314/block_milk_raw_bad.fif
+1211013766  15-Mar-2016 23:11:26
+Created new: /imaging/rf02/Semnet/meg16_0056/160314/block_milk_raw.fif
+Successfully downsampled: /imaging/rf02/Semnet/meg16_0056/160314/block_milk_raw_ds.fif
+307491108  16-Mar-2016 00:01:16
+
+/megdata/cbu/semnet/meg16_0056/160314/block_odour_raw.fif
+Created: /imaging/rf02/Semnet/meg16_0056/160314/block_odour_raw_bad.fif
+1224037746  16-Mar-2016 00:40:02
+Created new: /imaging/rf02/Semnet/meg16_0056/160314/block_odour_raw.fif
+Successfully downsampled: /imaging/rf02/Semnet/meg16_0056/160314/block_odour_raw_ds.fif
+310746896  16-Mar-2016 01:30:36
+
+
+I've done everything I could!

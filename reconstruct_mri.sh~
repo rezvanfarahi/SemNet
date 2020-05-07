@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+
+#before running script make sure you've typed:
+# freesurfer_5.3.0
+# mne_setup_2.7.3_64bit
+# setenv SUBJECTS_DIR /imaging/rf02/TypLexMEG/
+
+
+################
+# PARAMETERS:
+
+# Input/Output file path:
+
+#path='/megdata/cbu/PATH/TO/YOUR/DATA'
+#path='/group/erp/data/olaf.hauk/Others/Miozzo/data'
+#MRIpath='/group/erp/data/olaf.hauk/Others/Miozzo/MRIs'
+
+outpath='/imaging/rf02/Semnet' #'/imaging/rf02/TypLexMEG/icaanalysis_results/jpg/permutation/connectivity/WB_hubs/to_use' #connectivity/WB_spokes/spectral'  # output directory for images
+#inpath='/imaging/olaf/MEG/GoNoGo/STC/GM'
+inpath='/imaging/rf02/Semnet' #connectivity/WB_spokes/spectral/older'
+
+
+# /imaging/olaf/MEG/GoNoGo/STC/GM/GM_lex_wdspds_n18.stc
+########################
+
+### All Conditions
+
+out_subs=(\
+	    '/MRI_meg16_0030' \
+            '/MRI_meg16_0032' \
+            '/MRI_meg16_0033' \
+            '/MRI_meg16_0034' \
+            '/MRI_meg16_0035' \
+            '/MRI_meg16_0039' \
+            '/MRI_meg16_0041' \
+            '/MRI_meg16_0042' \
+            '/MRI_meg16_0045' \
+            '/MRI_meg16_0047' \
+            '/MRI_meg16_0052' \
+            '/MRI_meg16_0056' \
+	    '/MRI_meg16_0069' \
+ 	    '/MRI_meg16_0070' \
+            '/MRI_meg16_0072' \
+            '/MRI_meg16_0073' \
+            '/MRI_meg16_0075' \
+            '/MRI_meg16_0078' \
+            '/MRI_meg16_0082' \
+            '/MRI_meg16_0086' \
+            '/MRI_meg16_0097' \
+)
+cd in_path
+nconds=${#out_subs[*]}
+lastcond=`expr $nconds - 1`
+
+for cc in `seq 12 12`
+do
+  echo " Condition  ${cc}" 
+
+  recon-all -subjid ${out_subs[cc]} -autorecon2
+  
+done    
+

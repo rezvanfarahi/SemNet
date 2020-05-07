@@ -1,0 +1,13 @@
+/meg16_0125/160712
+
+/megdata/cbu/semnet/meg16_0125/160712/Block_milk_1_raw.fif
+Created: /imaging/rf02/Semnet/meg16_0125/160712/block_milk1_raw_bad.fif
+457223771  30-Aug-2016 17:48:59
+!/hpc-software/neuromag/bin/util/maxfilter-2.2.12  -f /megdata/cbu/semnet/meg16_0125/160712/Block_milk_1_raw.fif -o /imaging/rf02/Semnet/meg16_0125/160712/block_milk1_raw.fif -ctc /neuro/databases/ctc/ct_sparse.fif -cal /neuro/databases/sss/sss_cal.dat -linefreq 50  -force -autobad 960 -badlimit 7  -bad 112   123   141   142   143   211   212   222   223   233   242   311   332   341   342   411   413   421   423   442   443   511   512   522   523   531   542   543   621   622   623   633   642   711   713   721   733   742   743   811   812   813   913   922   931   932   933   943  1011  1012  1013  1022  1023  1031  1033  1042  1111  1113  1121  1123  1131  1141  1213  1222  1223  1233  1241  1243  1312  1321  1323  1341  1342  1413  1421  1431  1433  1441  1442  1542  1612  1622  1623  1631  1632  1633  1641  1642  1712  1722  1731  1732  1741  1743  1831  1843  1912  1921  1923  1931  1932  1933  1943  2013  2023  2031  2111  2113  2121  2132  2211  2212  2221  2222  2231  2232  2233  2241  2311  2331  2343  2412  2422  2432  2511  2512  2521  2523  2531  2542  2611  2612  2621  2622  2631  2632  2633  2641   -st 10 -corr 0.98 -movecomp inter  -hpisubt amp -origin -13 4 45 -frame head -v | tee /imaging/rf02/Semnet/meg16_0125/160712/block_milk1_raw.log
+
+Created new: /imaging/rf02/Semnet/meg16_0125/160712/block_milk1_raw.fif
+Successfully downsampled: /imaging/rf02/Semnet/meg16_0125/160712/block_milk1_raw_ds.fif
+118628217  30-Aug-2016 17:52:06
+
+
+I've done everything I could!

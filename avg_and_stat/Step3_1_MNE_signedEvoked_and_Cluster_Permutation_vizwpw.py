@@ -1,0 +1,190 @@
+"""
+=================================================================
+Permutation t-test on source data with spatio-temporal clustering
+=================================================================
+
+Tests if the evoked response is significantly different between
+conditions across subjects (simulated here using one subject's data).
+The multiple comparisons problem is addressed with a cluster-level
+permutation test across space and time.
+
+"""
+
+# Authors: Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
+#          Eric Larson <larson.eric.d@gmail.com>
+# License: BSD (3-clause)
+
+print __doc__
+
+import sys
+sys.path.insert(1,'/imaging/local/software/mne_python/latest_v0.11')
+
+#sys.path.insert(1,'/imaging/rf02/Semnet/mne_python0.9')
+#sys.path.insert(1,'/imaging/local/software/mne_python/latest')
+sys.path.insert(1,'/imaging/local/software/python_packages/scikit-learn/v0.13.1/lib.linux-x86_64-2.7/sklearn/externals')
+import joblib
+
+
+import os.path as op
+import numpy as np
+from numpy.random import randn
+from scipy import stats as stats
+
+import mne
+from mne import (io, spatial_tris_connectivity, compute_morph_matrix,spatio_temporal_tris_connectivity,read_source_estimate,grade_to_tris)
+from mne.epochs import equalize_epoch_counts
+from mne.stats import (spatio_temporal_cluster_1samp_test,
+                       summarize_clusters_stc)
+from mne.minimum_norm import apply_inverse, read_inverse_operator
+from mne.stats import f_threshold_mway_rm, f_mway_rm, fdr_correction, spatio_temporal_cluster_test
+from mne.datasets import sample
+from mne.viz import mne_analyze_colormap
+import os
+
+###############################################################################
+# Set parameters
+out_path = '/imaging/rf02/Semnet/stc/permutation/evoked/pnt1_30/newregsigned/wpw/' # root
+uvttest_path = '/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/wpw/' # root
+avg_path= '/imaging/rf02/Semnet/stc/GrandAverage/evoked/pnt1_30/newregsigned/'
+out_path_img='/imaging/rf02/Semnet/jpg/permutation/evoked/pnt1_30/vizwpw/'
+
+if not os.path.exists(out_path):
+    os.makedirs(out_path)
+if not os.path.exists(uvttest_path):
+    os.makedirs(uvttest_path)
+if not os.path.exists(avg_path):
+    os.makedirs(avg_path)
+data_path = '/imaging/rf02/Semnet/'	# where subdirs for MEG data are
+inv_path = '/imaging/rf02/Semnet/'
+print sys.argv
+p_inds = [0]
+for ss in sys.argv[1:]:
+   p_inds.append( int( ss ) )
+label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
+
+subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
+#p_inds=[0,1,2,3,4,5,6,7,8,9,10]
+p_list=[0.05]#,0.025,0.01,0.008,0.005]#,0.02,0.01,0.008,0.005,0.002,0.001, 0.0008,0.0005,0.0002,0.0001,0.00005,0.00001]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
+print "subject_inds:"
+print subject_inds
+print "No rejection"
+
+list_all =  ['/meg16_0030/160216/', #0
+            '/meg16_0032/160218/', #1
+            '/meg16_0034/160219/', #3
+            '/meg16_0035/160222/', #4
+            '/meg16_0042/160229/', #7
+            '/meg16_0045/160303/', #8
+            '/meg16_0052/160310/', #10
+            '/meg16_0056/160314/',#11
+            '/meg16_0069/160405/',#12 
+            '/meg16_0070/160407/', #13
+            '/meg16_0072/160408/', #15
+            '/meg16_0073/160411/', #16
+            '/meg16_0075/160411/', #17
+            '/meg16_0078/160414/', #18
+            '/meg16_0082/160418/', #19
+            '/meg16_0086/160422/', #20
+            '/meg16_0097/160512/', #21 
+            '/meg16_0122/160707/', #22 
+            '/meg16_0125/160712/', #24 
+            ]
+
+
+
+# subjects names used for MRI data
+subjects=  ['MRI_meg16_0030' ,#0
+            'MRI_meg16_0032' ,#1
+            'MRI_meg16_0034' ,#2
+            'MRI_meg16_0035' ,#3
+            'MRI_meg16_0042' ,#4
+            'MRI_meg16_0045' ,#5
+            'MRI_meg16_0052' ,#6
+            'MRI_meg16_0056' ,#7
+    	       'MRI_meg16_0069' ,#8
+ 	       'MRI_meg16_0070' ,#9
+            'MRI_meg16_0072' ,#10
+            'MRI_meg16_0073' ,#11
+            'MRI_meg16_0075' ,#12
+            'MRI_meg16_0078' ,#13
+            'MRI_meg16_0082' ,#14
+            'MRI_meg16_0086' ,#15
+            'MRI_meg16_0097' ,#16
+            'MRI_meg16_0122' ,#17
+            'MRI_meg16_0125' ,#18
+            ]
+
+ll = []
+for ss in p_inds:
+ ll.append(p_list[ss])
+
+print "ll:"
+print ll
+
+n_subjects=19
+stim_delay = 0.034 # delay in s ((NOTE! not in the example, taken from Olaf's script. Rezvan))
+tmin, tmax = -0.3, 0.6
+# so we have X: observations * time * vertices in each condition
+#X_list=range(2)
+event_names = ['Visual','Hand','Hear','Pwordc']# 'Visual']#'Hear']#, 'Neutral', 'Emotional','Pwordc']
+#thiscond=3
+refcond=3
+n_levels=len(event_names)
+n_times=len(list(np.arange(350,751,25)))
+tmin1=0
+tstep1=25.
+#nwins=5
+stc=range(3)
+X=np.zeros((n_subjects,n_times,20484,n_levels))
+for p_threshold in ll:       
+        
+    for thiscond in range(3):
+       
+        p_thr=0.05
+        
+#        print cluster_p_values.min()
+        ###############################################################################
+        # Visualize the clusters
+        
+        print('Visualizing clusters.')
+        
+        #    tval_stc = mne.SourceEstimate(np.transpose(T_obs,[1,0]), vertices=fsave_vertices,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+        #    out_file3=uvttest_path + 'UVTtest_icomorphed_19subj_SemDec_pnt1_30ica_ConConds'
+        #    tval_stc.save(out_file3)
+        #    Now let's build a convenient representation of each cluster, where each
+        #    cluster becomes a "time point" in the SourceEstimate
+       
+        
+        
+        #aa=Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]
+        #bb=T_obs[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]<0
+        #aa[bb]=-1
+        #Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=aa
+        max_step=5
+        
+        fname_in=out_path + 'ClusPer_abs_sw_icomorphed_newreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_19subj_SemDec_pnt1_30ica_'+event_names[thiscond]+'_'+event_names[refcond]+'_maxstep'+str(max_step)
+        stc[thiscond] = read_source_estimate(fname_in)
+fsave_vertices = [np.arange(10242), np.arange(10242)]
+
+#stc_sum=np.sum([2*np.abs(stc[0]),3*np.abs(stc[1]),4*np.abs(stc[2])])
+data_sum=2*np.abs(stc[0].data)+3*np.abs(stc[1].data)+4*np.abs(stc[2].data)-1
+data_sum[data_sum==8]=7.00
+stc_sum = mne.SourceEstimate(-data_sum, vertices=fsave_vertices,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+
+clim=dict(kind='value',lims=[-7,-3,0])
+import matplotlib.pyplot as plt
+plt.figure()
+times_list=list(np.arange(0,401,25))
+this_view='lateral'
+this_surf='inflated'
+for this_t in times_list:
+	thisbrain=stc_sum.plot(hemi='lh', 	views=this_view,subjects_dir=data_path,subject='fsaverage',time_viewer=False,colormap='Set1',alpha=1,clim=clim,
+	smoothing_steps=2,transparent=False,initial_time=this_t,time_unit='ms',size=1400,surface=this_surf)
+	out_img=out_path_img+this_view+'_'+this_surf+'_'+str(this_t)+'ms.jpg'
+	thisbrain.save_image(out_img)
+	#        matx_stc.save(out_file2)
+        
+                
+         
+        
+    	

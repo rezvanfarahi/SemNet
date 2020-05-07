@@ -1,0 +1,1 @@
+maxfilter  -f block_localisers_raw.fif  -o block_localisers_raw_sss.fif  -st  -origin 0 0 45  -frame head  -autobad on  -movecomp  -format short  -force
