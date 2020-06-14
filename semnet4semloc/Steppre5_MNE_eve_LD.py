@@ -121,7 +121,7 @@ for index, meg in enumerate(ll):
 #   event_id = {'visual': 1, 'hear': 2, 'hand': 3, 'neutral': 4, 'emotional': 5,'pword': 6}#, 'concrete': 93}
    event_id = { 'emotional': 5, 'concrete': 393}#'neutral': 4, 
 
-   if subject_inds[index] in np.array([3,5]):#np.array([4,8,9]):eeg=150e-6,
+   if subject_inds[index] in np.array([2,3,5]):#np.array([4,8,9]):eeg=150e-6,
         reject = dict( grad=200e-12, mag=4e-12,eeg=150e-6)
    else:
         reject = dict( grad=200e-12, mag=4e-12,eeg=120e-6)#, eog=150e-6)

@@ -116,21 +116,27 @@ for index, meg in enumerate(ll):
    picks = mne.pick_types(raw.info, meg=True, eeg=True, eog=False, stim=False, include=include, exclude=exclude)
   
    print ("Epoching")
-   if subject_inds[index] in np.array([3,5]):#np.array([4,8,9]):
+   if subject_inds[index] in np.array([2,3,5]):#np.array([4,8,9]):
         reject = dict(eeg=150e-6, grad=200e-12, mag=4e-12)
    else:
         reject = dict(eeg=120e-6, grad=200e-12, mag=4e-12)#, eog=150e-6)
-   epochs = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks, proj=True, baseline=(None, 0), reject=reject,preload=True)
-   print (len(epochs))
-#   for eegcnt in range(71):
-#        if eegcnt<10:
-#            thiseegbad=sum(epochs.drop_log,[]).count('EEG00'+str(eegcnt))
-#            if thiseegbad>=90:
-#                raw.info['bads'].append(u'EEG00'+str(eegcnt))                
-#        else:
-#            thiseegbad=sum(epochs.drop_log,[]).count('EEG0'+str(eegcnt))
-#            if thiseegbad>=90:
-#                raw.info['bads'].append(u'EEG0'+str(eegcnt))
+   epochs_pre = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks, proj=True, baseline=(None, 0), reject=reject,preload=True)
+   print (len(epochs_pre))
+   for eegcnt in range(71):
+        if eegcnt<10:
+            thiseegbad=sum(epochs_pre.drop_log,[]).count('EEG00'+str(eegcnt))
+            if thiseegbad>=20:
+                raw.info['bads'].append(u'EEG00'+str(eegcnt))                
+        else:
+            thiseegbad=sum(epochs_pre.drop_log,[]).count('EEG0'+str(eegcnt))
+            if thiseegbad>=20:
+                raw.info['bads'].append(u'EEG0'+str(eegcnt))
+   print (raw.info['bads'])
+   picks = mne.pick_types(raw.info, eeg=True, meg=True, eog=True, exclude='bads')
+   epochs = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks,
+    		             baseline=(None, 0), proj=True, reject=reject, preload=True)
+   print(epochs.drop_log_stats)
+
    evoked=epochs.average()
 
    #epochs=mne.epochs.equalize_epoch_counts(epochs)
