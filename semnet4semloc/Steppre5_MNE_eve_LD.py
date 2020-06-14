@@ -132,11 +132,11 @@ for index, meg in enumerate(ll):
    for eegcnt in range(71):
         if eegcnt<10:
             thiseegbad=sum(epochs.drop_log,[]).count('EEG00'+str(eegcnt))
-            if thiseegbad>=90:# and eegcnt not in range(8):
+            if thiseegbad>=30:# and eegcnt not in range(8):
                 raw.info['bads'].append(u'EEG00'+str(eegcnt))                
         else:
             thiseegbad=sum(epochs.drop_log,[]).count('EEG0'+str(eegcnt))
-            if thiseegbad>=90:
+            if thiseegbad>=30:
                 raw.info['bads'].append(u'EEG0'+str(eegcnt))
    print (raw.info['bads'])
    picks = mne.pick_types(raw.info, eeg=True, meg=True, eog=True, exclude='bads')
