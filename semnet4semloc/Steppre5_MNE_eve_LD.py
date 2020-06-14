@@ -43,7 +43,7 @@ subject_inds = []#
 for ss in sys.argv[1:]:
     subject_inds.append( int( ss ) )
 
-subject_inds=[0,1,2,3]#,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]#[16,17,18]#
+subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]#[16,17,18]#
 print ("subject_inds:")
 print (subject_inds)
 print ("No rejection")
@@ -132,11 +132,11 @@ for index, meg in enumerate(ll):
    for eegcnt in range(71):
         if eegcnt<10:
             thiseegbad=sum(epochs.drop_log,[]).count('EEG00'+str(eegcnt))
-            if thiseegbad>=30:# and eegcnt not in range(8):
+            if thiseegbad>=20:# and eegcnt not in range(8):
                 raw.info['bads'].append(u'EEG00'+str(eegcnt))                
         else:
             thiseegbad=sum(epochs.drop_log,[]).count('EEG0'+str(eegcnt))
-            if thiseegbad>=30:
+            if thiseegbad>=20:
                 raw.info['bads'].append(u'EEG0'+str(eegcnt))
    print (raw.info['bads'])
    picks = mne.pick_types(raw.info, eeg=True, meg=True, eog=True, exclude='bads')
