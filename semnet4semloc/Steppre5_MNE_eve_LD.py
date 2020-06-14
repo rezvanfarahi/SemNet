@@ -110,16 +110,16 @@ for index, meg in enumerate(ll):
    for ii in range(concrete_triggers.shape[0]):
        for jj in range(events.shape[0]):
            if (events[jj,2]==concrete_triggers[ii,1] and events[jj+1,2]==concrete_triggers[ii,2]):
-               eventsch[jj,2]=393
+               eventsch[jj,2]=93
     ###############################################################################
     # Read epochs for all channels, removing a bad one
 #    raw.plot(scalings=dict(eeg=100e-6))
-   print ("epochs"); print(np.sum(eventsch[:,2]==393)); print(" "); print(np.sum(eventsch[:,2]==5))
+   print ("epochs"); print(np.sum(eventsch[:,2]==93)); print(" "); print(np.sum(eventsch[:,2]==5))
    tmin = -0.3
    tmax = 0.6 
    picks = mne.pick_types(raw.info, eeg=True, meg=True, eog=True, exclude='bads')
 #   event_id = {'visual': 1, 'hear': 2, 'hand': 3, 'neutral': 4, 'emotional': 5,'pword': 6}#, 'concrete': 93}
-   event_id = { 'emotional': 5, 'concrete': 393}#'neutral': 4, 
+   event_id = { 'emotional': 5,'neutral': 4,  'concrete': 93}#
 
    if subject_inds[index] in np.array([2,3,5]):#np.array([4,8,9]):eeg=150e-6,
         reject = dict( grad=200e-12, mag=4e-12,eeg=150e-6)
@@ -132,11 +132,11 @@ for index, meg in enumerate(ll):
    for eegcnt in range(71):
         if eegcnt<10:
             thiseegbad=sum(epochs.drop_log,[]).count('EEG00'+str(eegcnt))
-            if thiseegbad>=20:# and eegcnt not in range(8):
+            if thiseegbad>=30:# and eegcnt not in range(8):
                 raw.info['bads'].append(u'EEG00'+str(eegcnt))                
         else:
             thiseegbad=sum(epochs.drop_log,[]).count('EEG0'+str(eegcnt))
-            if thiseegbad>=20:
+            if thiseegbad>=30:
                 raw.info['bads'].append(u'EEG0'+str(eegcnt))
    print (raw.info['bads'])
    picks = mne.pick_types(raw.info, eeg=True, meg=True, eog=True, exclude='bads')
@@ -145,6 +145,6 @@ for index, meg in enumerate(ll):
    print(epochs.drop_log_stats)
    input("press enter to continue")
 ##   print (len(epochs)/450.)
-#   raw.save(raw_fname_out, overwrite=True)
-#   mne.write_events(raw_fname_out[:-4]+'-eve.fif', eventsch)
+   raw.save(raw_fname_out, overwrite=True)
+   mne.write_events(raw_fname_out[:-4]+'-eve.fif', eventsch)
    
