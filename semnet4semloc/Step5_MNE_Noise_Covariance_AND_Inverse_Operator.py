@@ -14,8 +14,8 @@ print (__doc__)
 
 import sys
 sys.path.insert(1,'/imaging/local/software/mne_python/latest_v0.11')
-sys.path.insert(1,'/imaging/rf02/scikit-learn-0.15.0')
-sys.path.insert(1,'/home/rf02/.local/lib/python2.7/site-packages')
+#sys.path.insert(1,'/imaging/rf02/scikit-learn-0.15.0')
+#sys.path.insert(1,'/home/rf02/.local/lib/python2.7/site-packages')
 sys.path.insert(1,'/imaging/local/software/anaconda/2.4.1/2/lib/python2.7/site-packages/scipy')
 import sklearn
 #import scipy
