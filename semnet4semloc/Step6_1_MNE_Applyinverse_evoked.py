@@ -46,7 +46,7 @@ os.chdir('/imaging/rf02/Semnet/')
 # get indices for subjects to be processed from command line input
 # 
 print (sys.argv)
-subject_inds = []#
+subject_inds = [1]#
 for ss in sys.argv[1:]:
     subject_inds.append( int( ss ) )
 
@@ -113,15 +113,15 @@ for ii, meg in enumerate(ll):
     print (subject_inds[0])
     #cov_path=data_path+meg+'noise_cov'
     #noise_cov=mne.read_cov(cov_path)
-    raw_fname = data_path + meg+ 'SemDec_blocks_tsss_filtSL_1_48_ica_raw.fif' #clean_ssp_
-    event_fname = orig_path + meg + 'SemDec_blocks_tsss_filtSL_1_48_ica_raw-eve.fif'
-    subjects_dir = data_path 
-    
+    raw_fname = data_path + meg+ 'block_LD_tsss_filtSL_1_48_ica_out_raw.fif'#'SemDec_blocks_tsss_filtSL_1_48_ica_raw.fif' #clean_ssp_
+    event_fname = orig_path + meg + 'block_LD_tsss_filtSL_1_48_ica_out_raw-eve.fif'#'SemDec_blocks_tsss_filtSL_1_48_ica_raw-eve.fif'
+    subjects_dir = data_path    
     tmin = -0.3
     tmax = 0.6  # Use a lower tmax to reduce multiple comparisons
     #   Setup for reading the raw data
     raw = io.Raw(raw_fname)
-    ss.append(raw.info['subject_info']['sex'])
+    print (raw.info['bads'])
+    #ss.append(raw.info['subject_info']['sex'])
     events = mne.read_events(event_fname)
 #    stim_delay = 0.034 # delay in s
 #    events[:,0] = events[:,0]+np.round( raw.info['sfreq']*stim_delay )
@@ -134,7 +134,7 @@ for ii, meg in enumerate(ll):
         reject = dict(eeg=150e-6, grad=200e-12, mag=4e-12)
     else:
         reject = dict(eeg=120e-6, grad=200e-12, mag=4e-12)#, eog=150e-6)
-    event_ids = {'neutral': 4, 'emotional': 5,'concrete': 93}
+    event_ids = {'emotional': 5,'concrete': 93}#'neutral': 4, 
     epochs = mne.Epochs(raw, events, event_ids, tmin, tmax, picks=picks, proj=True, baseline=(None, 0), reject=reject)
 #    for eegcnt in range(71):
 #        if eegcnt<10:
@@ -148,11 +148,12 @@ for ii, meg in enumerate(ll):
     epochs.drop_bad_epochs()
     picks = mne.pick_types(raw.info, eeg=True, meg=True, eog=False, exclude='bads')
     epochs_list=[]#range(3)
-    for eid,event_id in enumerate([4,5,93]):
+    for eid,event_id in enumerate([5,93]):
 #        event_id = eid+1  
         epochs_list.append(epochs[epochs.events[:,2]==event_id])
     equalize_epoch_counts(epochs_list,method='mintime')
     print(len(epochs))
+    print(epochs.drop_log_stats)
 
                    
                    
@@ -163,55 +164,41 @@ for ii, meg in enumerate(ll):
 	###############################################################################
     print ("Transform to source space")
     
-    fname_inv = data_path + meg + 'InvOp_ico5oldreg_fftSL_1_48_clean_ica_EMEG-inv.fif'
+    fname_inv = data_path + meg + 'InvOp_LD_ico5oldreg_fftSL_1_48_clean_ica_EMEG-inv.fif'#'InvOp_ico5oldreg_fftSL_1_48_clean_ica_EMEG-inv.fif'
     
     method = "MNE"  # use dSPM method (could also be MNE or sLORETA)
     inverse_operator = read_inverse_operator(fname_inv)
 #    sample_vertices = [s['vertno'] for s in inverse_operator['src']]
-    #    Let's average and compute inverse, resampling to speed things up
-#    evoked=epochs.average()    
-#    epdata=evoked.data 
-#    em=np.abs(epdata)
-#    #emax=np.mean(em[:,:,600:900],axis=2)#
-#    sa=em[:,550:950]#.max(axis=2)
-#    #bm=np.sqrt(np.mean(epdata[:,:,100:500]**2,axis=2))
-#    bv=np.var(em[:,100:500],axis=1)
-#    edv=sa.copy()
-#    for ii in range(sa.shape[1]):
-#        edv[:,ii]=(sa[:,ii]**2)/bv
-#
-#    ediv=np.sqrt(edv)
-#    snr = 3.0#np.mean(ediv)
-#    print snr
+
     
     subject_from = subjects[subject_inds[0]]
     subject_to = 'fsaverage'
     vertices_to = [np.arange(10242), np.arange(10242)]
 #    stc_list=range(len(epochs_list))
-    event_names = [ 'Neutral', 'Emotional','Concrete']
+    event_names = [  'Emotional','Concrete']#'Neutral',
 
 #    evoked_list=range(len(epochs_list))
 #    condition_list=range(len(epochs_list))
     for evcnt in range(len(epochs_list)):
         this_evoked = epochs_list[evcnt].average()
         epdata=this_evoked.data 
-        em=np.abs(epdata)
-        #emax=np.mean(em[:,:,600:900],axis=2)#
-        sa=em[:,350:750]#.max(axis=2)
-        #bm=np.sqrt(np.mean(epdata[:,:,100:500]**2,axis=2))
-        bv=np.var(em[:,50:300],axis=1)
-        edv=sa.copy()
-        for ii in range(sa.shape[1]):
-            edv[:,ii]=(sa[:,ii]**2)/bv    
-        ediv=np.sqrt(edv)
         snr = 3.0#np.mean(ediv)
         lambda2 = 1.0 / snr ** 2
         this_condition = apply_inverse(this_evoked, inverse_operator, lambda2, method,pick_ori="normal")
         this_morphmat=mne.compute_morph_matrix(subject_from, subject_to, this_condition.vertices, vertices_to, subjects_dir=data_path)
         this_stc=this_condition.morph_precomputed(subject_to,vertices_to,this_morphmat, subject_from)
-#        this_stc.resample(200)
-        data_out = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_names[evcnt]+'_Source_Signed_Evoked_m300_600'
+        data_out = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[evcnt]+'_Source_Signed_Evoked_m300_600'
         this_stc.save(data_out)
 
     #evoked1 = whiten_evoked(evoked11, noise_cov)
     #evoked1.resample(50)
+
+#em=np.abs(epdata)
+##emax=np.mean(em[:,:,600:900],axis=2)#
+#sa=em[:,350:750].copy()#.max(axis=2)
+##bm=np.sqrt(np.mean(epdata[:,:,100:500]**2,axis=2))
+#bv=np.var(em[:,50:300],axis=1)
+#edv=sa.copy()
+#for ii in range(sa.shape[1]):
+#    edv[:,ii]=(sa[:,ii]**2)/bv    
+#ediv=np.sqrt(edv)
