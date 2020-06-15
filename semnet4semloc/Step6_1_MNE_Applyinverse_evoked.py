@@ -184,10 +184,10 @@ for ii, meg in enumerate(ll):
         epdata=this_evoked.data 
         snr = 3.0#np.mean(ediv)
         lambda2 = 1.0 / snr ** 2
-        this_condition = apply_inverse(this_evoked, inverse_operator, lambda2, method,pick_ori="normal")
+        this_condition = apply_inverse(this_evoked, inverse_operator, lambda2, method,pick_ori=None)#None for unsigned "normal" for signed
         this_morphmat=mne.compute_morph_matrix(subject_from, subject_to, this_condition.vertices, vertices_to, subjects_dir=data_path)
         this_stc=this_condition.morph_precomputed(subject_to,vertices_to,this_morphmat, subject_from)
-        data_out = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[evcnt]+'_Source_Signed_Evoked_m300_600'
+        data_out = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[evcnt]+'_Source_Evoked_m300_600'
         this_stc.save(data_out)
 
     #evoked1 = whiten_evoked(evoked11, noise_cov)
