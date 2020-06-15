@@ -119,7 +119,7 @@ stim_delay = 0.034 # delay in s ((NOTE! not in the example, taken from Olaf's sc
 tmin, tmax = -0.3, 0.6
 # so we have X: observations * time * vertices in each condition
 #X_list=range(2)
-event_names = ['Neutral', 'Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
+event_names = ['Emotional', 'Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
 #thiscond=0
 thiscond=1
 n_levels=len(event_names)
