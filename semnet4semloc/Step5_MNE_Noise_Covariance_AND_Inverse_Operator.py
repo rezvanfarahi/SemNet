@@ -91,11 +91,11 @@ for index, meg in enumerate(ll):
 
    
    print ("reading raw file")
-   raw_fname = data_path + meg+ 'block_LD_tsss_filtSL_1_48_ica_raw.fif'#'SemDec_blocks_tsss_filtSL_1_48_ica_raw.fif'
+   raw_fname = data_path + meg+ 'block_LD_tsss_filtSL_1_48_ica_out_raw.fif'#'block_LD_tsss_filtSL_1_48_ica_raw.fif'#'SemDec_blocks_tsss_filtSL_1_48_ica_raw.fif'
    raw = mne.io.Raw(raw_fname, preload=True)
    print (raw.info['bads'])
    print ("Reading events"  ) 
-   events_fname = orig_path + meg + 'block_LD_tsss_filtSL_1_48_ica_raw-eve.fif'#'SemDec_blocks_tsss_filtSL_1_48_ica_raw-eve.fif'
+   events_fname = orig_path + meg + 'block_LD_tsss_filtSL_1_48_ica_out_raw-eve.fif'#'SemDec_blocks_tsss_filtSL_1_48_ica_raw-eve.fif'
    events = mne.read_events(events_fname)
 
    print ("Reading evevokeds" )  
@@ -125,11 +125,11 @@ for index, meg in enumerate(ll):
    for eegcnt in range(71):
         if eegcnt<10:
             thiseegbad=sum(epochs_pre.drop_log,[]).count('EEG00'+str(eegcnt))
-            if thiseegbad>=20:
+            if thiseegbad>=30:
                 raw.info['bads'].append(u'EEG00'+str(eegcnt))                
         else:
             thiseegbad=sum(epochs_pre.drop_log,[]).count('EEG0'+str(eegcnt))
-            if thiseegbad>=20:
+            if thiseegbad>=30:
                 raw.info['bads'].append(u'EEG0'+str(eegcnt))
    print (raw.info['bads'])
    picks = mne.pick_types(raw.info, eeg=True, meg=True, eog=True, exclude='bads')
