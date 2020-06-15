@@ -49,7 +49,7 @@ if not os.path.exists(uvttest_path):
     os.makedirs(uvttest_path)
 data_path = '/imaging/rf02/Semnet/'	# where subdirs for MEG data are
 inv_path = '/imaging/rf02/Semnet/'
-print sys.argv
+print (sys.argv)
 p_inds = [0]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
@@ -58,9 +58,9 @@ label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
 subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
 p_list=[0.00005,0.05,0.045,0.04,0.03,0.025,0.02,0.01,0.008,0.005,0.002,0.001, 0.0008,0.0005,0.0002,0.0001,0.00005,0.00001]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
-print "subject_inds:"
-print subject_inds
-print "No rejection"
+print ("subject_inds:")
+print (subject_inds)
+print ("No rejection")
 b='gamma'
 list_all =  ['/meg16_0030/160216/', #0
             '/meg16_0032/160218/', #1
@@ -119,9 +119,9 @@ stim_delay = 0.034 # delay in s ((NOTE! not in the example, taken from Olaf's sc
 tmin, tmax = -0.3, 0.6
 # so we have X: observations * time * vertices in each condition
 #X_list=range(2)
-event_names = ['Neutral', 'Emotional','Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
+event_names = ['Neutral', 'Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
 #thiscond=0
-thiscond=2
+thiscond=1
 n_levels=len(event_names)
 n_times=901
 tmin1=50
@@ -134,17 +134,17 @@ for p_threshold in ll:
     for ii, meg in enumerate(list_all):
         print ii
         for event_no in range(n_levels):     
-            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#_'+b#'firstMorphed_ico_SemDec_ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
+            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#_'+b#'firstMorphed_ico_SemDec_ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
             stc_cond = mne.read_source_estimate(fname_in)
 #            stc_cond.resample(100)
 #            stc_cond.crop(0.050,0.450)
             X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
-    X_list=[np.squeeze(x) for x in np.split(X, n_levels, axis=-1)]
-    factor_levels = [n_levels]  # number of levels in each factor
-    effects = 'A'  # this is the default signature for computing all effects
-    return_pvals = False          
-    def stat_fun(*args):  
-        return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=effects, return_pvals=return_pvals)[0]
+    #X_list=[np.squeeze(x) for x in np.split(X, n_levels, axis=-1)]
+    #factor_levels = [n_levels]  # number of levels in each factor
+    #effects = 'A'  # this is the default signature for computing all effects
+    #return_pvals = False          
+    #def stat_fun(*args):  
+    #    return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=effects, return_pvals=return_pvals)[0]
 
 #            xx=np.asarray(args)
 #            xx1=np.reshape(xx,(xx.shape[0],xx.shape[1],xx.shape[2]*xx.shape[3]))
@@ -155,7 +155,7 @@ for p_threshold in ll:
     for wcnt1,wcnt2 in zip([350,450,550,650,750],[450,550,650,750,850]):#range(nwins):
         wcnt=wcnt+1
         Xmean[:,wcnt,:,:]=np.mean(X[:,wcnt1:wcnt2,:,:],1)
-    for refcond in np.array([0,1]):#in range(5):
+    for refcond in np.array([0]):#in range(5):
         Matx1=np.squeeze(np.subtract(Xmean[:,:,:,thiscond],Xmean[:,:,:,refcond]))
         Matx=np.transpose(Matx1,[0,2,1])#np.zeros((n_subjects,20484,n_times))
         MT=np.zeros((20484,nwins))
@@ -167,7 +167,7 @@ for p_threshold in ll:
     
         vertices_to = [np.arange(10242), np.arange(10242)]
         tval_stc = mne.SourceEstimate(MT, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-        out_file3=uvttest_path + 'UVTtest_icomorphed_oldreg_19subj_SemDec_m300_600_100ms_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]#+'_'+b
+        out_file3=uvttest_path + 'UVTtest_icomorphed_oldreg_19subj_LD_m300_600_100ms_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]#+'_'+b
         tval_stc.save(out_file3)
     
     	
