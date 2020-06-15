@@ -46,7 +46,7 @@ os.chdir('/imaging/rf02/Semnet/')
 # get indices for subjects to be processed from command line input
 # 
 print (sys.argv)
-subject_inds = [1]#
+subject_inds = []#
 for ss in sys.argv[1:]:
     subject_inds.append( int( ss ) )
 
