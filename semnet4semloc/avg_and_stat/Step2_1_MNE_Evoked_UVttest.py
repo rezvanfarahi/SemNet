@@ -111,8 +111,8 @@ ll = []
 for ss in p_inds:
  ll.append(p_list[ss])
 
-print "ll:"
-print ll
+print ("ll:")
+print (ll)
 
 n_subjects=19
 stim_delay = 0.034 # delay in s ((NOTE! not in the example, taken from Olaf's script. Rezvan))
@@ -132,7 +132,7 @@ Xmean=np.zeros((n_subjects,nwins,20484,n_levels))
 for p_threshold in ll:
     
     for ii, meg in enumerate(list_all):
-        print ii
+        print (ii)
         for event_no in range(n_levels):     
             fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#_'+b#'firstMorphed_ico_SemDec_ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
             stc_cond = mne.read_source_estimate(fname_in)
@@ -161,7 +161,7 @@ for p_threshold in ll:
         MT=np.zeros((20484,nwins))
     
         for cnt in range(Matx.shape[2]):
-            print cnt
+            print (cnt)
             MT[:,cnt]= mne.stats.ttest_1samp_no_p(Matx[:,:,cnt], sigma=1e-3, method='relative')
         #MT[np.abs(MT)<t_threshold]=0
     
