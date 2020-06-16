@@ -132,7 +132,7 @@ for p_threshold in ll:
     for ii, meg in enumerate(list_all):
         print (ii)
         for event_no in range(n_levels):     
-            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[event_no]+'_Source_Signed_Evoked_m300_600'#_'+b#'firstMorphed_ico_SemDec_ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
+            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#_'+b#'firstMorphed_ico_SemDec_ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
             stc_cond = mne.read_source_estimate(fname_in)
 #            stc_cond.resample(100)
 #            stc_cond.crop(0.050,0.450)
@@ -165,7 +165,7 @@ for p_threshold in ll:
     
         vertices_to = [np.arange(10242), np.arange(10242)]
         tval_stc = mne.SourceEstimate(MT, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-        out_file3=uvttest_path + 'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Signed_'+event_names[thiscond]+'_'+event_names[refcond]#+'_'+b
+        out_file3=uvttest_path + 'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]#+'_'+b
         tval_stc.save(out_file3)
     
     	

@@ -60,15 +60,14 @@ for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
 
-subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
+#subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
-p_list=[0.05,0.045,0.04,0.025,0.01,0.005]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
-print "subject_inds:"
-print subject_inds
+p_list=[0.1,0.05,0.045,0.04,0.025,0.01,0.005]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
+#print "subject_inds:"
+#print subject_inds
 print "No rejection"
 
-list_all =  ['/meg16_0030/160216/', #0
-            '/meg16_0032/160218/', #1
+list_all =  ['/meg16_0032/160218/', #1 '/meg16_0030/160216/', #0 not needed for LD
             '/meg16_0034/160219/', #3
             '/meg16_0035/160222/', #4
             '/meg16_0042/160229/', #7
@@ -91,8 +90,7 @@ list_all =  ['/meg16_0030/160216/', #0
 
 
 # subjects names used for MRI data
-subjects=  ['MRI_meg16_0030' ,#0
-            'MRI_meg16_0032' ,#1
+subjects=  ['MRI_meg16_0032' ,#1 'MRI_meg16_0030' ,#0 not needed for LD
             'MRI_meg16_0034' ,#2
             'MRI_meg16_0035' ,#3
             'MRI_meg16_0042' ,#4
@@ -119,14 +117,14 @@ for ss in p_inds:
 print "ll:"
 print ll
 
-n_subjects=19
+n_subjects=18
 stim_delay = 0.034 # delay in s ((NOTE! not in the example, taken from Olaf's script. Rezvan))
 tmin, tmax = -0.3, 0.6
 # so we have X: observations * time * vertices in each condition
 #X_list=range(2)
-event_names = ['Neutral', 'Emotional','Concrete']# 'Visual']#'Hear']#, 'Neutral', 'Emotional','Pwordc']
+event_names = ['Emotional','Concrete']# 'Visual']#'Hear']#, 'Neutral', 'Emotional','Pwordc']'Neutral', 
 #thiscond=3
-thiscond=2
+thiscond=1
 n_levels=len(event_names)
 n_times=5
 tmin1=50
@@ -138,7 +136,7 @@ for p_threshold in ll:
     for ii, meg in enumerate(list_all):
         print ii
         for event_no in range(n_levels):     
-            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#'firstMorphed_ico_SemDec_pnt1_30ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
+            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#'firstMorphed_ico_SemDec_pnt1_30ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
             stc_cond = read_source_estimate(fname_in)
 #            stc_cond.resample(60)
 #            stc_cond.crop(0.050,0.450)
@@ -219,7 +217,7 @@ for p_threshold in ll:
         if cluster_p_values.min()<=0.05:
             stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
             
-            out_file1=out_path + 'ClusPer_abs_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_19subj_SemDec_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]+'_maxstep'+str(max_step)
+            out_file1=out_path + 'ClusPer_abs_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_LD_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]+'_maxstep'+str(max_step)
             stc_all_cluster_vis.save(out_file1)
             
             Matx=np.zeros((20484,n_times))
@@ -235,7 +233,7 @@ for p_threshold in ll:
             
             
             matx_stc = mne.SourceEstimate(Matx, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-            out_file2=out_path + 'ClusPer_abs_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_19subj_SemDec_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]+'_maxstep'+str(max_step)
+            out_file2=out_path + 'ClusPer_abs_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_LD_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]+'_maxstep'+str(max_step)
             matx_stc.save(out_file2)
          
         
