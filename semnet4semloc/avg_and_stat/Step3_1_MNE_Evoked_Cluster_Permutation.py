@@ -199,7 +199,7 @@ for p_threshold in ll:
         #    Now select the clusters that are sig. at p < 0.05 (note that this value
         #    is multiple-comparisons corrected).
                                          
-        p_thr=0.05
+        p_thr=0.1
         good_cluster_inds = np.where(cluster_p_values <p_thr)[0]
         print cluster_p_values[good_cluster_inds]; print good_cluster_inds
         print cluster_p_values.min()
