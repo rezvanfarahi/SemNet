@@ -323,7 +323,7 @@ for ii, meg in enumerate(ll):
 #        con2=mne.connectivity.spectral_connectivity(data=abs_mat[np.newaxis,:,550:750],method='coh',sfreq=1000.,mode='multitaper',fmin=1.,fmax=45.,mt_adaptive=True,faverage=True)
 #        cona=np.corrcoef(abs_mat[:,550:750])#con2[0]+con2[0].transpose(1,0,2)
 #        cons[ii,:,:]=np.squeeze(conc-cona)
-    X[ii,:,:,:]=conabs_mat
+    X[ii,:,:,:]=conabs_mat.copy()
     out_file=out_path + meg[:11] + '_Semnet_ConEmot_LD_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg.mat'
     scio.savemat(out_file,{'conabs_mat':conabs_mat})
 out_fileX=out_path+"SN4SL_LD_conabs_mat_all_oldreg.npy"
