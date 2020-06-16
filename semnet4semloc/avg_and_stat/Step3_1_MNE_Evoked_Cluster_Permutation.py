@@ -185,7 +185,7 @@ for p_threshold in ll:
     tail=0
     max_step=1;
 #    n_permutations=5000
-    for refcond in np.asarray([0,1]):
+    for refcond in np.asarray([0]):
 #        refcond=thiscond+1
         X1=np.squeeze(X[:,:,:,thiscond]-X[:,:,:,refcond])
                             
