@@ -55,15 +55,14 @@ for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
 
-subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
+#subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
 p_list=[0.00005,0.05,0.045,0.04,0.03,0.025,0.02,0.01,0.008,0.005,0.002,0.001, 0.0008,0.0005,0.0002,0.0001,0.00005,0.00001]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
-print ("subject_inds:")
-print (subject_inds)
+#print ("subject_inds:")
+#print (subject_inds)
 print ("No rejection")
 b='gamma'
-list_all =  ['/meg16_0030/160216/', #0
-            '/meg16_0032/160218/', #1
+list_all =  ['/meg16_0032/160218/', #1  '/meg16_0030/160216/', #0
             '/meg16_0034/160219/', #3
             '/meg16_0035/160222/', #4
             '/meg16_0042/160229/', #7
@@ -86,8 +85,7 @@ list_all =  ['/meg16_0030/160216/', #0
 
 
 # subjects names used for MRI data
-subjects=  ['MRI_meg16_0030' ,#0
-            'MRI_meg16_0032' ,#1
+subjects=  ['MRI_meg16_0032' ,#1 'MRI_meg16_0030' ,#0 not needed for LD
             'MRI_meg16_0034' ,#2
             'MRI_meg16_0035' ,#3
             'MRI_meg16_0042' ,#4
@@ -114,7 +112,7 @@ for ss in p_inds:
 print ("ll:")
 print (ll)
 
-n_subjects=19
+n_subjects=18
 stim_delay = 0.034 # delay in s ((NOTE! not in the example, taken from Olaf's script. Rezvan))
 tmin, tmax = -0.3, 0.6
 # so we have X: observations * time * vertices in each condition
@@ -167,7 +165,7 @@ for p_threshold in ll:
     
         vertices_to = [np.arange(10242), np.arange(10242)]
         tval_stc = mne.SourceEstimate(MT, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-        out_file3=uvttest_path + 'UVTtest_icomorphed_oldreg_19subj_LD_m300_600_100ms_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]#+'_'+b
+        out_file3=uvttest_path + 'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]#+'_'+b
         tval_stc.save(out_file3)
     
     	
