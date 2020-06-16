@@ -189,7 +189,7 @@ for p_threshold in ll:
 #        refcond=thiscond+1
         X1=np.squeeze(X[:,:,:,thiscond]-X[:,:,:,refcond])
                             
-        T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X1, connectivity=connectivity,  threshold=t_threshold, tail=tail, t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, n_permutations=n_permutations, n_jobs=4)#, max_step=0)#, max_step=0)#spatial_exclude=exclude_ver, 
+        T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X1, connectivity=connectivity,  threshold=t_threshold, tail=tail, t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, n_permutations=n_permutations, n_jobs=4, max_step=max_step)#, max_step=0)#spatial_exclude=exclude_ver, 
     
         #    T_obs, clusters, cluster_p_values, H0 = clu = \
         #        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,#max_step=max_step,
@@ -214,7 +214,7 @@ for p_threshold in ll:
         #    tval_stc.save(out_file3)
         #    Now let's build a convenient representation of each cluster, where each
         #    cluster becomes a "time point" in the SourceEstimate
-        if cluster_p_values.min()<=0.5:
+        if cluster_p_values.min()<=0.7:
             stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
             
             out_file1=out_path + 'ClusPer_abs_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_LD_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]+'_maxstep'+str(max_step)
