@@ -90,7 +90,7 @@ for cnt=1:length(list_all)
     
     % create data array
     %--------------------------------------------------------------------------
-    fname_a='_Semnet_ConEmot_SL_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
+    fname_a='_Semnet_ConEmot_LD_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
     
     fname_in=[input_path,list_all{cnt},fname_a,'.mat'];
     this_dir=input_path;%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/avg_50verts_dipole/';
@@ -196,34 +196,34 @@ plot(taxis(tmin:tmax),D1(1,tmin:tmax,1),'r','LineWidth',3), hold on, plot(taxis(
 % h=area([D(1,500:750,1);Dci(1,500:750,1)+D(1,500:750,1)]);
 % set(h,'facealpha',0.5)
 % plot(D(1,500:950,1),'r'), hold on, plot(D(1,500:950,2))
-xlabel('time(ms) peri-stimulus')
+xlabel('time(ms) post-stimulus')
 ylabel('signed ERP')
 title('Anterior Temporal Lobe')
 % 
 figure,
 plot(taxis(tmin:tmax),D1(2,tmin:tmax,1),'r','LineWidth',3), hold on, plot(taxis(tmin:tmax),D1(2,tmin:tmax,2),'LineWidth',3)
 % plot(D(2,500:950,1),'r'), hold on, plot(D(2,500:950,2))
-xlabel('time(ms) peri-stimulus')
+xlabel('time(ms) post-stimulus')
 ylabel('signed ERP')
 title('Inferior Frontal Gyrus')
 % 
 figure,
 plot(taxis(tmin:tmax),D1(3,tmin:tmax,1),'r','LineWidth',3), hold on, plot(taxis(tmin:tmax),D1(3,tmin:tmax,2),'LineWidth',3)
 % plot(D(3,500:950,1),'r'), hold on, plot(D(3,500:950,2))
-xlabel('time(ms) peri-stimulus')
+xlabel('time(ms) post-stimulus')
 ylabel('signed ERP')
 title('Middle Temporal Gyrus')
 
 figure,
 % plot(D(4,500:750,1),'r'), hold on, plot(D(4,500:750,2))
 plot(taxis(tmin:tmax),D1(4,tmin:tmax,1),'r','LineWidth',3), hold on, plot(taxis(tmin:tmax),D1(4,tmin:tmax,2),'LineWidth',3)
-xlabel('time(ms) peri-stimulus')
+xlabel('time(ms) post-stimulus')
 ylabel('signed ERP')
 title('Angular Gyrus')
 % 
 figure,
 plot(taxis(tmin:tmax),D1(5,tmin:tmax,1),'r','LineWidth',3), hold on, plot(taxis(tmin:tmax),D1(5,tmin:tmax,2),'LineWidth',3)
 % plot(D(5,500:950,1),'r'), hold on, plot(D(5,500:950,2))
-xlabel('time(ms) peri-stimulus')
+xlabel('time(ms) post-stimulus')
 ylabel('signed ERP')
 title('Visual Word Form Area')
