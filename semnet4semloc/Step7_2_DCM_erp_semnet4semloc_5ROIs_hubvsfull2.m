@@ -821,7 +821,7 @@ DCMbase.xU.name = {'C-A'};
 
 
 % LogEvd=[]; DCMname={};
-this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
+this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
 if ~exist(this_model_dir,'dir')
     mkdir(this_model_dir)
 end
