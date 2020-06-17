@@ -171,10 +171,10 @@ for dcnt1=1:size(Dstd,1)
             Dt(dcnt1,dcnt2)=tstat1.tstat;
     end
 end
-ntimewins=8;
+ntimewins=5;
 Dpm=zeros(size(Dataf,1),ntimewins);
 for ii=1:ntimewins
-    Datafm=squeeze(mean((Dataf(:,(200+50*ii)/q:(250+50*ii)/q,:,:)),2));%5x2x17
+    Datafm=squeeze(mean((Dataf(:,(250+100*(ii-1)/q:(250+100*ii)/q,:,:)),2));%5x2x17
     for dcnt1=1:size(Dpm,1)
             [h,Dpm(dcnt1,ii)]=ttest(squeeze(Datafm(dcnt1,1,:))-squeeze(Datafm(dcnt1,2,:)));
     end
