@@ -59,7 +59,7 @@ chlabels = {
 input_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/dipole/';
 
 
-list_all =  {'/meg16_0030', 
+list_all =  {%'/meg16_0030', not needed for LD
             '/meg16_0032', 
             '/meg16_0034', 
             '/meg16_0035', 
