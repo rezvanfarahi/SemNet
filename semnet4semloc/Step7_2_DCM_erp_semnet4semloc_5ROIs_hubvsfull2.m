@@ -769,7 +769,7 @@ length(Model)
 
 cwd = '/home/rf02/rezvan/semnet/semnet4semloc'
 
-dosubs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
+dosubs = [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];%1 removed for LD
 list_all =  {'./meg16_0030', 
             './meg16_0032', 
             './meg16_0034', 
@@ -799,7 +799,7 @@ DCMbase.options.model    = 'ERP';
 DCMbase.options.spatial =  'LFP';
 DCMbase.options.trials  = [1 2];  % [3 4] for CROI ([1 2] ROI)
 DCMbase.options.Tdcm(1) = 0;      % start of peri-stimulus time to be modelled
-DCMbase.options.Tdcm(2) = 450;   % end of peri-stimulus time to be modelled
+DCMbase.options.Tdcm(2) = 250;   % end of peri-stimulus time to be modelled
 DCMbase.options.Nmodes  = 8;      % nr of modes for data selection
 DCMbase.options.h       = 0;      % nr of DCT components for detrending [increase to 4????]
 DCMbase.options.onset   = 60;     % selection of onset (prior mean = 60ms for onset at 0)
@@ -821,7 +821,7 @@ DCMbase.xU.name = {'C-A'};
 
 
 % LogEvd=[]; DCMname={};
-this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
+this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
 if ~exist(this_model_dir,'dir')
     mkdir(this_model_dir)
 end
@@ -830,7 +830,7 @@ parfor s = 1:length(dosubs) %parfor
     sub    = dosubs(s);
     
     DCMsub = DCMbase;
-    fname_a='_Semnet_ConEmot_SL_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_ctfdip_avg_exttc_50verts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%'_TypLex_Evoked_ATL_WFA_forDCM';
+    fname_a='_Semnet_ConEmot_LD_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_ctfdip_avg_exttc_50verts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%'_TypLex_Evoked_ATL_WFA_forDCM';
     path_in='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/avg_50verts_dipole/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_whoshub/';
     fname_in=[path_in,list_all{sub}(3:end),fname_a,'_filtered_cnvrt'];
     fname_in
@@ -849,10 +849,10 @@ parfor s = 1:length(dosubs) %parfor
     for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[22:2:36,37:38]%39:46%1:numel(Model)
         
         ['model ', num2str(n)]
-        this_filename=sprintf([this_model_dir,'/DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);
+        this_filename=sprintf([this_model_dir,'/DCM_erpf_ConEmot_LD_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);
         if ~exist(this_filename,'file')
             DCM      = DCMsub;
-            DCM.name = sprintf([this_model_dir,'/DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);
+            DCM.name = sprintf([this_model_dir,'/DCM_erpf_ConEmot_LD_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);
             
             DCM.A = Model(n).A;
             DCM.B = Model(n).B;
