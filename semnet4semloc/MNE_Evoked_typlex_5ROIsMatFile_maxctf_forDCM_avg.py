@@ -281,7 +281,7 @@ for ii, meg in enumerate(ll):
                     # Load data
         srcin='/imaging/rf02/TypLexMEG/fsaverage/bem/fsaverage_dist-ico-5-src.fif'
         src_avg = mne.read_source_spaces(srcin)
-        fname = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_LD_1_48ica_'+event_name+'_Source_Signed_Evoked_m300_600'
+        fname = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Signed_Evoked_m300_600'
         this_stc = mne.read_source_estimate(fname)  
         tmin1=-300
         tstep1=1
