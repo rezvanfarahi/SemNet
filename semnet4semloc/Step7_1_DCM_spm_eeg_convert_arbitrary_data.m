@@ -171,7 +171,7 @@ for dcnt1=1:size(Dstd,1)
             Dt(dcnt1,dcnt2)=tstat1.tstat;
     end
 end
-ntimewins=5;
+ntimewins=4;
 Dpm=zeros(size(Dataf,1),ntimewins);
 for ii=1:ntimewins
     Datafm=squeeze(mean((Dataf(:,(250+100*(ii-1))/q:(250+100*ii)/q,:,:)),2));%5x2x17
