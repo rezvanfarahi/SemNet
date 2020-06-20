@@ -80,7 +80,7 @@ Model = struct([]);
 
 cwd = '/home/rf02/rezvan/test1/dcm'
 
-dosubs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
+dosubs = [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
 list_all =  {'./meg16_0030', 
             './meg16_0032', 
             './meg16_0034', 
@@ -104,12 +104,6 @@ list_all =  {'./meg16_0030',
 
 
 
-% Region names (Location, Lpos, irrelevant for LFP)
-% DCMbase.Sname = {'lWFA','lATL'};
-% DCMbase.Lpos = [];
-% 
-% DCMbase.xU.X = [1; -1]; % W-NW
-% DCMbase.xU.name = {'W-NW'};
 
 LogEvd=[]; DCMname={};
 Amean=zeros(length(dosubs),28,5,5,2);
@@ -118,7 +112,7 @@ all_DCMs={};
 subj=struct();
 % dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_aifg_ERP_dtr1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/';
 % dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated_thesis/model15/';
-dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
+dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
 
 % dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';
 
@@ -130,15 +124,15 @@ for s = 1:length(dosubs) %parfor
     sub    = dosubs(s);
     
    ncnt=0;
-    for n=[18:2:36]%,37:38]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
+    for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[18:2:36]%,37:38]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
         ncnt=ncnt+1;
         sub
         n
 
-        load(sprintf([dcm_path,'DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n));%'DCM_erpf_SemLoc_5ROIs_sub%d_mod%d.mat'
+        load(sprintf([dcm_path,'DCM_erpf_ConEmot_LD_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n));%'DCM_erpf_SemLoc_5ROIs_sub%d_mod%d.mat'
        
         this_model=struct();
-this_model.fname=sprintf([dcm_path,'DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);%DCM.name;DCM_erpf_SemLoc_5ROIs_mCTFavg_sub14_mod38
+this_model.fname=sprintf([dcm_path,'DCM_erpf_ConEmot_LD_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);%DCM.name;DCM_erpf_SemLoc_5ROIs_mCTFavg_sub14_mod38
 this_model.F=DCM.F;
 
 this_model.Ep=DCM.Ep;
@@ -154,11 +148,12 @@ sess.model(1,ncnt)=this_model;
     end
     subj(1,s).sess=sess;
 end
-out_dir=dcm_path;%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/home/rf02/rezvan/test1/step_by_step/dcm/latest/200ms_7models/semloc';
+out_dir=dcm_path;
+%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/home/rf02/rezvan/test1/step_by_step/dcm/latest/200ms_7models/semloc';
 if ~exist(out_dir,'dir')
     mkdir(out_dir)
 end
-save([out_dir,'/modelspace_allmaxCTF_nohubs_f250_oldreg.mat'],'subj')
+save([out_dir,'/modelspace_allmaxCTF_all_oldreg.mat'],'subj')
 cd(dcm_path)
 % [alpha,exp_r,xp,pxp,bor] = spm_BMS (LogEvd, [], 1, [], [], []);
 % for n1=1:numel(Model)
