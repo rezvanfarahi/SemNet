@@ -124,7 +124,7 @@ for s = 1:length(dosubs) %parfor
     sub    = dosubs(s);
     
    ncnt=0;
-    for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[18:2:36]%,37:38]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
+    for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[18:2:36]%,37:38]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
         ncnt=ncnt+1;
         sub
         n
@@ -153,7 +153,7 @@ out_dir=dcm_path;
 if ~exist(out_dir,'dir')
     mkdir(out_dir)
 end
-save([out_dir,'/modelspace_allmaxCTF_all_oldreg.mat'],'subj')
+save([out_dir,'/modelspace_allmaxCTF_hubs_oldreg.mat'],'subj')
 cd(dcm_path)
 % [alpha,exp_r,xp,pxp,bor] = spm_BMS (LogEvd, [], 1, [], [], []);
 % for n1=1:numel(Model)
