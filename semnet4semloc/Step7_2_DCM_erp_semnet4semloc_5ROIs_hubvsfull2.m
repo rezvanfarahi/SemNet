@@ -799,7 +799,7 @@ DCMbase.options.model    = 'ERP';
 DCMbase.options.spatial =  'LFP';
 DCMbase.options.trials  = [1 2];  % [3 4] for CROI ([1 2] ROI)
 DCMbase.options.Tdcm(1) = 0;      % start of peri-stimulus time to be modelled
-DCMbase.options.Tdcm(2) = 250;   % end of peri-stimulus time to be modelled
+DCMbase.options.Tdcm(2) = 450;   % end of peri-stimulus time to be modelled
 DCMbase.options.Nmodes  = 8;      % nr of modes for data selection
 DCMbase.options.h       = 0;      % nr of DCT components for detrending [increase to 4????]
 DCMbase.options.onset   = 60;     % selection of onset (prior mean = 60ms for onset at 0)
@@ -821,7 +821,7 @@ DCMbase.xU.name = {'C-A'};
 
 
 % LogEvd=[]; DCMname={};
-this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
+this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
 if ~exist(this_model_dir,'dir')
     mkdir(this_model_dir)
 end
