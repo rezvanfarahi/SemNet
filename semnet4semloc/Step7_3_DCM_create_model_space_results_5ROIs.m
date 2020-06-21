@@ -110,21 +110,21 @@ Amean=zeros(length(dosubs),28,5,5,2);
 Bmean=zeros(length(dosubs),28,5,5);
 all_DCMs={};
 subj=struct();
-% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_aifg_ERP_dtr1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/';
-% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated_thesis/model15/';
-dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
+% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_aifg_ERP_dtr1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/';
+% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated_thesis/model15/';
+dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
 
-% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';
+% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';
 
 
-% /imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_50verts_dtr1_dip/ctf
+% /imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/avg_50verts_dtr1_dip/ctf
 
 for s = 1:length(dosubs) %parfor
     sess=struct();
     sub    = dosubs(s);
     
    ncnt=0;
-    for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[18:2:36]%,37:38]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
+    for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[18:2:36]%,37:38]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
         ncnt=ncnt+1;
         sub
         n
@@ -149,11 +149,11 @@ sess.model(1,ncnt)=this_model;
     subj(1,s).sess=sess;
 end
 out_dir=dcm_path;
-%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/home/rf02/rezvan/test1/step_by_step/dcm/latest/200ms_7models/semloc';
+%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/home/rf02/rezvan/test1/step_by_step/dcm/latest/200ms_7models/semloc';
 if ~exist(out_dir,'dir')
     mkdir(out_dir)
 end
-save([out_dir,'/modelspace_allmaxCTF_hubs_oldreg.mat'],'subj')
+save([out_dir,'/modelspace_allmaxCTF_all_oldreg.mat'],'subj')
 cd(dcm_path)
 % [alpha,exp_r,xp,pxp,bor] = spm_BMS (LogEvd, [], 1, [], [], []);
 % for n1=1:numel(Model)
