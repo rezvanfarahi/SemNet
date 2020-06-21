@@ -153,7 +153,7 @@ out_dir=dcm_path;
 if ~exist(out_dir,'dir')
     mkdir(out_dir)
 end
-save([out_dir,'/modelspace_allmaxCTF_all_oldreg.mat'],'subj')
+save([out_dir,'/modelspace_allmaxCTF_hubs_oldreg.mat'],'subj')
 cd(dcm_path)
 % [alpha,exp_r,xp,pxp,bor] = spm_BMS (LogEvd, [], 1, [], [], []);
 % for n1=1:numel(Model)
