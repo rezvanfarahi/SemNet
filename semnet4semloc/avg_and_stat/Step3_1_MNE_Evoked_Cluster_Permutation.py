@@ -45,8 +45,8 @@ import os
 # Set parameters
 
 
-out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/' # root
-uvttest_path = '/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/1_48/' # root
+out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/LD/' # root LD or SD
+uvttest_path = '/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/LD/1_48/' # root
 
 if not os.path.exists(out_path):
     os.makedirs(out_path)
