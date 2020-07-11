@@ -27,7 +27,7 @@ inpath='/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/LD/1_48/' #'/imagi
 ### All Conditions
 conds=(\
 
-'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
+#'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
 'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
 )
 
