@@ -27,19 +27,8 @@ inpath='/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/LD/1_48/' #'/imagi
 ### All Conditions
 conds=(\
 
-
 'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
 'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
-
-
-##perm wpw
-#'ClusPer_abs_sw_icomorphed_newreg_clusterp05_p05_19subj_SemDec_pnt1_30ica_Hand_Pwordc_maxstep5' \
-#'ClusPer_abs_sw_icomorphed_newreg_clusterp05_p05_19subj_SemDec_pnt1_30ica_Visual_Pwordc_maxstep5' \
-
-#'ClusPer_abs_sw_icomorphed_newreg_clusterp05_p05_19subj_SemDec_pnt1_30ica_Visual_Hand_maxstep5' \
-#'ClusPer_sEvoked_sw_icomorphed_newreg_clusterp01_p05_19subj_SemDec_pnt1_30ica_Visual_Handgammamu_maxstep5' \
-
-
 )
 
 nconds=${#conds[*]}
