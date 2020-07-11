@@ -43,9 +43,10 @@ do
     --subject fsaverage \
     --smooth 5 \
     --stcin ${inpath}/${conds[cc]} \
-    --tmin 1 \
-    --tmax 5 \
-    --tstep 1 \
+    --scaleby 10000000000 \
+    --tmin 150 \
+    --tmax 300 \
+    --tstep 100 \
     --pickrange \
     --alpha 1.0 \
     --width 600 \
