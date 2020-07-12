@@ -53,7 +53,7 @@ do
     --height 400 \
     --noscalebar \
     --view  lat \
-    --jpg ${outpath}/${conds[cc]} \
+    --tif ${outpath}/${conds[cc]} \
     --fthresh 0e10  --fmid 2e10 --fmax 4e10
 done    
 
