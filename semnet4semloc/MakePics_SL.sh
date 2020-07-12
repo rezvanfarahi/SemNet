@@ -52,7 +52,6 @@ do
     --width 600 \
     --height 400 \
     --noscalebar \
-    --nocomments \
     --view  lat \
     --jpg ${outpath}/${conds[cc]} \
     --fthresh 0e10  --fmid 2e10 --fmax 4e10
