@@ -1,0 +1,1420 @@
+Node file: node-e[02-03]
+Starting SMPD on node-e02 node-e03  ...
+srun --ntasks-per-node=1 --ntasks=2 /hpc-software/matlab/r2015a/bin/mw_smpd -phrase MATLAB -port 20794 -debug 0 &
+Checking that SMPD processes are running (Attempt 1 of 60)
+/hpc-software/matlab/r2015a/bin/mw_smpd -phrase MATLAB -port 20794 -status node-e02 > /dev/null 2>&1
+SMPD process found running on node-e02
+/hpc-software/matlab/r2015a/bin/mw_smpd -phrase MATLAB -port 20794 -status node-e03 > /dev/null 2>&1
+SMPD process found running on node-e03
+All SMPDs launched
+Machine args: -hosts 2 node-e02 14 node-e03 5
+/hpc-software/matlab/r2015a/bin/mw_mpiexec -phrase MATLAB -port 20794 -l -hosts 2 node-e02 14 node-e03 5 -genvlist MDCE_DECODE_FUNCTION,MDCE_STORAGE_LOCATION,MDCE_STORAGE_CONSTRUCTOR,MDCE_JOB_LOCATION,MDCE_DEBUG,MDCE_LICENSE_NUMBER,MLM_WEB_LICENSE,MLM_WEB_USER_CRED,MLM_WEB_ID "/hpc-software/matlab/r2015a/bin/worker" -parallel
+[17]                            < M A T L A B (R) >
+[17]                  Copyright 1984-2015 The MathWorks, Inc.
+[17]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[17]                             February 12, 2015
+[15]                            < M A T L A B (R) >
+[15]                  Copyright 1984-2015 The MathWorks, Inc.
+[15]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[15]                             February 12, 2015
+[14]                            < M A T L A B (R) >
+[14]                  Copyright 1984-2015 The MathWorks, Inc.
+[14]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[14]                             February 12, 2015
+[16]                            < M A T L A B (R) >
+[16]                  Copyright 1984-2015 The MathWorks, Inc.
+[16]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[16]                             February 12, 2015
+[18]                            < M A T L A B (R) >
+[18]                  Copyright 1984-2015 The MathWorks, Inc.
+[18]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[18]                             February 12, 2015
+[18] 
+[16] 
+[15] 
+[14] 
+[17] 
+[14]To get started, type one of these: helpwin, helpdesk, or demo.
+[18]To get started, type one of these: helpwin, helpdesk, or demo.
+[16]To get started, type one of these: helpwin, helpdesk, or demo.
+[15]To get started, type one of these: helpwin, helpdesk, or demo.
+[14]For product information, visit www.mathworks.com.
+[18]For product information, visit www.mathworks.com.
+[16]For product information, visit www.mathworks.com.
+[15]For product information, visit www.mathworks.com.
+[14] 
+[18] 
+[16] 
+[15] 
+[17]To get started, type one of these: helpwin, helpdesk, or demo.
+[17]For product information, visit www.mathworks.com.
+[17] 
+[14][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[14]you rename the function to avoid a potential name conflict.] 
+[14][> In path (line 109)
+[14]  In addpath (line 86)
+[14]  In matlabrc (line 247)] 
+[18][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[18]you rename the function to avoid a potential name conflict.] 
+[18][> In path (line 109)
+[18]  In addpath (line 86)
+[18]  In matlabrc (line 247)] 
+[16][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[16]you rename the function to avoid a potential name conflict.] 
+[16][> In path (line 109)
+[16]  In addpath (line 86)
+[16]  In matlabrc (line 247)] 
+[15][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[15]you rename the function to avoid a potential name conflict.] 
+[15][> In path (line 109)
+[15]  In addpath (line 86)
+[15]  In matlabrc (line 247)] 
+[17][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[17]you rename the function to avoid a potential name conflict.] 
+[17][> In path (line 109)
+[17]  In addpath (line 86)
+[17]  In matlabrc (line 247)] 
+[16]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[14]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[15]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[17]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[18]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[14]	Academic License
+[15]	Academic License
+[16]	Academic License
+[17]	Academic License
+[18]	Academic License
+[17]2020-06-21 23:04:39 | About to evaluate task with DistcompEvaluateFileTask
+[15]2020-06-21 23:04:39 | About to evaluate task with DistcompEvaluateFileTask
+[16]2020-06-21 23:04:39 | About to evaluate task with DistcompEvaluateFileTask
+[14]2020-06-21 23:04:39 | About to evaluate task with DistcompEvaluateFileTask
+[18]2020-06-21 23:04:39 | About to evaluate task with DistcompEvaluateFileTask
+[16]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core
+[17]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core
+[14]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core
+[16]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core/iSetup
+[15]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core
+[17]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core/iSetup
+[18]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core
+[14]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core/iSetup
+[15]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core/iSetup
+[18]2020-06-21 23:04:39 | Enter distcomp_evaluate_filetask_core/iSetup
+[18]2020-06-21 23:04:39 | This process will exit on any fault.
+[15]2020-06-21 23:04:39 | This process will exit on any fault.
+[17]2020-06-21 23:04:39 | This process will exit on any fault.
+[16]2020-06-21 23:04:39 | This process will exit on any fault.
+[14]2020-06-21 23:04:39 | This process will exit on any fault.
+[18]2020-06-21 23:04:39 | This process will exit when its parent process dies.
+[15]2020-06-21 23:04:39 | This process will exit when its parent process dies.
+[16]2020-06-21 23:04:39 | This process will exit when its parent process dies.
+[14]2020-06-21 23:04:39 | This process will exit when its parent process dies.
+[17]2020-06-21 23:04:39 | This process will exit when its parent process dies.
+[18]2020-06-21 23:04:39 | About to initialize MPI.
+[16]2020-06-21 23:04:39 | About to initialize MPI.
+[14]2020-06-21 23:04:39 | About to initialize MPI.
+[15]2020-06-21 23:04:39 | About to initialize MPI.
+[17]2020-06-21 23:04:39 | About to initialize MPI.
+[13]                            < M A T L A B (R) >
+[13]                  Copyright 1984-2015 The MathWorks, Inc.
+[13]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[13]                             February 12, 2015
+[11]                            < M A T L A B (R) >
+[11]                  Copyright 1984-2015 The MathWorks, Inc.
+[11]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[11]                             February 12, 2015
+[9]                            < M A T L A B (R) >
+[9]                  Copyright 1984-2015 The MathWorks, Inc.
+[9]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[9]                             February 12, 2015
+[2]                            < M A T L A B (R) >
+[2]                  Copyright 1984-2015 The MathWorks, Inc.
+[2]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[2]                             February 12, 2015
+[1]                            < M A T L A B (R) >
+[1]                  Copyright 1984-2015 The MathWorks, Inc.
+[1]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[1]                             February 12, 2015
+[0]                            < M A T L A B (R) >
+[0]                  Copyright 1984-2015 The MathWorks, Inc.
+[0]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[0]                             February 12, 2015
+[12]                            < M A T L A B (R) >
+[12]                  Copyright 1984-2015 The MathWorks, Inc.
+[12]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[12]                             February 12, 2015
+[10]                            < M A T L A B (R) >
+[10]                  Copyright 1984-2015 The MathWorks, Inc.
+[10]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[10]                             February 12, 2015
+[8]                            < M A T L A B (R) >
+[8]                  Copyright 1984-2015 The MathWorks, Inc.
+[8]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[8]                             February 12, 2015
+[7]                            < M A T L A B (R) >
+[7]                  Copyright 1984-2015 The MathWorks, Inc.
+[7]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[7]                             February 12, 2015
+[6]                            < M A T L A B (R) >
+[6]                  Copyright 1984-2015 The MathWorks, Inc.
+[6]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[6]                             February 12, 2015
+[5]                            < M A T L A B (R) >
+[5]                  Copyright 1984-2015 The MathWorks, Inc.
+[5]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[5]                             February 12, 2015
+[4]                            < M A T L A B (R) >
+[4]                  Copyright 1984-2015 The MathWorks, Inc.
+[4]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[4]                             February 12, 2015
+[3]                            < M A T L A B (R) >
+[3]                  Copyright 1984-2015 The MathWorks, Inc.
+[3]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[3]                             February 12, 2015
+[11] 
+[6] 
+[4] 
+[3] 
+[2] 
+[0] 
+[10] 
+[5] 
+[9] 
+[8] 
+[1] 
+[7] 
+[13] 
+[12] 
+[11]To get started, type one of these: helpwin, helpdesk, or demo.
+[10]To get started, type one of these: helpwin, helpdesk, or demo.
+[8]To get started, type one of these: helpwin, helpdesk, or demo.
+[6]To get started, type one of these: helpwin, helpdesk, or demo.
+[5]To get started, type one of these: helpwin, helpdesk, or demo.
+[4]To get started, type one of these: helpwin, helpdesk, or demo.
+[3]To get started, type one of these: helpwin, helpdesk, or demo.
+[1]To get started, type one of these: helpwin, helpdesk, or demo.
+[0]To get started, type one of these: helpwin, helpdesk, or demo.
+[9]To get started, type one of these: helpwin, helpdesk, or demo.
+[7]To get started, type one of these: helpwin, helpdesk, or demo.
+[2]To get started, type one of these: helpwin, helpdesk, or demo.
+[13]To get started, type one of these: helpwin, helpdesk, or demo.
+[12]To get started, type one of these: helpwin, helpdesk, or demo.
+[13]For product information, visit www.mathworks.com.
+[11]For product information, visit www.mathworks.com.
+[10]For product information, visit www.mathworks.com.
+[8]For product information, visit www.mathworks.com.
+[7]For product information, visit www.mathworks.com.
+[6]For product information, visit www.mathworks.com.
+[5]For product information, visit www.mathworks.com.
+[4]For product information, visit www.mathworks.com.
+[4] 
+[3]For product information, visit www.mathworks.com.
+[3] 
+[2]For product information, visit www.mathworks.com.
+[2] 
+[1]For product information, visit www.mathworks.com.
+[1] 
+[0]For product information, visit www.mathworks.com.
+[0] 
+[12]For product information, visit www.mathworks.com.
+[12] 
+[11] 
+[10] 
+[9]For product information, visit www.mathworks.com.
+[9] 
+[8] 
+[7] 
+[6] 
+[5] 
+[13] 
+[11][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[11]you rename the function to avoid a potential name conflict.] 
+[11][> In path (line 109)
+[11]  In addpath (line 86)
+[11]  In matlabrc (line 247)] 
+[6][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[6]you rename the function to avoid a potential name conflict.] 
+[6][> In path (line 109)
+[6]  In addpath (line 86)
+[6]  In matlabrc (line 247)] 
+[1][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[1]you rename the function to avoid a potential name conflict.] 
+[1][> In path (line 109)
+[1]  In addpath (line 86)
+[1]  In matlabrc (line 247)] 
+[0][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[0]you rename the function to avoid a potential name conflict.] 
+[0][> In path (line 109)
+[0]  In addpath (line 86)
+[0]  In matlabrc (line 247)] 
+[3][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[3]you rename the function to avoid a potential name conflict.] 
+[3][> In path (line 109)
+[3]  In addpath (line 86)
+[3]  In matlabrc (line 247)] 
+[2][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[2]you rename the function to avoid a potential name conflict.] 
+[2][> In path (line 109)
+[2]  In addpath (line 86)
+[2]  In matlabrc (line 247)] 
+[10][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[10]you rename the function to avoid a potential name conflict.] 
+[10][> In path (line 109)
+[10]  In addpath (line 86)
+[10]  In matlabrc (line 247)] 
+[9][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[9]you rename the function to avoid a potential name conflict.] 
+[9][> In path (line 109)
+[9]  In addpath (line 86)
+[9]  In matlabrc (line 247)] 
+[4][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[4]you rename the function to avoid a potential name conflict.] 
+[4][> In path (line 109)
+[4]  In addpath (line 86)
+[4]  In matlabrc (line 247)] 
+[5][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[5]you rename the function to avoid a potential name conflict.] 
+[5][> In path (line 109)
+[5]  In addpath (line 86)
+[5]  In matlabrc (line 247)] 
+[12][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[12]you rename the function to avoid a potential name conflict.] 
+[12][> In path (line 109)
+[12]  In addpath (line 86)
+[12]  In matlabrc (line 247)] 
+[13][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[13]you rename the function to avoid a potential name conflict.] 
+[13][> In path (line 109)
+[13]  In addpath (line 86)
+[13]  In matlabrc (line 247)] 
+[8][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[8]you rename the function to avoid a potential name conflict.] 
+[8][> In path (line 109)
+[8]  In addpath (line 86)
+[8]  In matlabrc (line 247)] 
+[7][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[7]you rename the function to avoid a potential name conflict.] 
+[7][> In path (line 109)
+[7]  In addpath (line 86)
+[7]  In matlabrc (line 247)] 
+[3]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[5]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[4]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[0]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[1]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[6]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[13]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[11]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[9]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[12]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[7]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[2]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[0]	Academic License
+[3]	Academic License
+[4]	Academic License
+[13]	Academic License
+[6]	Academic License
+[8]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[1]	Academic License
+[11]	Academic License
+[5]	Academic License
+[12]	Academic License
+[9]	Academic License
+[7]	Academic License
+[8]	Academic License
+[2]	Academic License
+[10]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[10]	Academic License
+[8]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[1]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[11]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[10]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[9]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[7]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[0]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[13]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[5]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[4]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[3]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[2]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[12]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[6]2020-06-21 23:04:49 | About to evaluate task with DistcompEvaluateFileTask
+[5]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[4]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[0]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[1]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[12]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[11]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[13]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[2]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[5]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[4]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[0]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[1]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[12]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[11]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[13]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[7]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[2]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[9]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[10]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[7]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[6]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[9]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[10]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[6]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[8]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[8]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[3]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core
+[3]2020-06-21 23:04:50 | Enter distcomp_evaluate_filetask_core/iSetup
+[8]2020-06-21 23:04:50 | This process will exit on any fault.
+[7]2020-06-21 23:04:50 | This process will exit on any fault.
+[6]2020-06-21 23:04:50 | This process will exit on any fault.
+[3]2020-06-21 23:04:50 | This process will exit on any fault.
+[5]2020-06-21 23:04:50 | This process will exit on any fault.
+[4]2020-06-21 23:04:50 | This process will exit on any fault.
+[2]2020-06-21 23:04:50 | This process will exit on any fault.
+[0]2020-06-21 23:04:50 | This process will exit on any fault.
+[12]2020-06-21 23:04:50 | This process will exit on any fault.
+[11]2020-06-21 23:04:50 | This process will exit on any fault.
+[10]2020-06-21 23:04:50 | This process will exit on any fault.
+[9]2020-06-21 23:04:50 | This process will exit on any fault.
+[1]2020-06-21 23:04:50 | This process will exit on any fault.
+[13]2020-06-21 23:04:50 | This process will exit on any fault.
+[12]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[11]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[10]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[9]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[8]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[6]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[5]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[0]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[4]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[3]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[2]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[1]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[13]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[7]2020-06-21 23:04:50 | This process will exit when its parent process dies.
+[13]2020-06-21 23:04:50 | About to initialize MPI.
+[9]2020-06-21 23:04:50 | About to initialize MPI.
+[6]2020-06-21 23:04:50 | About to initialize MPI.
+[12]2020-06-21 23:04:50 | About to initialize MPI.
+[3]2020-06-21 23:04:50 | About to initialize MPI.
+[11]2020-06-21 23:04:50 | About to initialize MPI.
+[10]2020-06-21 23:04:50 | About to initialize MPI.
+[7]2020-06-21 23:04:50 | About to initialize MPI.
+[4]2020-06-21 23:04:50 | About to initialize MPI.
+[0]2020-06-21 23:04:50 | About to initialize MPI.
+[2]2020-06-21 23:04:50 | About to initialize MPI.
+[1]2020-06-21 23:04:50 | About to initialize MPI.
+[8]2020-06-21 23:04:50 | About to initialize MPI.
+[5]2020-06-21 23:04:50 | About to initialize MPI.
+[13]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[12]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[11]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[10]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[4]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[2]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[1]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[0]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[5]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[18]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[14]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[17]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[16]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[15]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[9]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[6]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[8]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[3]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[7]2020-06-21 23:04:51 | About to call mpiParallelSessionStarting.
+[18]2020-06-21 23:04:51 | Finished initializing MPI.
+[15]2020-06-21 23:04:51 | Finished initializing MPI.
+[14]2020-06-21 23:04:51 | Finished initializing MPI.
+[16]2020-06-21 23:04:51 | Finished initializing MPI.
+[17]2020-06-21 23:04:51 | Finished initializing MPI.
+[0]2020-06-21 23:04:51 | Finished initializing MPI.
+[3]2020-06-21 23:04:51 | Finished initializing MPI.
+[2]2020-06-21 23:04:51 | Finished initializing MPI.
+[4]2020-06-21 23:04:51 | Finished initializing MPI.
+[5]2020-06-21 23:04:51 | Finished initializing MPI.
+[9]2020-06-21 23:04:51 | Finished initializing MPI.
+[13]2020-06-21 23:04:51 | Finished initializing MPI.
+[8]2020-06-21 23:04:51 | Finished initializing MPI.
+[12]2020-06-21 23:04:51 | Finished initializing MPI.
+[10]2020-06-21 23:04:51 | Finished initializing MPI.
+[11]2020-06-21 23:04:51 | Finished initializing MPI.
+[7]2020-06-21 23:04:51 | Finished initializing MPI.
+[6]2020-06-21 23:04:51 | Finished initializing MPI.
+[1]2020-06-21 23:04:51 | Finished initializing MPI.
+[18]2020-06-21 23:04:51 | About to call decode function.
+[14]2020-06-21 23:04:51 | About to call decode function.
+[17]2020-06-21 23:04:51 | About to call decode function.
+[15]2020-06-21 23:04:51 | About to call decode function.
+[16]2020-06-21 23:04:51 | About to call decode function.
+[18]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[14]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[17]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[15]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[16]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[11]2020-06-21 23:04:51 | About to call decode function.
+[2]2020-06-21 23:04:51 | About to call decode function.
+[1]2020-06-21 23:04:51 | About to call decode function.
+[8]2020-06-21 23:04:51 | About to call decode function.
+[5]2020-06-21 23:04:51 | About to call decode function.
+[0]2020-06-21 23:04:51 | About to call decode function.
+[4]2020-06-21 23:04:51 | About to call decode function.
+[12]2020-06-21 23:04:51 | About to call decode function.
+[6]2020-06-21 23:04:51 | About to call decode function.
+[13]2020-06-21 23:04:51 | About to call decode function.
+[10]2020-06-21 23:04:51 | About to call decode function.
+[3]2020-06-21 23:04:51 | About to call decode function.
+[7]2020-06-21 23:04:51 | About to call decode function.
+[9]2020-06-21 23:04:51 | About to call decode function.
+[13]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[11]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[7]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[5]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[4]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[3]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[2]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[1]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[0]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[12]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[10]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[9]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[8]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[6]2020-06-21 23:04:51 | In parallel.cluster.generic.communicatingDecodeFcn
+[17]2020-06-21 23:04:51 | Setting the desktop client to a new client with username 
+[14]2020-06-21 23:04:51 | Setting the desktop client to a new client with username 
+[16]2020-06-21 23:04:51 | Setting the desktop client to a new client with username 
+[18]2020-06-21 23:04:51 | Setting the desktop client to a new client with username 
+[15]2020-06-21 23:04:51 | Setting the desktop client to a new client with username 
+[17]2020-06-21 23:04:51 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[16]2020-06-21 23:04:51 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[14]2020-06-21 23:04:51 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[18]2020-06-21 23:04:51 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[15]2020-06-21 23:04:51 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[14]2020-06-21 23:04:51 | About to find job and task using locations "Job1" and "Job1/Task15"
+[16]2020-06-21 23:04:51 | About to find job and task using locations "Job1" and "Job1/Task17"
+[17]2020-06-21 23:04:51 | About to find job and task using locations "Job1" and "Job1/Task18"
+[15]2020-06-21 23:04:51 | About to find job and task using locations "Job1" and "Job1/Task16"
+[18]2020-06-21 23:04:51 | About to find job and task using locations "Job1" and "Job1/Task19"
+[8]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[4]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[6]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[5]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[10]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[9]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[1]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[13]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[12]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[7]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[3]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[11]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[8]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[4]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[6]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[2]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[5]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[9]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[1]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[13]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[12]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[10]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[7]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[11]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[3]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[0]2020-06-21 23:04:52 | Setting the desktop client to a new client with username 
+[2]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[0]2020-06-21 23:04:52 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[15]2020-06-21 23:04:52 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[16]2020-06-21 23:04:52 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[18]2020-06-21 23:04:52 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[17]2020-06-21 23:04:52 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[14]2020-06-21 23:04:52 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[17]2020-06-21 23:04:52 | Completed pre-execution phase
+[16]2020-06-21 23:04:52 | Completed pre-execution phase
+[14]2020-06-21 23:04:52 | Completed pre-execution phase
+[15]2020-06-21 23:04:52 | Completed pre-execution phase
+[18]2020-06-21 23:04:52 | Completed pre-execution phase
+[18]2020-06-21 23:04:52 | About to pPreJobEvaluate
+[17]2020-06-21 23:04:52 | About to pPreJobEvaluate
+[16]2020-06-21 23:04:52 | About to pPreJobEvaluate
+[14]2020-06-21 23:04:52 | About to pPreJobEvaluate
+[15]2020-06-21 23:04:52 | About to pPreJobEvaluate
+[8]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task9"
+[4]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task5"
+[0]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task1"
+[6]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task7"
+[13]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task14"
+[1]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task2"
+[5]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task6"
+[11]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task12"
+[3]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task4"
+[10]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task11"
+[9]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task10"
+[2]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task3"
+[12]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task13"
+[7]2020-06-21 23:04:52 | About to find job and task using locations "Job1" and "Job1/Task8"
+[0]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[8]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[11]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[4]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[6]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[1]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[10]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[5]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[13]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[7]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[9]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[3]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[12]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[2]2020-06-21 23:04:53 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[0]2020-06-21 23:04:53 | Completed pre-execution phase
+[12]2020-06-21 23:04:53 | Completed pre-execution phase
+[5]2020-06-21 23:04:53 | Completed pre-execution phase
+[13]2020-06-21 23:04:53 | Completed pre-execution phase
+[8]2020-06-21 23:04:53 | Completed pre-execution phase
+[2]2020-06-21 23:04:53 | Completed pre-execution phase
+[3]2020-06-21 23:04:53 | Completed pre-execution phase
+[7]2020-06-21 23:04:53 | Completed pre-execution phase
+[6]2020-06-21 23:04:53 | Completed pre-execution phase
+[4]2020-06-21 23:04:53 | Completed pre-execution phase
+[10]2020-06-21 23:04:53 | Completed pre-execution phase
+[9]2020-06-21 23:04:53 | Completed pre-execution phase
+[11]2020-06-21 23:04:53 | Completed pre-execution phase
+[1]2020-06-21 23:04:53 | Completed pre-execution phase
+[13]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[12]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[11]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[10]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[9]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[8]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[7]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[6]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[5]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[4]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[3]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[2]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[1]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[0]2020-06-21 23:04:53 | About to pPreJobEvaluate
+[6]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[0]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[14]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[13]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[11]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[9]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[7]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[10]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[3]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[1]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[4]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[2]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[12]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[5]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[18]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[8]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[15]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[17]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[16]2020-06-21 23:04:54 | About to pPreTaskEvaluate
+[0]2020-06-21 23:04:54 | About to add job dependencies
+[6]2020-06-21 23:04:54 | About to add job dependencies
+[3]2020-06-21 23:04:54 | About to add job dependencies
+[11]2020-06-21 23:04:54 | About to add job dependencies
+[7]2020-06-21 23:04:54 | About to add job dependencies
+[13]2020-06-21 23:04:54 | About to add job dependencies
+[4]2020-06-21 23:04:54 | About to add job dependencies
+[9]2020-06-21 23:04:54 | About to add job dependencies
+[10]2020-06-21 23:04:54 | About to add job dependencies
+[8]2020-06-21 23:04:54 | About to add job dependencies
+[5]2020-06-21 23:04:54 | About to add job dependencies
+[12]2020-06-21 23:04:54 | About to add job dependencies
+[15]2020-06-21 23:04:54 | About to add job dependencies
+[18]2020-06-21 23:04:54 | About to add job dependencies
+[14]2020-06-21 23:04:54 | About to add job dependencies
+[16]2020-06-21 23:04:54 | About to add job dependencies
+[1]2020-06-21 23:04:54 | About to add job dependencies
+[2]2020-06-21 23:04:54 | About to add job dependencies
+[17]2020-06-21 23:04:54 | About to add job dependencies
+[15]2020-06-21 23:04:56 | About to call jobStartup
+[14]2020-06-21 23:04:56 | About to call jobStartup
+[15]2020-06-21 23:04:56 | About to push FileWriter on stack
+[14]2020-06-21 23:04:56 | About to push FileWriter on stack
+[15]2020-06-21 23:04:56 | FileWriter popped off stack
+[15]2020-06-21 23:04:56 | About to call taskStartup
+[14]2020-06-21 23:04:56 | FileWriter popped off stack
+[15]2020-06-21 23:04:56 | About to push FileWriter on stack
+[14]2020-06-21 23:04:56 | About to call taskStartup
+[15]2020-06-21 23:04:56 | FileWriter popped off stack
+[15]2020-06-21 23:04:56 | About to get evaluation data
+[14]2020-06-21 23:04:56 | About to push FileWriter on stack
+[14]2020-06-21 23:04:56 | FileWriter popped off stack
+[14]2020-06-21 23:04:56 | About to get evaluation data
+[16]2020-06-21 23:04:56 | About to call jobStartup
+[18]2020-06-21 23:04:56 | About to call jobStartup
+[16]2020-06-21 23:04:56 | About to push FileWriter on stack
+[18]2020-06-21 23:04:56 | About to push FileWriter on stack
+[17]2020-06-21 23:04:56 | About to call jobStartup
+[16]2020-06-21 23:04:56 | FileWriter popped off stack
+[18]2020-06-21 23:04:56 | FileWriter popped off stack
+[16]2020-06-21 23:04:56 | About to call taskStartup
+[18]2020-06-21 23:04:56 | About to call taskStartup
+[18]2020-06-21 23:04:56 | About to push FileWriter on stack
+[16]2020-06-21 23:04:56 | About to push FileWriter on stack
+[18]2020-06-21 23:04:56 | FileWriter popped off stack
+[16]2020-06-21 23:04:56 | FileWriter popped off stack
+[18]2020-06-21 23:04:56 | About to get evaluation data
+[16]2020-06-21 23:04:56 | About to get evaluation data
+[17]2020-06-21 23:04:56 | About to push FileWriter on stack
+[17]2020-06-21 23:04:56 | FileWriter popped off stack
+[17]2020-06-21 23:04:56 | About to call taskStartup
+[17]2020-06-21 23:04:56 | About to push FileWriter on stack
+[17]2020-06-21 23:04:56 | FileWriter popped off stack
+[17]2020-06-21 23:04:56 | About to get evaluation data
+[15]2020-06-21 23:04:56 | About to pInstantiatePool
+[14]2020-06-21 23:04:56 | About to pInstantiatePool
+[16]2020-06-21 23:04:56 | About to pInstantiatePool
+[18]2020-06-21 23:04:56 | About to pInstantiatePool
+[17]2020-06-21 23:04:56 | About to pInstantiatePool
+[1]2020-06-21 23:04:57 | About to call jobStartup
+[13]2020-06-21 23:04:57 | About to call jobStartup
+[11]2020-06-21 23:04:57 | About to call jobStartup
+[9]2020-06-21 23:04:57 | About to call jobStartup
+[3]2020-06-21 23:04:57 | About to call jobStartup
+[5]2020-06-21 23:04:57 | About to call jobStartup
+[6]2020-06-21 23:04:57 | About to call jobStartup
+[2]2020-06-21 23:04:57 | About to call jobStartup
+[8]2020-06-21 23:04:57 | About to call jobStartup
+[4]2020-06-21 23:04:57 | About to call jobStartup
+[13]2020-06-21 23:04:58 | About to push FileWriter on stack
+[1]2020-06-21 23:04:58 | About to push FileWriter on stack
+[9]2020-06-21 23:04:58 | About to push FileWriter on stack
+[3]2020-06-21 23:04:58 | About to push FileWriter on stack
+[11]2020-06-21 23:04:58 | About to push FileWriter on stack
+[6]2020-06-21 23:04:58 | About to push FileWriter on stack
+[5]2020-06-21 23:04:58 | About to push FileWriter on stack
+[8]2020-06-21 23:04:58 | About to push FileWriter on stack
+[10]2020-06-21 23:04:57 | About to call jobStartup
+[13]2020-06-21 23:04:58 | FileWriter popped off stack
+[1]2020-06-21 23:04:58 | FileWriter popped off stack
+[3]2020-06-21 23:04:58 | FileWriter popped off stack
+[9]2020-06-21 23:04:58 | FileWriter popped off stack
+[11]2020-06-21 23:04:58 | FileWriter popped off stack
+[13]2020-06-21 23:04:58 | About to call taskStartup
+[2]2020-06-21 23:04:58 | About to push FileWriter on stack
+[1]2020-06-21 23:04:58 | About to call taskStartup
+[6]2020-06-21 23:04:58 | FileWriter popped off stack
+[3]2020-06-21 23:04:58 | About to call taskStartup
+[9]2020-06-21 23:04:58 | About to call taskStartup
+[11]2020-06-21 23:04:58 | About to call taskStartup
+[4]2020-06-21 23:04:58 | About to push FileWriter on stack
+[6]2020-06-21 23:04:58 | About to call taskStartup
+[3]2020-06-21 23:04:58 | About to push FileWriter on stack
+[1]2020-06-21 23:04:58 | About to push FileWriter on stack
+[13]2020-06-21 23:04:58 | About to push FileWriter on stack
+[9]2020-06-21 23:04:58 | About to push FileWriter on stack
+[11]2020-06-21 23:04:58 | About to push FileWriter on stack
+[8]2020-06-21 23:04:58 | FileWriter popped off stack
+[3]2020-06-21 23:04:58 | FileWriter popped off stack
+[1]2020-06-21 23:04:58 | FileWriter popped off stack
+[13]2020-06-21 23:04:58 | FileWriter popped off stack
+[11]2020-06-21 23:04:58 | FileWriter popped off stack
+[6]2020-06-21 23:04:58 | About to push FileWriter on stack
+[3]2020-06-21 23:04:58 | About to get evaluation data
+[1]2020-06-21 23:04:58 | About to get evaluation data
+[13]2020-06-21 23:04:58 | About to get evaluation data
+[11]2020-06-21 23:04:58 | About to get evaluation data
+[8]2020-06-21 23:04:58 | About to call taskStartup
+[6]2020-06-21 23:04:58 | FileWriter popped off stack
+[9]2020-06-21 23:04:58 | FileWriter popped off stack
+[2]2020-06-21 23:04:58 | FileWriter popped off stack
+[12]2020-06-21 23:04:57 | About to call jobStartup
+[5]2020-06-21 23:04:58 | FileWriter popped off stack
+[6]2020-06-21 23:04:58 | About to get evaluation data
+[9]2020-06-21 23:04:58 | About to get evaluation data
+[8]2020-06-21 23:04:58 | About to push FileWriter on stack
+[4]2020-06-21 23:04:58 | FileWriter popped off stack
+[0]2020-06-21 23:04:57 | About to call jobStartup
+[2]2020-06-21 23:04:58 | About to call taskStartup
+[10]2020-06-21 23:04:58 | About to push FileWriter on stack
+[7]2020-06-21 23:04:57 | About to call jobStartup
+[8]2020-06-21 23:04:58 | FileWriter popped off stack
+[5]2020-06-21 23:04:58 | About to call taskStartup
+[4]2020-06-21 23:04:58 | About to call taskStartup
+[2]2020-06-21 23:04:58 | About to push FileWriter on stack
+[8]2020-06-21 23:04:58 | About to get evaluation data
+[5]2020-06-21 23:04:58 | About to push FileWriter on stack
+[4]2020-06-21 23:04:58 | About to push FileWriter on stack
+[2]2020-06-21 23:04:58 | FileWriter popped off stack
+[5]2020-06-21 23:04:58 | FileWriter popped off stack
+[4]2020-06-21 23:04:58 | FileWriter popped off stack
+[10]2020-06-21 23:04:58 | FileWriter popped off stack
+[2]2020-06-21 23:04:58 | About to get evaluation data
+[5]2020-06-21 23:04:58 | About to get evaluation data
+[4]2020-06-21 23:04:58 | About to get evaluation data
+[12]2020-06-21 23:04:58 | About to push FileWriter on stack
+[0]2020-06-21 23:04:58 | About to push FileWriter on stack
+[10]2020-06-21 23:04:58 | About to call taskStartup
+[7]2020-06-21 23:04:58 | About to push FileWriter on stack
+[10]2020-06-21 23:04:58 | About to push FileWriter on stack
+[10]2020-06-21 23:04:58 | FileWriter popped off stack
+[0]2020-06-21 23:04:58 | FileWriter popped off stack
+[10]2020-06-21 23:04:58 | About to get evaluation data
+[12]2020-06-21 23:04:58 | FileWriter popped off stack
+[0]2020-06-21 23:04:58 | About to call taskStartup
+[12]2020-06-21 23:04:58 | About to call taskStartup
+[7]2020-06-21 23:04:58 | FileWriter popped off stack
+[0]2020-06-21 23:04:58 | About to push FileWriter on stack
+[12]2020-06-21 23:04:58 | About to push FileWriter on stack
+[7]2020-06-21 23:04:58 | About to call taskStartup
+[0]2020-06-21 23:04:58 | FileWriter popped off stack
+[12]2020-06-21 23:04:58 | FileWriter popped off stack
+[0]2020-06-21 23:04:58 | About to get evaluation data
+[7]2020-06-21 23:04:58 | About to push FileWriter on stack
+[12]2020-06-21 23:04:58 | About to get evaluation data
+[7]2020-06-21 23:04:58 | FileWriter popped off stack
+[7]2020-06-21 23:04:58 | About to get evaluation data
+[8]2020-06-21 23:04:58 | About to pInstantiatePool
+[3]2020-06-21 23:04:58 | About to pInstantiatePool
+[9]2020-06-21 23:04:58 | About to pInstantiatePool
+[6]2020-06-21 23:04:58 | About to pInstantiatePool
+[1]2020-06-21 23:04:58 | About to pInstantiatePool
+[2]2020-06-21 23:04:58 | About to pInstantiatePool
+[4]2020-06-21 23:04:58 | About to pInstantiatePool
+[13]2020-06-21 23:04:58 | About to pInstantiatePool
+[5]2020-06-21 23:04:58 | About to pInstantiatePool
+[11]2020-06-21 23:04:58 | About to pInstantiatePool
+[10]2020-06-21 23:04:58 | About to pInstantiatePool
+[0]2020-06-21 23:04:58 | About to pInstantiatePool
+[7]2020-06-21 23:04:58 | About to pInstantiatePool
+[12]2020-06-21 23:04:58 | About to pInstantiatePool
+[14]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[5]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[0]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[4]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[2]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[1]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[3]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[7]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[6]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[16]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[18]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[15]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[13]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[9]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[12]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[10]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[17]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[8]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[11]2020-06-21 23:04:58 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[1]2020-06-21 23:05:58 | Failed to create session object with the message:
+[1]'MatlabPoolPeerInstance{fUuid=dfbff684-c028-49c3-b2d2-92b11f86023e, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=2, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[2]2020-06-21 23:05:58 | Failed to create session object with the message:
+[2]'MatlabPoolPeerInstance{fUuid=10c8f63a-3de2-4c5f-ae86-45694858f51e, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=3, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[1]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=dfbff684-c028-49c3-b2d2-92b11f86023e, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=2, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[0]2020-06-21 23:05:58 | Failed to create session object with the message:
+[0]'MatlabPoolPeerInstance{fUuid=5764770b-704c-403b-833c-7e9038d01b2a, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=1, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[2]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=10c8f63a-3de2-4c5f-ae86-45694858f51e, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=3, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[0]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=5764770b-704c-403b-833c-7e9038d01b2a, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=1, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[3]2020-06-21 23:05:58 | Failed to create session object with the message:
+[3]'MatlabPoolPeerInstance{fUuid=fa1638b2-00e2-49c6-a933-4dc207384330, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=4, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[3]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=fa1638b2-00e2-49c6-a933-4dc207384330, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=4, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[4]2020-06-21 23:05:58 | Failed to create session object with the message:
+[4]'MatlabPoolPeerInstance{fUuid=830d10e0-b32b-4ab4-aaa0-9763bcffcc45, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=5, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[4]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=830d10e0-b32b-4ab4-aaa0-9763bcffcc45, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=5, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[5]2020-06-21 23:05:58 | Failed to create session object with the message:
+[5]'MatlabPoolPeerInstance{fUuid=2a3b3980-001b-457b-96ce-c121d6fdb485, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=6, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[5]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=2a3b3980-001b-457b-96ce-c121d6fdb485, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=6, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[6]2020-06-21 23:05:58 | Failed to create session object with the message:
+[6]'MatlabPoolPeerInstance{fUuid=45d1a187-d430-4d6b-be28-8292b506fabf, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=7, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[6]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=45d1a187-d430-4d6b-be28-8292b506fabf, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=7, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[7]2020-06-21 23:05:58 | Failed to create session object with the message:
+[7]'MatlabPoolPeerInstance{fUuid=17ac8f92-ea89-498f-8769-b7ca28552855, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=8, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[7]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=17ac8f92-ea89-498f-8769-b7ca28552855, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=8, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[9]2020-06-21 23:05:58 | Failed to create session object with the message:
+[9]'MatlabPoolPeerInstance{fUuid=011d5679-804e-4dc8-a4de-5245513953c5, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=10, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[8]2020-06-21 23:05:58 | Failed to create session object with the message:
+[8]'MatlabPoolPeerInstance{fUuid=b013c1c4-9b3e-4569-bd16-9c9f161b7a32, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=9, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[9]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=011d5679-804e-4dc8-a4de-5245513953c5, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=10, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[8]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=b013c1c4-9b3e-4569-bd16-9c9f161b7a32, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=9, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[10]2020-06-21 23:05:58 | Failed to create session object with the message:
+[10]'MatlabPoolPeerInstance{fUuid=4a53e599-ad71-4973-b75b-a396de6086ab, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=11, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[10]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=4a53e599-ad71-4973-b75b-a396de6086ab, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=11, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[11]2020-06-21 23:05:58 | Failed to create session object with the message:
+[11]'MatlabPoolPeerInstance{fUuid=6e52b4b2-2f46-4ad8-bfa4-fa8ba2282c5d, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=12, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[12]2020-06-21 23:05:58 | Failed to create session object with the message:
+[12]'MatlabPoolPeerInstance{fUuid=49b0190c-cd33-4833-a8ab-3cbfa2eb14c4, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=13, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[11]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=6e52b4b2-2f46-4ad8-bfa4-fa8ba2282c5d, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=12, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[12]2020-06-21 23:05:58 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=49b0190c-cd33-4833-a8ab-3cbfa2eb14c4, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=13, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[13]2020-06-21 23:05:59 | Failed to create session object with the message:
+[13]'MatlabPoolPeerInstance{fUuid=0bebfee8-37cb-42f4-9b42-969db45bdb44, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=14, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[13]2020-06-21 23:05:59 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=0bebfee8-37cb-42f4-9b42-969db45bdb44, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=14, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[14]2020-06-21 23:05:59 | Failed to create session object with the message:
+[14]'MatlabPoolPeerInstance{fUuid=9468ad1c-e130-428c-955e-21557a37560b, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=15, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[14]2020-06-21 23:05:59 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=9468ad1c-e130-428c-955e-21557a37560b, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=15, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[16]2020-06-21 23:05:59 | Failed to create session object with the message:
+[16]'MatlabPoolPeerInstance{fUuid=a7322e07-3c18-4e1b-91f7-6f20830b9297, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=17, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[15]2020-06-21 23:05:59 | Failed to create session object with the message:
+[15]'MatlabPoolPeerInstance{fUuid=15abbd65-1e5a-4534-8dac-29f463c62bcb, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=16, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[16]2020-06-21 23:05:59 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=a7322e07-3c18-4e1b-91f7-6f20830b9297, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=17, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[15]2020-06-21 23:05:59 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=15abbd65-1e5a-4534-8dac-29f463c62bcb, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=16, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[17]2020-06-21 23:05:59 | Failed to create session object with the message:
+[17]'MatlabPoolPeerInstance{fUuid=f1b9c399-204e-4976-8151-78e28767327e, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=18, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[17]2020-06-21 23:05:59 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=f1b9c399-204e-4976-8151-78e28767327e, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=18, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[18]2020-06-21 23:05:59 | Failed to create session object with the message:
+[18]'MatlabPoolPeerInstance{fUuid=a0a6755a-6eb7-4073-a885-0412c5ae923f, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=19, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused'
+[18]2020-06-21 23:05:59 | Error message from connectToClient: MatlabPoolPeerInstance{fUuid=a0a6755a-6eb7-4073-a885-0412c5ae923f, fGroupUuid=7ba4e950-b352-4d66-9b55-577eca898952, fLabIndex=19, fNumberOfLabs=19} was unable to connect to login-gpu02/172.31.120.42:27370 most probably because login-gpu02/172.31.120.42:27370 refused the connection: Connection refused
+[3]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[3]A reportable error occurred during job execution.
+[3]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[3]                interactiveWorker.start(args{:});
+[3]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[3]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[3]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[3]                    job.pInstantiatePool(task, fcn, nOut, args);
+[3]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[3]nEvaluateTask();
+[3]Error in dctEvaluateTask (line 57)
+[3]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[3]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[3]    dctEvaluateTask(postFcns, finishFcn);
+[3]Error in distcomp_evaluate_filetask_core (line 52)
+[3]    iDoTask(handlers, postFcns);
+[11]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[11]A reportable error occurred during job execution.
+[11]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[11]                interactiveWorker.start(args{:});
+[11]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[11]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[11]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[11]                    job.pInstantiatePool(task, fcn, nOut, args);
+[11]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[11]nEvaluateTask();
+[11]Error in dctEvaluateTask (line 57)
+[11]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[11]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[11]    dctEvaluateTask(postFcns, finishFcn);
+[11]Error in distcomp_evaluate_filetask_core (line 52)
+[11]    iDoTask(handlers, postFcns);
+[1]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[1]A reportable error occurred during job execution.
+[1]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[1]                interactiveWorker.start(args{:});
+[1]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[1]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[1]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[1]                    job.pInstantiatePool(task, fcn, nOut, args);
+[1]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[1]nEvaluateTask();
+[1]Error in dctEvaluateTask (line 57)
+[1]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[1]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[1]    dctEvaluateTask(postFcns, finishFcn);
+[1]Error in distcomp_evaluate_filetask_core (line 52)
+[1]    iDoTask(handlers, postFcns);
+[13]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[13]A reportable error occurred during job execution.
+[13]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[13]                interactiveWorker.start(args{:});
+[13]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[13]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[13]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[13]                    job.pInstantiatePool(task, fcn, nOut, args);
+[13]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[13]nEvaluateTask();
+[13]Error in dctEvaluateTask (line 57)
+[13]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[13]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[13]    dctEvaluateTask(postFcns, finishFcn);
+[13]Error in distcomp_evaluate_filetask_core (line 52)
+[13]    iDoTask(handlers, postFcns);
+[5]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[5]A reportable error occurred during job execution.
+[5]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[5]                interactiveWorker.start(args{:});
+[5]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[5]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[5]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[5]                    job.pInstantiatePool(task, fcn, nOut, args);
+[5]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[5]nEvaluateTask();
+[5]Error in dctEvaluateTask (line 57)
+[5]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[5]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[5]    dctEvaluateTask(postFcns, finishFcn);
+[5]Error in distcomp_evaluate_filetask_core (line 52)
+[5]    iDoTask(handlers, postFcns);
+[4]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[4]A reportable error occurred during job execution.
+[4]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[4]                interactiveWorker.start(args{:});
+[4]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[4]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[4]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[4]                    job.pInstantiatePool(task, fcn, nOut, args);
+[4]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[4]nEvaluateTask();
+[4]Error in dctEvaluateTask (line 57)
+[4]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[4]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[4]    dctEvaluateTask(postFcns, finishFcn);
+[4]Error in distcomp_evaluate_filetask_core (line 52)
+[4]    iDoTask(handlers, postFcns);
+[6]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[6]A reportable error occurred during job execution.
+[6]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[6]                interactiveWorker.start(args{:});
+[6]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[6]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[6]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[6]                    job.pInstantiatePool(task, fcn, nOut, args);
+[6]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[6]nEvaluateTask();
+[6]Error in dctEvaluateTask (line 57)
+[6]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[6]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[6]    dctEvaluateTask(postFcns, finishFcn);
+[6]Error in distcomp_evaluate_filetask_core (line 52)
+[6]    iDoTask(handlers, postFcns);
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[7]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[7]A reportable error occurred during job execution.
+[7]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[7]                interactiveWorker.start(args{:});
+[7]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[7]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[7]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[7]                    job.pInstantiatePool(task, fcn, nOut, args);
+[7]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[7]nEvaluateTask();
+[7]Error in dctEvaluateTask (line 57)
+[7]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[7]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[7]    dctEvaluateTask(postFcns, finishFcn);
+[7]Error in distcomp_evaluate_filetask_core (line 52)
+[7]    iDoTask(handlers, postFcns);
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[8]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[8]A reportable error occurred during job execution.
+[8]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[8]                interactiveWorker.start(args{:});
+[8]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[8]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[8]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[8]                    job.pInstantiatePool(task, fcn, nOut, args);
+[8]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[8]nEvaluateTask();
+[8]Error in dctEvaluateTask (line 57)
+[8]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[8]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[8]    dctEvaluateTask(postFcns, finishFcn);
+[8]Error in distcomp_evaluate_filetask_core (line 52)
+[8]    iDoTask(handlers, postFcns);
+[9]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[9]A reportable error occurred during job execution.
+[9]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[9]                interactiveWorker.start(args{:});
+[9]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[9]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[9]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[9]                    job.pInstantiatePool(task, fcn, nOut, args);
+[9]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[9]nEvaluateTask();
+[9]Error in dctEvaluateTask (line 57)
+[9]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[9]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[9]    dctEvaluateTask(postFcns, finishFcn);
+[9]Error in distcomp_evaluate_filetask_core (line 52)
+[9]    iDoTask(handlers, postFcns);
+[10]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[10]A reportable error occurred during job execution.
+[10]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[10]                interactiveWorker.start(args{:});
+[10]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[10]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[10]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[10]                    job.pInstantiatePool(task, fcn, nOut, args);
+[10]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[10]nEvaluateTask();
+[10]Error in dctEvaluateTask (line 57)
+[10]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[10]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[10]    dctEvaluateTask(postFcns, finishFcn);
+[10]Error in distcomp_evaluate_filetask_core (line 52)
+[10]    iDoTask(handlers, postFcns);
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[0]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[0]A reportable error occurred during job execution.
+[0]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[0]                interactiveWorker.start(args{:});
+[0]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[0]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[0]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[0]                    job.pInstantiatePool(task, fcn, nOut, args);
+[0]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[0]nEvaluateTask();
+[0]Error in dctEvaluateTask (line 57)
+[0]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[0]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[0]    dctEvaluateTask(postFcns, finishFcn);
+[0]Error in distcomp_evaluate_filetask_core (line 52)
+[0]    iDoTask(handlers, postFcns);
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[12]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[12]A reportable error occurred during job execution.
+[12]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[12]                interactiveWorker.start(args{:});
+[12]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[12]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[12]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[12]                    job.pInstantiatePool(task, fcn, nOut, args);
+[12]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[12]nEvaluateTask();
+[12]Error in dctEvaluateTask (line 57)
+[12]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[12]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[12]    dctEvaluateTask(postFcns, finishFcn);
+[12]Error in distcomp_evaluate_filetask_core (line 52)
+[12]    iDoTask(handlers, postFcns);
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[2]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[2]A reportable error occurred during job execution.
+[2]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[2]                interactiveWorker.start(args{:});
+[2]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[2]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[2]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[2]                    job.pInstantiatePool(task, fcn, nOut, args);
+[2]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[2]nEvaluateTask();
+[2]Error in dctEvaluateTask (line 57)
+[2]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[2]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[2]    dctEvaluateTask(postFcns, finishFcn);
+[2]Error in distcomp_evaluate_filetask_core (line 52)
+[2]    iDoTask(handlers, postFcns);
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[3]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[1]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[11]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[5]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[4]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[6]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[13]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[9]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[7]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[8]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[10]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[0]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[2]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[12]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[3]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[11]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[1]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[5]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[4]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[9]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[13]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[6]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[7]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[10]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[0]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[8]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[2]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[12]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[14]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[14]A reportable error occurred during job execution.
+[14]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[14]                interactiveWorker.start(args{:});
+[14]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[14]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[14]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[14]                    job.pInstantiatePool(task, fcn, nOut, args);
+[14]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[14]nEvaluateTask();
+[14]Error in dctEvaluateTask (line 57)
+[14]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[14]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[14]    dctEvaluateTask(postFcns, finishFcn);
+[14]Error in distcomp_evaluate_filetask_core (line 52)
+[14]    iDoTask(handlers, postFcns);
+[15]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[15]A reportable error occurred during job execution.
+[15]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[15]                interactiveWorker.start(args{:});
+[15]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[15]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[15]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[15]                    job.pInstantiatePool(task, fcn, nOut, args);
+[15]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[15]nEvaluateTask();
+[15]Error in dctEvaluateTask (line 57)
+[15]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[15]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[15]    dctEvaluateTask(postFcns, finishFcn);
+[15]Error in distcomp_evaluate_filetask_core (line 52)
+[15]    iDoTask(handlers, postFcns);
+[16]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[16]A reportable error occurred during job execution.
+[16]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[16]                interactiveWorker.start(args{:});
+[16]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[16]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[16]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[16]                    job.pInstantiatePool(task, fcn, nOut, args);
+[16]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[16]nEvaluateTask();
+[16]Error in dctEvaluateTask (line 57)
+[16]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[16]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[16]    dctEvaluateTask(postFcns, finishFcn);
+[16]Error in distcomp_evaluate_filetask_core (line 52)
+[16]    iDoTask(handlers, postFcns);
+[17]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[17]A reportable error occurred during job execution.
+[17]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[17]                interactiveWorker.start(args{:});
+[17]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[17]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[17]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[17]                    job.pInstantiatePool(task, fcn, nOut, args);
+[17]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[17]nEvaluateTask();
+[17]Error in dctEvaluateTask (line 57)
+[17]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[17]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[17]    dctEvaluateTask(postFcns, finishFcn);
+[17]Error in distcomp_evaluate_filetask_core (line 52)
+[17]    iDoTask(handlers, postFcns);
+[18]2020-06-21 23:05:59 | Caught an error during nEvaluateTask: Error using parallel.internal.pool.InteractiveWorker/start (line 130)
+[18]A reportable error occurred during job execution.
+[18]Error in parallel.internal.apishared.PoolFactory.instantiate (line 17)
+[18]                interactiveWorker.start(args{:});
+[18]Error in parallel.CommunicatingJob/pInstantiatePool (line 166)
+[18]            [job.IsPoolTask, job.Pool] = parallel.internal.apishared.PoolFactory.instantiate( job.pIsInteractivePool(), ...
+[18]Error in dctEvaluateTask>iEvaluateTask/nEvaluateTask (line 241)
+[18]                    job.pInstantiatePool(task, fcn, nOut, args);
+[18]Error in dctEvaluateTask>iEvaluateTask (line 141)
+[18]nEvaluateTask();
+[18]Error in dctEvaluateTask (line 57)
+[18]        [resultsFcn, taskPostFcn, taskEvaluatedOK] = iEvaluateTask(job, task, runprop);
+[18]Error in distcomp_evaluate_filetask_core>iDoTask (line 153)
+[18]    dctEvaluateTask(postFcns, finishFcn);
+[18]Error in distcomp_evaluate_filetask_core (line 52)
+[18]    iDoTask(handlers, postFcns);
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: @()taskPostFcn(runprop.TaskEvaluator) with args
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iFinishTask with args
+[14]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[16]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[15]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[18]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[17]2020-06-21 23:05:59 | About to call pPostTaskEvaluate
+[14]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[16]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[18]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[15]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[17]2020-06-21 23:05:59 | About to call pPostJobEvaluate
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[15]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[16]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[6]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[14]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[1]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[18]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[11]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[2]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[13]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[17]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[15]2020-06-21 23:05:59 | About to exit MATLAB normally
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[0]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[18]2020-06-21 23:05:59 | About to exit MATLAB normally
+[10]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[14]2020-06-21 23:05:59 | About to exit MATLAB normally
+[16]2020-06-21 23:05:59 | About to exit MATLAB normally
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[1]2020-06-21 23:05:59 | About to exit MATLAB normally
+[13]2020-06-21 23:05:59 | About to exit MATLAB normally
+[11]2020-06-21 23:05:59 | About to exit MATLAB normally
+[2]2020-06-21 23:05:59 | About to exit MATLAB normally
+[7]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[6]2020-06-21 23:05:59 | About to exit MATLAB normally
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: removeDirectory with args
+[17]2020-06-21 23:05:59 | About to exit MATLAB normally
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[12]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[0]2020-06-21 23:05:59 | About to exit MATLAB normally
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[8]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[10]2020-06-21 23:05:59 | About to exit MATLAB normally
+[15]2020-06-21 23:05:59 | About to exit with code: 0
+[7]2020-06-21 23:05:59 | About to exit MATLAB normally
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[18]2020-06-21 23:05:59 | About to exit with code: 0
+[3]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[16]2020-06-21 23:05:59 | About to exit with code: 0
+[14]2020-06-21 23:05:59 | About to exit with code: 0
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray done.
+[1]2020-06-21 23:05:59 | About to exit with code: 0
+[13]2020-06-21 23:05:59 | About to exit with code: 0
+[5]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[6]2020-06-21 23:05:59 | About to exit with code: 0
+[12]2020-06-21 23:05:59 | About to exit MATLAB normally
+[2]2020-06-21 23:05:59 | About to exit with code: 0
+[17]2020-06-21 23:05:59 | About to exit with code: 0
+[8]2020-06-21 23:05:59 | About to exit MATLAB normally
+[9]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[4]2020-06-21 23:05:59 | dctEvaluateFunctionArray calling: iExitFunction with args
+[3]2020-06-21 23:05:59 | About to exit MATLAB normally
+[0]2020-06-21 23:05:59 | About to exit with code: 0
+[10]2020-06-21 23:05:59 | About to exit with code: 0
+[7]2020-06-21 23:05:59 | About to exit with code: 0
+[5]2020-06-21 23:05:59 | About to exit MATLAB normally
+[9]2020-06-21 23:05:59 | About to exit MATLAB normally
+[4]2020-06-21 23:05:59 | About to exit MATLAB normally
+[12]2020-06-21 23:05:59 | About to exit with code: 0
+[8]2020-06-21 23:05:59 | About to exit with code: 0
+[3]2020-06-21 23:05:59 | About to exit with code: 0
+[5]2020-06-21 23:05:59 | About to exit with code: 0
+[11]2020-06-21 23:05:59 | About to exit with code: 0
+[9]2020-06-21 23:05:59 | About to exit with code: 0
+[4]2020-06-21 23:05:59 | About to exit with code: 0
+Stopping SMPD ...
+srun --ntasks-per-node=1 --ntasks=2 /hpc-software/matlab/r2015a/bin/mw_smpd -shutdown -phrase MATLAB -port 20794
+Exiting with code: 0
