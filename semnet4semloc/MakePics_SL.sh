@@ -44,8 +44,8 @@ do
     --smooth 5 \
     --stcin ${inpath}/${conds[cc]} \
     --scaleby 10000000000 \
-    --tmin 150 \
-    --tmax 300 \
+    --tmin 50 \
+    --tmax 500 \
     --tstep 100 \
     --pickrange \
     --alpha 1.0 \
