@@ -5,7 +5,7 @@
 # freesurfer_5.3.0
 # mne_setup_2.7.3_64bit
 # setenv SUBJECTS_DIR /imaging/rf02/TypLexMEG/
-
+#NOTE! use TypLexMEG folder not Semnet (for fsaverage)
 
 ################
 # PARAMETERS:
@@ -16,9 +16,9 @@
 #path='/group/erp/data/olaf.hauk/Others/Miozzo/data'
 #MRIpath='/group/erp/data/olaf.hauk/Others/Miozzo/MRIs'
 
-outpath='/imaging/rf02/Semnet/semnet4semloc/jpg/uvttest/evoked/LD/1_48/ConEmot' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats/Hand_Hear' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/jpg/GrandAverage/evoked/pnt1_30/newregsigned/cats/Visual' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats'  # output directory for images
+outpath='/imaging/rf02/Semnet/semnet4semloc/jpg/uvttest/evoked/SD/1_48/ConEmot' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats/Hand_Hear' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/jpg/GrandAverage/evoked/pnt1_30/newregsigned/cats/Visual' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats'  # output directory for images
 #inpath='/imaging/olaf/MEG/GoNoGo/STC/GM'
-inpath='/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/LD/1_48/' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/wbwnewregsigned2/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #
+inpath='/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/SD/1_48/' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/wbwnewregsigned2/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #
 
 
 # /imaging/olaf/MEG/GoNoGo/STC/GM/GM_lex_wdspds_n18.stc
@@ -28,7 +28,7 @@ inpath='/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/LD/1_48/' #'/imagi
 conds=(\
 
 #'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
-'UVTtest_icomorphed_oldreg_18subj_LD_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
+'UVTtest_icomorphed_oldreg_19subj_SemDec_m300_600_100ms_SL_1_48ica_Concrete_Emotional' \
 )
 
 nconds=${#conds[*]}
