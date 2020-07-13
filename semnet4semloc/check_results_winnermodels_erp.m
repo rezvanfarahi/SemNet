@@ -10,30 +10,30 @@ cd('/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/')
 
 cwd = '/home/rf02/rezvan/test1/dcm'
 
-dosubs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
-list_all = {'./meg10_0378',
-    './meg10_0390',
-    './meg11_0026',
-    './meg11_0050',
-    './meg11_0052',
-    './meg11_0069',
-    './meg11_0086',
-    './meg11_0091',
-    './meg11_0096',
-    './meg11_0101',
-    './meg11_0102',
-    './meg11_0112',
-    './meg11_0104',
-    './meg11_0118',
-    './meg11_0131',
-    './meg11_0144',
-    './meg11_0147',
-    };
+% dosubs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
+% list_all = {'./meg10_0378',
+%     './meg10_0390',
+%     './meg11_0026',
+%     './meg11_0050',
+%     './meg11_0052',
+%     './meg11_0069',
+%     './meg11_0086',
+%     './meg11_0091',
+%     './meg11_0096',
+%     './meg11_0101',
+%     './meg11_0102',
+%     './meg11_0112',
+%     './meg11_0104',
+%     './meg11_0118',
+%     './meg11_0131',
+%     './meg11_0144',
+%     './meg11_0147',
+%     };
 
 
 
 
-dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/typlex/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
+dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
 %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';%
 H_C=[];
 H_A=[];
@@ -43,20 +43,20 @@ for s = 1:length(dosubs) %parfor
     sub    = dosubs(s);
     
    ncnt=0;
-    for n=[2,4,39:40]%[30,32]%[14,16,45:46]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
+    for n=[22,24]%[30,32]%[14,16,45:46]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
         ncnt=ncnt+1;
         sub
         n
 
-        load(sprintf([dcm_path,'DCM_erpf_TypLex_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n));%DCM_erpf_SemLoc_5ROIs_mpowavg_sub%d_mod%d.mat
+        load(sprintf([dcm_path,'DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n));%DCM_erpf_SemLoc_5ROIs_mpowavg_sub%d_mod%d.mat
 %         DCM_erpf_SemLoc_5ROIs_avg_allverts_pifg_sub11_mod8
         H_C(:,:,ncnt,s)=DCM.H{1,1};%DCM.xY.y{1,1};%
         H_A(:,:,ncnt,s)=DCM.H{1,2};%DCM.xY.y{1,2};%
     end
 end
-asig=mean(H_A(1:451,:,:,:),4);%H_A(:,:,4,7);%
+asig=mean(H_A(1:251,:,:,:),4);%H_A(:,:,4,7);%
 asig=mean(asig,3);%squeeze(asig(:,:,4));%
-csig=mean(H_C(1:451,:,:,:),4);%H_C(:,:,4,7);%
+csig=mean(H_C(1:251,:,:,:),4);%H_C(:,:,4,7);%
 csig=mean(csig,3);%squeeze(csig(:,:,4));%
 
 figure,
