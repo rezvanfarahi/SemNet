@@ -103,7 +103,7 @@ title('Visual Word Form Area')
 % legend('Concrete','Abstract')
 
 
-cd('/home/rf02/rezvan/test1/step_by_step/dcm/ERP_signals/prefinal/')
+cd('/imaging/rf02/Semnet/semnet4semloc/dcm/')
 
 %        plot(DCM.H{1, 2}(:,end))%H{1,1} concrete, H{1,2} abstract; H{}(:,ii) ii=ROI
 %         this_model=struct();
