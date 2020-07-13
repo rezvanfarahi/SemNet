@@ -33,7 +33,7 @@ dosubs = [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 19];
 
 
 
-dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
+dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
 %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';%
 H_C=[];
 H_A=[];
@@ -43,7 +43,7 @@ for s = 1:length(dosubs) %parfor
     sub    = dosubs(s);
     
    ncnt=0;
-    for n=[14,16,45,46]%[30,32]%[14,16,45:46]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
+    for n=[2,4,39,40]%[30,32]%[14,16,45:46]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
         ncnt=ncnt+1;
         sub
         n
@@ -54,9 +54,9 @@ for s = 1:length(dosubs) %parfor
         H_A(:,:,ncnt,s)=DCM.H{1,2};%DCM.xY.y{1,2};%
     end
 end
-asig=mean(H_A(1:251,:,:,:),4);%H_A(:,:,4,7);%
+asig=mean(H_A(1:451,:,:,:),4);%H_A(:,:,4,7);%
 asig=mean(asig,3);%squeeze(asig(:,:,4));%
-csig=mean(H_C(1:251,:,:,:),4);%H_C(:,:,4,7);%
+csig=mean(H_C(1:451,:,:,:),4);%H_C(:,:,4,7);%
 csig=mean(csig,3);%squeeze(csig(:,:,4));%
 
 figure,
