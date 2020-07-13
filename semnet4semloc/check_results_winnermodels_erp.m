@@ -10,7 +10,7 @@ cd('/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/')
 
 cwd = '/home/rf02/rezvan/test1/dcm'
 
-% dosubs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
+dosubs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
 % list_all = {'./meg10_0378',
 %     './meg10_0390',
 %     './meg11_0026',
