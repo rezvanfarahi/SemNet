@@ -132,12 +132,12 @@ for s = 1:length(dosubs) %parfor
         load(sprintf([dcm_path,'DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n));%'DCM_erpf_SemLoc_5ROIs_sub%d_mod%d.mat'
        
         this_model=struct();
-this_model.fname=sprintf([dcm_path,'DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);%DCM.name;DCM_erpf_SemLoc_5ROIs_mCTFavg_sub14_mod38
-this_model.F=DCM.F;
+        this_model.fname=sprintf([dcm_path,'DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);%DCM.name;DCM_erpf_SemLoc_5ROIs_mCTFavg_sub14_mod38
+        this_model.F=DCM.F;
 
-this_model.Ep=DCM.Ep;
-this_model.Cp=DCM.Cp;
-sess.model(1,ncnt)=this_model;
+        this_model.Ep=DCM.Ep;
+        this_model.Cp=DCM.Cp;
+        sess.model(1,ncnt)=this_model;
         LogEvd(s,ncnt) = DCM.F;
         DCMname{s,ncnt} = DCM.name;
         all_DCMs{s,ncnt}=DCM;
