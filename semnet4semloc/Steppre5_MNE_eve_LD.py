@@ -145,6 +145,6 @@ for index, meg in enumerate(ll):
    print(epochs.drop_log_stats)
    input("press enter to continue")
 ##   print (len(epochs)/450.)
-   raw.save(raw_fname_out, overwrite=True)
-   mne.write_events(raw_fname_out[:-4]+'-eve.fif', eventsch)
+#   raw.save(raw_fname_out, overwrite=True)
+#   mne.write_events(raw_fname_out[:-4]+'-eve.fif', eventsch)
    
