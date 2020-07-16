@@ -110,6 +110,10 @@ Amean=zeros(length(dosubs),28,5,5,2);
 Bmean=zeros(length(dosubs),28,5,5);
 all_DCMs={};
 all_subjs=struct();
+all_subjs_hubs=struct();
+all_subjs_nohubs=struct();
+all_subjs_atlhub=struct();
+all_subjs_aghub=struct();
 % dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_aifg_ERP_dtr1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/';
 % dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated_thesis/model15/';
 dcm_paths={'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f250.mat',
@@ -123,11 +127,27 @@ for path_cnt=1:3
         jj=jj+1;
         ii=ii+1;
         all_subjs(1,ii).sess=subj(1,jj).sess;
+        all_subjs_hubs(1,ii).sess.model= subj(1,jj).sess.model(1:16);
+        all_subjs_nohubs(1,ii).sess.model= subj(1,jj).sess.model(17:26);
+        
+        all_subjs_atlhub(1,ii).sess.model= subj(1,jj).sess.model(1:4);
+        all_subjs_aghub(1,ii).sess.model= subj(1,jj).sess.model(13:16);
     end
 end
-subj=all_subjs;
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_allmaxCTF.mat','subj')
-    
+subj=all_subjs([1:17,19:end]);
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_allmaxCTF_250ms.mat','subj')
+subj=all_subjs_hubs([1:17,19:end]);
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_hubsmaxCTF_250ms.mat','subj')
+subj=all_subjs_nohubs([1:17,19:end]);
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_nohubsmaxCTF_250ms.mat','subj')
+
+subj=all_subjs_atlhub([1:17,19:end]);
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_atlhub_maxCTF_250ms.mat','subj')
+subj=all_subjs_aghub([1:17,19:end]);
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_aghub_maxCTF_250ms.mat','subj')
+
+
+cd '/imaging/rf02/Semnet/semnet4semloc/dcm/'   
 % 
 % %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
 % 
