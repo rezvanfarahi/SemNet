@@ -68,7 +68,7 @@ title('Anterior Temporal Lobe')
 % legend('Concrete','Abstract')
 
 figure,
-plot(csig(:,2),'r','LineWidth',3), hold on, plot(asig(:,2),'LineWidth',3)
+plot(csig(:,2),'r','LineWidth',3), hold on, plot(asig(:,2),'LineWidth',3)s
 % plot(D(2,500:950,1),'r'), hold on, plot(D(2,500:950,2))
 xlabel('time(ms) peri-stimulus')
 ylabel('predicted ERP')

@@ -126,7 +126,7 @@ for path_cnt=1:3
     end
 end
 subj=all_subjs;
-% save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_allmaxCTF.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_allmaxCTF.mat','subj')
     
 % 
 % %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
