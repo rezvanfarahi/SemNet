@@ -114,8 +114,8 @@ n_subjects=len(subjects)
 #X_list=range(2)
 semtasks=['SemDec','LD']#
 event_names = ['Emotional', 'Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
-effect_names=['contrast','interaction','task']
-all_effects=['B','A:B','A']
+effect_names=['contrast','interaction']#,'task']
+all_effects=['B','A:B']#,'A']
 
 n_levels=len(semtasks)
 n_factors=len(event_names)
@@ -159,7 +159,7 @@ for p_threshold in ll:
     
 
     #    To speed things up a bit we will ...
-    n_permutations = 10000  # ... run fewer permutations (reduces sensitivity)
+    n_permutations = 5000  # ... run fewer permutations (reduces sensitivity)
     fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
     fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
     labelss=labelL+labelR
@@ -183,18 +183,19 @@ for p_threshold in ll:
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
-        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,#step_down_p=0.05,#max_step=max_step,
+        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,
                                      threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
                                      n_permutations=n_permutations,
                                      buffer_size=None)
         
-        p_thr=0.05
+        
         good_cluster_inds = np.where(cluster_p_values <p_thr)[0]
         print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
 
         print('Visualizing clusters.')
-        if len(cluster_p_values)>0:
-            if cluster_p_values.min()<0.05:
+        if len(cluster_p_values)>-1:
+            if cluster_p_values.min()<1:
+                p_thr=cluster_p_values.min()
                 stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
                 
                 out_file1=out_path + 'ClusPer_rmANOVA_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name
