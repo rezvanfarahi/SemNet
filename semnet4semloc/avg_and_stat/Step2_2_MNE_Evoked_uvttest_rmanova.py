@@ -143,7 +143,7 @@ for p_threshold in ll:
     #            stc_cond.crop(0.050,0.450)
                 wcnt=-1
                 for wcnt1,wcnt2 in zip(list(np.arange(350,751,100)),list(np.arange(450,851,100))):#range(nwins):
-                    print wcnt1,wcnt2
+                    print (wcnt1,wcnt2)
                     wcnt=wcnt+1
                     X[ii,tecnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 
