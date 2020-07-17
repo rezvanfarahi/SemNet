@@ -1,6 +1,6 @@
 """
 =================================================================
-Permutation t-test on source data with spatio-temporal clustering
+Permutation rm ANOVA on source data with spatio-temporal clustering
 =================================================================
 
 Tests if the evoked response is significantly different between
@@ -10,9 +10,7 @@ permutation test across space and time.
 
 """
 
-# Authors: Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
-#          Eric Larson <larson.eric.d@gmail.com>
-# License: BSD (3-clause)
+# Authors: Rezvan Farahibozorg, July 2020
 
 print(__doc__)
 # Russell's addition
@@ -148,23 +146,74 @@ for p_threshold in ll:
                     X[ii,tecnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 
                 #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
-    X1=X.copy()#[:,:,:,np.array([0,2,1,3])].copy()
-    
-    #=[np.squeeze(x) for x in np.split(X1, n_levels*n_factors, axis=-1)]
+    X1=np.transpose(X, [0, 3, 2, 1]).copy()#XX needs to be (Nsub, Ntime, Nvox, Ncond)
+    X_list=[np.squeeze(x) for x in np.split(X1, 4, axis=-1)]#Xlist is now (Ncond,Nsub, Ntime, Nvox)
+    def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires 
+        return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=effects, return_pvals=False)[0]
+
+    source_space = grade_to_tris(5)
+    print('Computing connectivity.')
+    connectivity = spatial_tris_connectivity(source_space)
+
+    pthresh = p_threshold
+    #    max_step=1;
+    f_thresh = f_threshold_mway_rm(n_subjects, factor_levels, effects, pthresh)
+
+    #    To speed things up a bit we will ...
+    n_permutations = 10000  # ... run fewer permutations (reduces sensitivity)
+    fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
+    fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
+    labelss=labelL+labelR
+    bb=stc_cond.in_label(labelss)
+    fsave_vertices = [np.arange(10242), np.arange(10242)]
+    nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+    nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
+    spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
+    print('Clustering.')
+    #    t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
+    #t_threshold=2
+    tail=0
+    max_step=1
+    vertices_avg = [np.arange(10242), np.arange(10242)]
+
     factor_levels = [n_levels,n_levels]  # number of levels in each factor
     for this_effect,effect_name in zip(all_effects,effect_names):
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
-        return_pvals = True         
-        #def stat_fun(*args):  
-        #    return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=effects, return_pvals=return_pvals)[0]
-        #thisX=np.swapaxes(X1,1,3)#subxcondsxtime
-        f=np.zeros((X1.shape[2],X1.shape[3]))
-        for xii in range(X1.shape[3]):#over time
-            f[:,xii], p= f_mway_rm(X1[:,:,:,xii], factor_levels=factor_levels,effects=this_effect, return_pvals=return_pvals)
-        vertices_avg = [np.arange(10242), np.arange(10242)]
-        matx_stc = mne.SourceEstimate(f, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-        out_file2=uvttest_path + 'UVttest_rmANOVA_Evoked_icomorphed_oldreg_18subj_SDvsLD_'+effect_name
-        matx_stc.save(out_file2)
+        return_pvals = False         
+        T_obs, clusters, cluster_p_values, H0 = clu = \
+        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=16,#step_down_p=0.05,#max_step=max_step,
+                                     threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
+                                     n_permutations=n_permutations,
+                                     buffer_size=None)
+        
+        p_thr=0.05
+        good_cluster_inds = np.where(cluster_p_values <p_thr)[0]
+        print cluster_p_values[good_cluster_inds]; print good_cluster_inds
+
+        print('Visualizing clusters.')
+        if len(cluster_p_values)>0:
+            if cluster_p_values.min()<0.05:
+                stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
+                
+                out_file1=out_path + 'ClusPer_rmANOVA_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name
+                stc_all_cluster_vis.save(out_file1)
+                
+                Matx=np.zeros((20484,n_times))
+                T=np.divide(T_obs,np.absolute(T_obs))
+                for cc in range(good_cluster_inds.shape[0]):
+                    Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
+                    
+                
+                #aa=Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]
+                #bb=T_obs[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]<0
+                #aa[bb]=-1
+                #Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=aa
+                
+                
+                matx_stc = mne.SourceEstimate(Matx, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+                out_file2=out_path + 'ClusPer_rmANOVA_Evoked_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name
+                matx_stc.save(out_file2)
+        
     
 #    ###############################################################################
 #    # Visualize the clusters
