@@ -152,7 +152,7 @@ for p_threshold in ll:
     
     #=[np.squeeze(x) for x in np.split(X1, n_levels*n_factors, axis=-1)]
     factor_levels = [n_levels,n_levels]  # number of levels in each factor
-    for this_effect,effect_name in zip(all_effects,effect_names)
+    for this_effect,effect_name in zip(all_effects,effect_names):
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = True         
         #def stat_fun(*args):  
