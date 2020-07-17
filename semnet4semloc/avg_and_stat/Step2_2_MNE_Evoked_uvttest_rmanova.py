@@ -161,6 +161,7 @@ for p_threshold in ll:
         f=np.zeros((X1.shape[2],X1.shape[3]))
         for xii in range(X1.shape[3]):#over time
             f[:,xii], p= f_mway_rm(X1[:,:,:,xii], factor_levels=factor_levels,effects=this_effect, return_pvals=return_pvals)
+        vertices_avg = [np.arange(10242), np.arange(10242)]
         matx_stc = mne.SourceEstimate(f, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
         out_file2=uvttest_path + 'UVttest_rmANOVA_Evoked_icomorphed_oldreg_18subj_SDvsLD_'+effect_name
         matx_stc.save(out_file2)
