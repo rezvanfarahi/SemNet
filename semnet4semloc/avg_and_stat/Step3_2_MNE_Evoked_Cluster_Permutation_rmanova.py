@@ -172,7 +172,7 @@ for p_threshold in ll:
     #    t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
     #t_threshold=2
     tail=0
-    max_step=1
+    max_step=0
     vertices_avg = [np.arange(10242), np.arange(10242)]
 
     
@@ -195,7 +195,7 @@ for p_threshold in ll:
         if len(cluster_p_values)>-1:
             if cluster_p_values.min()<1:
                 p_thr=cluster_p_values.min()
-                good_cluster_inds = np.where(cluster_p_values <p_thr)[0]
+                good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]
                 print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
                 stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
                 
