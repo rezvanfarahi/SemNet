@@ -153,7 +153,7 @@ for p_threshold in ll:
     #=[np.squeeze(x) for x in np.split(X1, n_levels*n_factors, axis=-1)]
     factor_levels = [n_levels,n_levels]  # number of levels in each factor
     for this_effect,effect_name in zip(all_effects,effect_names)
-        #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast
+        #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = True         
         #def stat_fun(*args):  
         #    return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=effects, return_pvals=return_pvals)[0]
