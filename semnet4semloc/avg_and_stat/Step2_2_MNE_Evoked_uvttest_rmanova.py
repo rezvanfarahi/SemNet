@@ -117,8 +117,8 @@ n_subjects=18
 #X_list=range(2)
 semtasks=['SemDec','LD']#
 event_names = ['Emotional', 'Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
-effect_names=['task','contrast']
-all_effects=['A','B']
+effect_names=['task','contrast','interaction']
+all_effects=['A','B','A:B']
 
 n_levels=len(semtasks)
 n_factors=len(event_names)
