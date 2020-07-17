@@ -59,7 +59,6 @@ p_list=[0.005,0.05,0.045,0.04,0.03,0.025,0.02,0.01,0.008,0.005,0.002,0.001, 0.00
 #print ("subject_inds:")
 #print (subject_inds)
 print ("No rejection")
-b='gamma'
 list_all =  ['/meg16_0032/160218/', #1  '/meg16_0030/160216/', #0
             '/meg16_0034/160219/', #3
             '/meg16_0035/160222/', #4
@@ -120,6 +119,7 @@ all_effects=['A','B','A:B']
 
 n_levels=len(semtasks)
 n_factors=len(event_names)
+factor_levels = [n_levels,n_levels]  # number of levels in each factor
 n_times=len(list(np.arange(350,751,100)))
 tmin1=50
 tstep1=100
@@ -176,7 +176,7 @@ for p_threshold in ll:
     max_step=1
     vertices_avg = [np.arange(10242), np.arange(10242)]
 
-    factor_levels = [n_levels,n_levels]  # number of levels in each factor
+    
     for this_effect,effect_name in zip(all_effects,effect_names):
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
