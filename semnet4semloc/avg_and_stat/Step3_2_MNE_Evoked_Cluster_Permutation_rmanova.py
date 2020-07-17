@@ -120,11 +120,11 @@ all_effects=['B','A:B']#,'A']
 n_levels=len(semtasks)
 n_factors=len(event_names)
 factor_levels = [n_levels,n_levels]  # number of levels in each factor
-n_times=len(list(np.arange(350,751,100)))
+n_times=len(list(np.arange(350,651,100)))
 tmin1=50
 tstep1=100
 X=np.zeros((n_subjects,n_levels*n_factors,20484,n_times))#np.zeros((n_subjects,n_times,20484,n_levels))
-nwins=5
+nwins=4
 #Xmean=np.zeros((n_subjects,nwins,20484,n_levels))
 for p_threshold in ll:
     
@@ -140,7 +140,7 @@ for p_threshold in ll:
     #            stc_cond.resample(100)
     #            stc_cond.crop(0.050,0.450)
                 wcnt=-1
-                for wcnt1,wcnt2 in zip(list(np.arange(350,751,100)),list(np.arange(450,851,100))):#range(nwins):
+                for wcnt1,wcnt2 in zip(list(np.arange(350,651,100)),list(np.arange(450,751,100))):#range(nwins):
                     print (wcnt1,wcnt2)
                     wcnt=wcnt+1
                     X[ii,tecnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
