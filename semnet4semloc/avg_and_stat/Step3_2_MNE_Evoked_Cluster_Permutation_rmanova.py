@@ -148,8 +148,7 @@ for p_threshold in ll:
                 #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
     X1=np.transpose(X, [0, 3, 2, 1]).copy()#XX needs to be (Nsub, Ntime, Nvox, Ncond)
     X_list=[np.squeeze(x) for x in np.split(X1, 4, axis=-1)]#Xlist is now (Ncond,Nsub, Ntime, Nvox)
-    def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires 
-        return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=effects, return_pvals=False)[0]
+    
 
     source_space = grade_to_tris(5)
     print('Computing connectivity.')
@@ -179,6 +178,8 @@ for p_threshold in ll:
     
     for this_effect,effect_name in zip(all_effects,effect_names):
         f_thresh = f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
+        def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires 
+            return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=this_effect, return_pvals=False)[0]
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
