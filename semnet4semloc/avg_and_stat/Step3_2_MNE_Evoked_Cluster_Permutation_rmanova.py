@@ -157,7 +157,7 @@ for p_threshold in ll:
 
     pthresh = p_threshold
     #    max_step=1;
-    f_thresh = f_threshold_mway_rm(n_subjects, factor_levels, effects, pthresh)
+    
 
     #    To speed things up a bit we will ...
     n_permutations = 10000  # ... run fewer permutations (reduces sensitivity)
@@ -178,6 +178,7 @@ for p_threshold in ll:
 
     
     for this_effect,effect_name in zip(all_effects,effect_names):
+        f_thresh = f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
