@@ -189,13 +189,14 @@ for p_threshold in ll:
                                      buffer_size=None)
         
         
-        good_cluster_inds = np.where(cluster_p_values <p_thr)[0]
-        print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
+        
 
         print('Visualizing clusters.')
         if len(cluster_p_values)>-1:
             if cluster_p_values.min()<1:
                 p_thr=cluster_p_values.min()
+                good_cluster_inds = np.where(cluster_p_values <p_thr)[0]
+                print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
                 stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
                 
                 out_file1=out_path + 'ClusPer_rmANOVA_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name
