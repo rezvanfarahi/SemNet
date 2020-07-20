@@ -114,8 +114,8 @@ n_subjects=len(subjects)
 #X_list=range(2)
 semtasks=['SemDec','LD']#
 event_names = ['Emotional', 'Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
-effect_names=['contrast','interaction','task']
-all_effects=['B','A:B','A']
+effect_names=['contrast','interaction']#,'task']
+all_effects=['B','A:B']#,'A']
 
 n_levels=len(semtasks)
 n_factors=len(event_names)
@@ -172,7 +172,7 @@ for p_threshold in ll:
     #    t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
     #t_threshold=2
     tail=0
-    max_step=1
+    max_step=4
     vertices_avg = [np.arange(10242), np.arange(10242)]
 
     
