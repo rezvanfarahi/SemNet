@@ -55,7 +55,7 @@ label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
 
 #subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
-p_list=[0.1,0.075,0.06,0.05,0.045,0.04,0.03,0.025,0.02,0.01,0.008,0.005,0.002,0.001, 0.0008,0.0005,0.0002,0.0001,0.00005,0.00001]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
+p_list=[0.05,0.045,0.04,0.03,0.025,0.02,0.01,0.008,0.005,0.002,0.001, 0.0008,0.0005,0.0002,0.0001,0.00005,0.00001]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
 #print ("subject_inds:")
 #print (subject_inds)
 print ("No rejection")
@@ -183,7 +183,7 @@ for p_threshold in ll:
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
-        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,
+        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,t_power=0,
                                      threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
                                      n_permutations=n_permutations,
                                      buffer_size=None)
@@ -199,7 +199,7 @@ for p_threshold in ll:
                 print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
                 stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
                 
-                out_file1=out_path + 'ClusPer_rmANOVA_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name
+                out_file1=out_path + 'ClusPer_rmANOVA_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name+'_'+str(max_step)
                 stc_all_cluster_vis.save(out_file1)
                 
                 Matx=np.zeros((20484,n_times))
@@ -215,7 +215,7 @@ for p_threshold in ll:
                 
                 
                 matx_stc = mne.SourceEstimate(Matx, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-                out_file2=out_path + 'ClusPer_rmANOVA_Evoked_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name
+                out_file2=out_path + 'ClusPer_rmANOVA_Evoked_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_SDvsLD_pnt1_48ica_'+effect_name+'_'+str(max_step)
                 matx_stc.save(out_file2)
         
     
