@@ -47,7 +47,7 @@ do
     --stcin ${inpath}/${conds[cc]} \
     --scaleby 10000000000 \
     --tmin 50 \
-    --tmax 500 \
+    --tmax 400 \
     --tstep 100 \
     --pickrange \
     --alpha 1.0 \
