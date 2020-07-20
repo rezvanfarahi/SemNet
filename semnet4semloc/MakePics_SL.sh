@@ -57,6 +57,6 @@ do
     --nocomments \
     --view  lat \
     --tif ${outpath}/${conds[cc]} \
-    --fthresh 0e10  --fmid 0.01e10 --fmax 0.02e10
+    --fthresh 0e10  --fmid 2e10 --fmax 4e10
 done    
 
