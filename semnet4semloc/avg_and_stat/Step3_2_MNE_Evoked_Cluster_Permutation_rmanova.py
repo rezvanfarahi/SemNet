@@ -114,8 +114,8 @@ n_subjects=len(subjects)
 #X_list=range(2)
 semtasks=['SemDec','LD']#
 event_names = ['Emotional', 'Concrete']#, ,'Pwordc']'Neutral', 'Emotional',
-effect_names=['contrast','interaction']#,'task']
-all_effects=['B','A:B']#,'A']
+effect_names=['contrast','interaction','task']
+all_effects=['B','A:B','A']
 
 n_levels=len(semtasks)
 n_factors=len(event_names)
@@ -159,7 +159,7 @@ for p_threshold in ll:
     
 
     #    To speed things up a bit we will ...
-    n_permutations = 5000  # ... run fewer permutations (reduces sensitivity)
+    n_permutations = 10000  # ... run fewer permutations (reduces sensitivity)
     fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
     fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
     labelss=labelL+labelR
@@ -183,7 +183,7 @@ for p_threshold in ll:
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
-        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,t_power=0,
+        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,t_power=1,
                                      threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
                                      n_permutations=n_permutations,
                                      buffer_size=None)
