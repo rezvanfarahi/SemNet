@@ -185,7 +185,7 @@ for p_threshold in ll:
     #    t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
     #t_threshold=2
     tail=0
-    max_step=1
+    max_step=4
     vertices_avg = [np.arange(10242), np.arange(10242)]
 
     
