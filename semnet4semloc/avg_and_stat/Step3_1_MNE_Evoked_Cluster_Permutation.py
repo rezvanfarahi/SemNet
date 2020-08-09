@@ -211,7 +211,7 @@ for p_threshold in ll:
         #    Now select the clusters that are sig. at p < 0.05 (note that this value
         #    is multiple-comparisons corrected).
                                          
-        p_thr=0.2
+        p_thr=0.05
         good_cluster_inds = np.where(cluster_p_values <p_thr)[0]
         print cluster_p_values[good_cluster_inds]; print good_cluster_inds
         print cluster_p_values.min()
@@ -226,7 +226,7 @@ for p_threshold in ll:
         #    tval_stc.save(out_file3)
         #    Now let's build a convenient representation of each cluster, where each
         #    cluster becomes a "time point" in the SourceEstimate
-        if cluster_p_values.min()<=0.7:
+        if cluster_p_values.min()<=0.05:
             stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
             
             out_file1=out_path + 'ClusPer_abs_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_18subj_LD_SL_1_48ica_'+event_names[thiscond]+'_'+event_names[refcond]+'_maxstep'+str(max_step)
