@@ -131,7 +131,7 @@ event_names = ['Emotional','Concrete']# 'Visual']#'Hear']#, 'Neutral', 'Emotiona
 #thiscond=3
 thiscond=1
 n_levels=len(event_names)
-n_times=5
+n_times=4
 tmin1=50
 tstep1=100
 #nwins=5
@@ -147,7 +147,7 @@ for p_threshold in ll:
 #            stc_cond.crop(0.050,0.450)
 #            X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) 
             wcnt=-1
-            for wcnt1,wcnt2 in zip([350,450,550,650,750],[450,550,650,750,850]):#range(nwins):
+            for wcnt1,wcnt2 in zip([350,450,550,650],[450,550,650,750]):#range(nwins):I removed 750 from min,850 from max 
                 wcnt=wcnt+1
                 X[ii,wcnt,:,event_no]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 #            X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) 
