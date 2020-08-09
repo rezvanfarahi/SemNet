@@ -165,12 +165,12 @@ for p_threshold in ll:
 
     #    To speed things up a bit we will ...
     n_permutations = 10000  # ... run fewer permutations (reduces sensitivity)
+    fsave_vertices = [np.arange(10242), np.arange(10242)]
     if exclude_wbmedial:
         fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
         fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
         labelss=labelL+labelR
-        bb=stc_cond.in_label(labelss)
-        fsave_vertices = [np.arange(10242), np.arange(10242)]
+        bb=stc_cond.in_label(labelss)    
         nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
         nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
         spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
