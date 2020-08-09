@@ -150,7 +150,7 @@ fname = data_path + list_all[0] + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_Concret
 this_stc = mne.read_source_estimate(fname)  
 tmin1=-300
 tstep1=1
-refstc_data=np.zeros((this_stc.data.shape[0],1))
+refstc_data=np.ones((this_stc.data.shape[0],1))
 vertices_to = [np.arange(10242), np.arange(10242)]
 refstc = mne.SourceEstimate(refstc_data, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
 #thisstc_label=mne.stc_to_label(thisstc_tolabel, src_avg)
@@ -159,7 +159,7 @@ ntimes=refstc.data.shape[1]
 for this_labelc, this_label in enumerate(labellist): 
     label_origdata=refstc.in_label(this_label).data
     label_verts=refstc.in_label(this_label).lh_vertno
-    refstc_data[label_verts,0]=1
+    refstc_data[label_verts,0]=0
     thisstc_tolabel = mne.SourceEstimate(refstc_data, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
     thisstc_label=mne.stc_to_label(thisstc_tolabel, src_avg,smooth=True)[0]
     label_path=out_path+'/'+'mask_labels_ATL_IFG_MTG_AG-lh'
