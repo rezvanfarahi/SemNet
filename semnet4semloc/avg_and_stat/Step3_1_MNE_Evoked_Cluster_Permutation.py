@@ -187,7 +187,9 @@ for p_threshold in ll:
         spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
     if exclude_ROIs:
         fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'
-        bb=stc_cond.in_label(fname_label)
+        labelmask=mne.read_label(fname_label,subject='fsaverage')
+        labelmask.values.fill(1.0)
+        bb=stc_cond.in_label(labelmask)
         nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
         spatial_exclude=fsave_vertices[0][nnl].copy()
 
