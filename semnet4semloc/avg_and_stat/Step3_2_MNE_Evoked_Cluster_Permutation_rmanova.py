@@ -53,7 +53,7 @@ if not os.path.exists(uvttest_path):
 data_path = '/imaging/rf02/Semnet/'	# where subdirs for MEG data are
 inv_path = '/imaging/rf02/Semnet/'
 print (sys.argv)
-p_inds = []
+p_inds = [7]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
