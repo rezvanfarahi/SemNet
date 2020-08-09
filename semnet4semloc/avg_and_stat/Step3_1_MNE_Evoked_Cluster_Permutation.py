@@ -44,9 +44,14 @@ import os
 ###############################################################################
 # Set parameters
 
-
-out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/LD/' # root LD or SD
+exclude_wbmedial=False
+exclude_ROIs=True
+if exclude_wbmedial:
+    out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/LD/' # root LD or SD
 uvttest_path = '/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/LD/1_48/' # root
+
+if exclude_ROIs:
+    out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/masked_ROIs/evoked/LD/' # root LD or SD
 
 if not os.path.exists(out_path):
     os.makedirs(out_path)
@@ -171,19 +176,26 @@ for p_threshold in ll:
 
 #    To speed things up a bit we will ...
     n_permutations = 5000  # ... run fewer permutations (reduces sensitivity)
-    fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
-    fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
-    labelss=labelL+labelR
-    bb=stc_cond.in_label(labelss)
     fsave_vertices = [np.arange(10242), np.arange(10242)]
-    nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-    nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
-    spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
+    if exclude_wbmedial:
+        fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
+        fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
+        labelss=labelL+labelR
+        bb=stc_cond.in_label(labelss)  
+        nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+        nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
+        spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
+    if exclude_ROIs:
+        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'
+        bb=stc_cond.in_label(fname_label)
+        nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+        spatial_exclude=fsave_vertices[0][nnl].copy()
+
     print('Clustering.')
     t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
     #t_threshold=2
     tail=0
-    max_step=1;
+    max_step=1
 #    n_permutations=5000
     for refcond in np.asarray([0]):
 #        refcond=thiscond+1
