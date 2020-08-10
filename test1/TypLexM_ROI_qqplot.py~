@@ -1,0 +1,331 @@
+"""
+=========================================================
+TF representation of SemLoc for frequency bands in source labels
+=========================================================
+
+"""
+# Authors: Alexandre Gramfort <gramfort@nmr.mgh.harvard.edu>
+#
+# License: BSD (3-clause)
+
+
+print(__doc__)
+
+import sys
+sys.path.append('/imaging/local/software/python_packages/nibabel/1.3.0')
+sys.path.append('/imaging/local/software/python_packages/pysurfer/v0.4')
+sys.path.append('/imaging/local/software/python_packages/scikit-learn/v0.14.1')
+sys.path.append('/imaging/local/software/mne_python/latest')
+
+# for qsub
+# (add ! here if needed) 
+#sys.path.append('/imaging/local/software/anaconda/latest/x86_64/bin/python')
+sys.path.append('/imaging/local/software/mne_python/git-master-0.8/mne-python/')
+###
+import os
+#import matplotlib.pyplot as plt
+import numpy as np
+import mne
+import scipy
+from scipy import stats
+from mne import io
+from mne.io import Raw
+#import pylab as pl
+#from mne import (fiff, read_evokeds, equalize_channels,read_proj, read_selection)
+#from mne.preprocessing.ica import ICA
+import scipy.io as sio
+import operator
+
+from mne.minimum_norm import (read_inverse_operator, make_inverse_operator, write_inverse_operator, apply_inverse, apply_inverse_epochs, source_induced_power,source_band_induced_power)
+from mne.minimum_norm.inverse import (prepare_inverse_operator)
+
+#from surfer import Brain
+#from surfer.io import read_stc
+#import logging
+
+import sklearn
+import scipy.io
+#from mne import filter
+from mne import find_events
+#from mne.epochs import combine_event_ids
+#from mne.layouts import read_layout
+
+#from mne.connectivity import seed_target_indices, spectral_connectivity
+
+###############################################################################
+data_path = '/imaging/rf02/TypLexMEG/' # root directory for your MEG data
+#os.chdir(data_path)
+subjects_dir = '/imaging/rf02/TypLexMEG/'    # where your MRI subdirectories are
+# where event-files are
+event_path = '/imaging/rf02/TypLexMEG/'    # where event files are
+
+label_path = '/imaging/rf02/TypLexMEG/createdlabels_SL/'
+
+inv_path = '/imaging/rf02/TypLexMEG/'
+inv_fname = 'InverseOperator_EMEG-inv.fif'
+
+# get indices for subjects to be processed from command line input
+# 
+print sys.argv
+subject_inds = []
+for ss in sys.argv[1:]:
+   subject_inds.append( int( ss ) )
+
+subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+print "subject_inds:"
+print subject_inds
+print "No rejection"
+
+list_all = ['meg10_0378/101209/', 
+'meg10_0390/101214/',
+'meg11_0026/110223/', 
+'meg11_0050/110307/', 
+'meg11_0052/110307/', 
+'meg11_0069/110315/', 
+'meg11_0086/110322/', 
+'meg11_0091/110328/', 
+'meg11_0096/110404/', 
+'meg11_0101/110411/', 
+'meg11_0102/110411/', 
+'meg11_0112/110505/',
+'meg11_0104/110412/',  
+'meg11_0118/110509/', 
+'meg11_0131/110519/', 
+'meg11_0144/110602/', 
+'meg11_0147/110603/'
+]
+
+# subjects names used for MRI data
+subjects=['SS1_Meg10_0378',
+'SS2_Meg10_0390',
+'SS3_Meg11_0026',
+'SS4_Meg11_0050',
+'SS5_Meg11_0052',
+'SS6_Meg11_0069',
+'SS9_Meg11_0086',
+'SS10_Meg11_0091',
+'SS12_Meg11_0096',
+'SS13_Meg11_0101',
+'SS14_Meg11_0102',
+'SS15_Meg11_0112',
+'SS16_Meg11_0104',
+'SS18_Meg11_0118',
+'SS19_Meg11_0131',
+'SS20_Meg11_0144',
+'SS21_Meg11_0147'
+]
+
+ll = []
+for ss in subject_inds:
+ ll.append(list_all[ss])
+
+print "ll:"
+print ll
+
+
+
+# Labels/ROIs
+labellist = ['atlleft-lh', 'atlright-rh']
+tmin, tmax = -0.5, 0.7
+reject = dict(eeg=120e-6, eog=150e-6, grad=200e-12, mag=4e-12)
+event_ids = {'cncrt_wrd': 1, 'abs_wrd': 2}
+# frequency bands with variable number of cycles for wavelets
+stim_delay = 0.034 # delay in s
+bands=['gamma']#,'alpha','beta', 'gamma']
+"""
+frequencies = np.arange(8, 45, 1)
+n_cycles = frequencies / float(7)
+n_cycles[frequencies<=20] = 2
+n_cycles[frequencies<=20] += np.arange(0,1,0.077)
+    # n_cycles[np.logical_and((frequencies>10), (frequencies<=20))] = 3
+"""
+
+#bb1=np.zeros((16,2))
+#bb2=np.zeros((16,2))
+#bb3=np.zeros((16,2))
+#bb4=np.zeros((16,2))
+#bb5=np.zeros((16,2))
+#bb6=np.zeros((16,2))
+#bb7=np.zeros((16,2))
+
+bbc=np.zeros((17,2,2))
+bba=np.zeros((17,2,2))
+BB=np.zeros((17,4,2))
+
+##loop across subjects...
+for ii, meg in enumerate(ll):
+	kk=-1
+	print ii
+	for b in bands:
+		print b
+		fname1 = data_path + meg + 'Morphed_SemLoc_sspclean_Concrete_Power_ratio_m500_700_' + b  
+		stc1 = mne.read_source_estimate(fname1)
+ 		fname2 = data_path + meg + 'Morphed_SemLoc_sspclean_Abstract_Power_ratio_m500_700_' + b  
+		stc2 = mne.read_source_estimate(fname2)
+		stc=np.subtract(stc1,stc2)
+		#for cc in range(6):
+		for kk, label_name in enumerate(labellist):
+			print kk
+			fname_label = label_path + label_name + '.label'
+			label1 = mne.read_label(fname_label)
+			stc_labelc = stc1.in_label(label1)
+			stc_labela = stc2.in_label(label1) 
+			#bbc[ii,kk,cc]=(stc_labelc.data[:,500+100*cc:600+100*cc]).mean()
+			#bba[ii,kk,cc]=(stc_labela.data[:,500+100*cc:600+100*cc]).mean()
+			bbc[ii,kk,0]=(stc_labelc.data[:,650:850]).mean()
+			bbc[ii,kk,1]=(stc_labelc.data[:,800:1000]).mean()
+			bba[ii,kk,0]=(stc_labela.data[:,650:850]).mean()
+			bba[ii,kk,1]=(stc_labela.data[:,800:1000]).mean()
+		BB[ii,0:2,:]=bbc[ii,:,:]
+		BB[ii,2:4,:]=bba[ii,:,:]
+
+### normality check
+"""
+ksp=np.zeros((2,6))
+shapiro_p=np.zeros((2,6))
+shapiro_t=np.zeros((2,6))
+import scipy.io as sio
+for cnt, label in enumerate(labellist):
+	d, ksp[cnt,0]=stats.kstest(bb1[:,cnt],'norm')
+	d, ksp[cnt,1]=stats.kstest(bb2[:,cnt],'norm')
+	d, ksp[cnt,2]=stats.kstest(bb3[:,cnt],'norm')
+	d, ksp[cnt,3]=stats.kstest(bb4[:,cnt],'norm')
+	d, ksp[cnt,4]=stats.kstest(bb5[:,cnt],'norm')
+	d, ksp[cnt,5]=stats.kstest(bb6[:,cnt],'norm')
+save_path= data_path + 'images/qqplots/kstest_gamma.mat'
+sio.savemat(save_path,{'ksp':ksp})
+
+for cnt, label in enumerate(labellist):
+	shapiro_t[cnt,0], shapiro_p[cnt,0]=stats.shapiro(bb1[:,cnt])
+	shapiro_t[cnt,1], shapiro_p[cnt,1]=stats.shapiro(bb2[:,cnt])
+	shapiro_t[cnt,2], shapiro_p[cnt,2]=stats.shapiro(bb3[:,cnt])
+	shapiro_t[cnt,3], shapiro_p[cnt,3]=stats.shapiro(bb4[:,cnt])
+	shapiro_t[cnt,4], shapiro_p[cnt,4]=stats.shapiro(bb5[:,cnt])
+	shapiro_t[cnt,5], shapiro_p[cnt,5]=stats.shapiro(bb6[:,cnt])
+save_path= data_path + 'images/qqplots/shapiro_gamma.mat'
+sio.savemat(save_path,{'shapiro_p':shapiro_p})
+
+import matplotlib.pyplot as plt
+for cnt, label in enumerate(labellist):
+	plt.figure()
+	plt.subplot(2, 3, 1)
+	stats.probplot(bb1[:,cnt], dist="norm", plot=plt)
+	plt.title('gamma_0-100ms')
+	plt.subplot(2, 3, 2)
+	stats.probplot(bb2[:,cnt], dist="norm", plot=plt)
+	plt.title('gamma_100-200ms')
+	plt.subplot(2, 3, 3)
+	stats.probplot(bb3[:,cnt], dist="norm", plot=plt)
+	plt.title('gamma_200-300ms')
+	plt.subplot(2, 3, 4)
+	stats.probplot(bb4[:,cnt], dist="norm", plot=plt)
+	plt.title('gamma_300-400ms')
+	plt.subplot(2, 3, 5)
+	stats.probplot(bb5[:,cnt], dist="norm", plot=plt)
+	plt.title('gamma_400-500ms')
+	plt.subplot(2, 3, 6)
+	stats.probplot(bb6[:,cnt], dist="norm", plot=plt)
+	plt.title('gamma_500-600ms')
+	plt.show()
+"""
+### boxplot
+"""
+import matplotlib.pyplot as plt
+from pylab import plot, show, savefig, xlim, figure, \
+                hold, ylim, legend, boxplot, setp, axes, xlabel, title, ylabel
+
+# function for setting the colors of the box plots pairs
+def setBoxColors(bp):
+    setp(bp['boxes'][0], color='blue')
+    setp(bp['caps'][0], color='blue')
+    setp(bp['caps'][1], color='blue')
+    setp(bp['whiskers'][0], color='blue')
+    setp(bp['whiskers'][1], color='blue')
+    setp(bp['fliers'][0], color='blue')
+    setp(bp['fliers'][1], color='blue')
+    setp(bp['medians'][0], color='blue')
+
+    setp(bp['boxes'][1], color='red')
+    setp(bp['caps'][2], color='red')
+    setp(bp['caps'][3], color='red')
+    setp(bp['whiskers'][2], color='red')
+    setp(bp['whiskers'][3], color='red')
+    setp(bp['fliers'][2], color='red')
+    setp(bp['fliers'][3], color='red')
+    setp(bp['medians'][1], color='red')
+
+# Some fake data to plot
+#for cnt1 in range(bb1c.shape[1])
+
+
+hold(True)
+ax = axes()
+Left= [bbc[:,0,0],  bba[:,0,0]]
+Right = [bbc[:,1,0],  bba[:,1,0]]
+# first boxplot pair
+bp = boxplot(Left, positions = [1, 2], widths = 0.6)
+setBoxColors(bp)
+# second boxplot pair
+bp = boxplot(Right, positions = [4, 5], widths = 0.6)
+setBoxColors(bp)
+# set axes limits and labels
+xlim(0,6)
+ylim(.6,1.4)
+#ax.set_xlabel('ATL')
+ax.set_xticklabels(['Left', 'Right'])
+ax.set_xticks([1.5, 4.5])
+ax.set_title('Alpha Band 150-350 ms')
+# draw temporary red and blue lines and use them to create a legend
+hB, = plot([1,2],'b-')
+hR, = plot([1,2],'r-')
+legend((hB, hR),('Concrete', 'Abstract'))
+hB.set_visible(False)
+hR.set_visible(False)
+save_path= data_path + 'images/qqplots/gamma_150350.png'
+show()
+savefig(save_path)
+
+
+hold(True)
+ax = axes()
+Left= [bbc[:,0,1],  bba[:,0,1]]
+Right = [bbc[:,1,1],  bba[:,1,1]]
+# first boxplot pair
+bp = boxplot(Left, positions = [1, 2], widths = 0.6)
+setBoxColors(bp)
+# second boxplot pair
+bp = boxplot(Right, positions = [4, 5], widths = 0.6)
+setBoxColors(bp)
+# set axes limits and labels
+xlim(0,6)
+ylim(.6,1.4)
+#ax.set_xlabel('ATL')
+ax.set_xticklabels(['Left', 'Right'])
+ax.set_xticks([1.5, 4.5])
+ax.set_title('Alpha Band 300-500 ms')
+# draw temporary red and blue lines and use them to create a legend
+hB, = plot([1,2],'b-')
+hR, = plot([1,2],'r-')
+legend((hB, hR),('Concrete', 'Abstract'))
+hB.set_visible(False)
+hR.set_visible(False)
+show()
+save_path= data_path + 'images/qqplots/gamma_300500.png'
+savefig(save_path)
+"""
+###two way rm anova
+
+from mne.stats import f_twoway_rm, fdr_correction
+factor_levels = [2, 2]  # number of levels in each factor
+effects = 'A*B' 
+fvals, pvals = f_twoway_rm(BB, factor_levels, effects=effects)
+pval_corrected=np.zeros((pvals.shape))
+reject, pval_corrected[0,:]=fdr_correction(pvals[0,:], alpha=0.05, method='indep')
+reject, pval_corrected[1,:]=fdr_correction(pvals[1,:], alpha=0.05, method='indep')
+reject, pval_corrected[2,:]=fdr_correction(pvals[2,:], alpha=0.05, method='indep')
+tl,pl=scipy.stats.ttest_rel(bbc[:,0,:],bba[:,0,:])
+tr,pr=scipy.stats.ttest_rel(bbc[:,1,:],bba[:,1,:])
+Anova_mat=[fvals,pvals,pval_corrected,tl,pl,tr,pr]
+save_path= data_path + 'images/qqplots/RMAnova_theta_150350_300500.mat'
+sio.savemat(save_path,{'Anova_mat':Anova_mat})
+

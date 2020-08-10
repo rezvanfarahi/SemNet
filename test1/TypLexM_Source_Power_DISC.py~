@@ -1,0 +1,103 @@
+# Author: Roman Goj <roman.goj@gmail.com>
+#         Denis Engemann <denis.engemann@gmail.com>
+#
+# License: BSD (3-clause)
+
+import sys
+sys.path.append('/imaging/local/software/python_packages/nibabel/1.3.0')
+sys.path.append('/imaging/local/software/python_packages/pysurfer/v0.4')
+sys.path.append('/imaging/local/software/python_packages/scikit-learn/v0.14.1')
+sys.path.append('/imaging/local/software/mne_python/latest')
+
+# for qsub
+# (add ! here if needed) /imaging/local/software/anaconda/latest/x86_64/bin/python
+sys.path.append('/imaging/local/software/mne_python/git-master-0.8/mne-python/')
+###
+
+import matplotlib.pyplot as plt
+import numpy as np
+import mne
+from mne import io
+from mne.io import Raw
+import pylab as pl
+from mne import (fiff, read_evokeds, equalize_channels,read_proj, read_selection)
+from mne.preprocessing.ica import ICA
+import scipy.io as sio
+import operator
+
+from mne.minimum_norm import (read_inverse_operator, make_inverse_operator, write_inverse_operator, apply_inverse, read_inverse_operator,apply_inverse_epochs, apply_inverse, source_induced_power)
+from mne.minimum_norm.inverse import (prepare_inverse_operator, _assemble_kernel)
+
+from surfer import Brain
+from surfer.io import read_stc
+import logging
+import os
+import sklearn
+import scipy.io
+from mne import filter
+from mne import find_events
+from mne.epochs import combine_event_ids
+
+from mne.fiff import Evoked
+from mne.layouts import read_layout
+from mne.time_frequency import compute_raw_psd, induced_power
+from mne.connectivity import seed_target_indices, spectral_connectivity
+from mne.io import Raw
+from mne.datasets import sample
+from mne.time_frequency import compute_epochs_csd
+from mne.beamformer import dics_source_power
+
+data_path = sample.data_path()
+raw_fname = data_path + '/MEG/sample/sample_audvis_raw.fif'
+event_fname = data_path + '/MEG/sample/sample_audvis_raw-eve.fif'
+fname_fwd = data_path + '/MEG/sample/sample_audvis-meg-eeg-oct-6-fwd.fif'
+subjects_dir = data_path + '/subjects'
+
+###############################################################################
+# Read raw data
+raw = Raw(raw_fname)
+raw.info['bads'] = ['MEG 2443']  # 1 bad MEG channel
+
+# Set picks
+picks = mne.pick_types(raw.info, meg=True, eeg=False, eog=False,
+                       stim=False, exclude='bads')
+
+# Read epochs
+event_id, tmin, tmax = 1, -0.2, 0.5
+events = mne.read_events(event_fname)
+epochs = mne.Epochs(raw, events, event_id, tmin, tmax, proj=True,
+                    picks=picks, baseline=(None, 0), preload=True,
+                    reject=dict(grad=4000e-13, mag=4e-12))
+evoked = epochs.average()
+
+# Read forward operator
+forward = mne.read_forward_solution(fname_fwd, surf_ori=True)
+
+# Computing the data and noise cross-spectral density matrices
+# The time-frequency window was chosen on the basis of spectrograms from
+# example time_frequency/plot_time_frequency.py
+# As fsum is False compute_epochs_csd returns a list of CrossSpectralDensity
+# instances than can then be passed to dics_source_power
+data_csds = compute_epochs_csd(epochs, mode='multitaper', tmin=0.04, tmax=0.15,
+                               fmin=15, fmax=30, fsum=False)
+noise_csds = compute_epochs_csd(epochs, mode='multitaper', tmin=-0.11,
+                                tmax=-0.001, fmin=15, fmax=30, fsum=False)
+
+# Compute DICS spatial filter and estimate source power
+stc = dics_source_power(epochs.info, forward, noise_csds, data_csds)
+#cd '~/rezvan/test1/'
+#stc.save('DICS_source_power')
+#from scipy.stats import scoreatpercentile  # for thresholding
+
+#for i, csd in enumerate(data_csds):
+ #   message = 'DICS source power at %0.1f Hz' % csd.frequencies[0]
+    #brain = stc.plot(surface='inflated', hemi='rh', subjects_dir=subjects_dir,
+    #                 time_label=message, figure=i)
+  #  fmin, fmax = [scoreatpercentile(stc.data[:, i], ii) for ii in [95, 100]]
+   # fmid = fmin + (fmax - fmin) / 2
+    #brain.set_data_time_index(i)
+    #brain.scale_data_colormap(fmin=fmin, fmid=fmid, fmax=fmax, transparent=True)
+    #brain.show_view('lateral')
+    # Uncomment line below to save images
+    #rez_path='~/rezvan/test1/'
+    #brain.save_image(rez_path + 'DICS_source_power_freq_%d.png' % csd.frequencies[0])

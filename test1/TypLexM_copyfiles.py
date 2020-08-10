@@ -1,0 +1,49 @@
+
+orig_path='/group/erp/data/olaf.hauk/MEG/TypLexM/data/MF22_new/'
+dest_path='/imaging/rf02/TypLexMEG/'
+import shutil
+import os
+subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+
+list_all = ['meg10_0378/101209/', 
+'meg10_0390/101214/',
+'meg11_0050/110307/', 
+'meg11_0052/110307/', 
+'meg11_0069/110315/', 
+'meg11_0086/110322/', 
+'meg11_0091/110328/', 
+'meg11_0096/110404/', 
+'meg11_0101/110411/', 
+'meg11_0102/110411/', 
+'meg11_0104/110412/', 
+'meg11_0112/110505/', 
+'meg11_0118/110509/', 
+'meg11_0131/110519/', 
+'meg11_0144/110602/', 
+'meg11_0147/110603/', 
+'meg11_0026/110223/', 
+]
+
+
+ll = []
+for ss in subject_inds:
+    ll.append(list_all[ss])
+
+for meg in ll:
+	"""
+	newdir=dest_path + meg[0:-8]
+	os.mkdir(newdir)
+	newdir=dest_path + meg
+	os.mkdir(newdir)
+	"""
+	orig_file = orig_path + meg + 'semloc_raw_ssst.fif'
+	dest_file = dest_path + meg + 'semloc_raw_ssst.fif'
+	shutil.copy(orig_file,dest_file)
+
+"""
+	orig_file = orig_path + meg + 'forward_5-3L-EMEG-fwd.fif'
+	dest_file = dest_path + meg + 'forward_5-3L-EMEG-fwd.fif'
+	shutil.copy(orig_file,dest_file)
+"""	
+
+

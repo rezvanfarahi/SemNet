@@ -57,7 +57,7 @@ chlabels = {
 
 };
 input_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/dipole/';
-
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_SD.mat';
 
 list_all =  {%'/meg16_0030', not needed for LD
             '/meg16_0032', 
@@ -90,7 +90,7 @@ for cnt=1:length(list_all)
     
     % create data array
     %--------------------------------------------------------------------------
-    fname_a='_Semnet_ConEmot_LD_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
+    fname_a='_Semnet_ConEmot_SL_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
     
     fname_in=[input_path,list_all{cnt},fname_a,'.mat'];
     this_dir=input_path;%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/avg_50verts_dipole/';
@@ -171,15 +171,17 @@ for dcnt1=1:size(Dstd,1)
             Dt(dcnt1,dcnt2)=tstat1.tstat;
     end
 end
-ntimewins=4;
+ntimewins=80;
 Dpm=zeros(size(Dataf,1),ntimewins);
+Datafm_wins=zeros(size(Dataf,1),ntimewins,size(Dataf,3),size(Dataf,4));
 for ii=1:ntimewins
-    Datafm=squeeze(mean((Dataf(:,(250+100*(ii-1))/q:(250+100*ii)/q,:,:)),2));%5x2x17
+    Datafm=squeeze(mean((Dataf(:,(250+5*(ii-1))/q:(250+5*ii)/q,:,:)),2));%5x2x17
+    Datafm_wins(:,ii,:,:)=Datafm;
     for dcnt1=1:size(Dpm,1)
             [h,Dpm(dcnt1,ii)]=ttest(squeeze(Datafm(dcnt1,1,:))-squeeze(Datafm(dcnt1,2,:)));
     end
 end
-
+% save(outpath_anova,'Datafm_wins')
 
 Dse=Dstd/sqrt(size(Dataf,4));
 ts=tinv([0.025,0.975],size(Dataf,4)-1);

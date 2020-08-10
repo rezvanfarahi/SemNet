@@ -1,0 +1,115 @@
+"""
+=========================================================
+Test script to compute  evoked data
+=========================================================
+
+"""
+# Authors: Alexandre Gramfort <gramfort@nmr.mgh.harvard.edu>
+#
+# License: BSD (3-clause)
+
+print __doc__
+
+# Russell's addition
+import sys
+sys.path.append('/imaging/local/software/python_packages/nibabel/v1.3.0')
+sys.path.append('/imaging/local/software/python_packages/pysurfer/v0.3.1')
+# End
+
+# for qsub
+# (add ! here if needed) /imaging/local/software/anaconda/latest/x86_64/bin/python
+sys.path.append('/imaging/local/software/mne_python/git-master-0.8/mne-python/')
+###
+
+
+import numpy as np
+import mne
+#from mne import fiff, read_proj, read_selection
+# from mne.datasets import sample
+from mne.fiff import Evoked
+from mne.minimum_norm import apply_inverse_epochs, apply_inverse, read_inverse_operator, source_induced_power
+import pylab as pl
+from mne.layouts import read_layout
+from mne.time_frequency import compute_raw_psd, induced_power
+from mne.connectivity import seed_target_indices, spectral_connectivity
+
+###############################################################################
+data_path = '/group/erp/data/olaf.hauk/MEG/TypLexM/data/MF22_new/'	# where subdirs for MEG data are
+
+# where event-files are
+event_path = '/group/erp/data/olaf.hauk/MEG/TypLexM/data/MF22_new/'     # where event files are
+
+# get indices for subjects to be processed from command line input
+# 
+
+print "No rejection"
+
+
+meg='meg10_0378/101209/'
+
+stim_delay = 0.034 # delay in s
+
+
+
+
+
+## Get raw data
+raw_fname = data_path + meg + '/semloc_raw_ssstf_raw.fif'
+print raw_fname
+ 
+##events
+event_fname = event_path + meg + 'semloc_raw_ssstnew.txt'
+
+## print "reading raw data"
+print "reading raw file"
+ # NOT 'False' (problem with qsub)
+raw = mne.io.Raw(raw_fname, preload=False)
+  
+## print "read events"
+print "Reading events from" + event_fname
+events = mne.read_events(event_fname)
+# events = mne.find_events(raw, stim_channel='STI101')
+events[:,0] += np.round( raw.info['sfreq']*stim_delay )
+
+## get configuration info
+include = []
+exclude = raw.info['bads'] # bads
+
+picks = mne.pick_types(raw.info, meg=True, eeg=True, eog=True,
+                                stim=False, include=include, exclude=exclude)
+
+## print "Filtering"
+# raw.filter(l_freq=None, h_freq=30, picks=picks, method='fft', h_trans_bandwidth=5)
+
+## epoching
+print "mne.Epochs()"
+ 
+tmin, tmax = -0.1, 0.45
+reject = dict(eeg=120e-6, eog=150e-6, grad=200e-12, mag=4e-12)
+reject = None
+event_ids = dict(C=1, A=2)
+
+# epochs = mne.Epochs(raw, events, event_ids, tmin, tmax, picks=picks, baseline=(None, 0), reject=reject)
+print "No artefact rejection"
+epochs = mne.Epochs(raw, events, event_ids, tmin, tmax, proj=True, picks=picks, baseline=(None, 0), preload=False, reject=None)
+
+## averaging
+out_evoked_fname = data_path + meg + 'semloc_evoked_py.fif'
+print "averaging"
+evokeds = [epochs['C'].average()]
+
+### evokeds1 = [epochs['A'].average()]
+### print(evokeds1)
+### evokeds1.plot()
+
+### print out_evoked_fname
+### fiff.write_evoked(out_evoked_fname, evokeds)
+
+n_cycles = 2  # number of cycles in Morlet wavelet
+frequencies = np.arange(7, 30, 3)  # frequencies of interest
+Fs = raw.info['sfreq']  # sampling in Hz
+from mne.time_frequency import induced_power
+epochs_data = epochs['A'].get_data() 
+power, phase_lock = induced_power(epochs_data, Fs=Fs, frequencies=frequencies, n_cycles=2, n_jobs=1)
+
+

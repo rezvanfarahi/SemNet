@@ -1,0 +1,76 @@
+%[num,txt,raw] = xlsread('C:\Users\Rezvan\Documents\PhD period\semloc\first year report\first year report\valence\new2013.xlsx');
+[num,txt,raw] = xlsread('C:\Users\rf02\Documents\Rezvan\PhD project\experiment design\next experiment\REF_CONCS_FEATS_concstats_brm.xlsx');
+
+%[num1,txt1,raw1] = xlsread('C:\Users\Rezvan\Downloads\AffectiveNormsforEnglishWords.xls',2);
+%[num1,txt1,raw1] = xlsread('C:\Users\Rezvan\Documents\PhD period\experiment design\new experiment\abstract.xlsx');
+[num1,txt1,raw1] = xlsread('C:\Users\rf02\Documents\Rezvan\PhD project\experiment design\next experiment\REF_CONCS_brm.xlsx');
+featlist={'taxonomic', 'encyclopaedic', 'function', 'visual-form_and_surface', 'visual-motion', 'visual-colour','sound', 'tactile', 'taste' , 'smell'};
+
+cncp1=raw1(2:end,1);%reshape(txt1,93*2,1);
+cncpall=raw(2:end,1);
+featlistall=raw(2:end,6);
+rankfeatall=cell2mat(raw(2:end,8));
+wsum=zeros(length(cncp1),length(featlist));
+for ii=1:size(cncp1,1)
+    thiscon=strcmp(cncpall, cncp1{ii});
+    numfeat=sum(thiscon);
+    
+    ii
+    for jj =1:length(featlist)
+        wherethisfeat=strcmpi(featlistall(thiscon),featlist{jj});
+        wsum(ii,jj)=sum(1-rankfeatall(wherethisfeat)/numfeat);
+        
+    end
+end
+visualcons=cncp1(wsum(:,4)>sum(wsum(:,[3,5,7:end]),2));
+xlsname='C:\Users\Rezvan\Documents\PhD period\experiment design\new experiment\visualnew.xlsx';
+xlswrite(xlsname,visualcons,1)
+% absnew=[];
+% cc=0;
+% for ii=1:size(conabs,1)
+%     if ~isempty(conabs{ii,2})
+%         cc=cc+1;
+%         absnew{cc,1}=conabs{ii,1};
+%         absnew{cc,2}=conabs{ii,2};
+%         absnew{cc,3}=conabs{ii,3};
+%     end
+% end
+% aa=cell2mat(absnew(:,2));
+% bb=cell2mat(absnew(:,3));
+% emotabs=absnew(abs(aa-mean(aa))>std(aa),:);
+% neutabs=absnew(abs(aa-mean(aa))<=std(aa),:);
+% cc=cell2mat(emotabs(:,3));
+% dd=cell2mat(neutabs(:,3));
+% nabs=neutabs(dd<4.21,:);
+% eabs=emotabs(cc>=4.21,:);
+% xlsname='C:\Users\Rezvan\Documents\PhD period\experiment design\new experiment\abstract2.xlsx';
+% xlswrite(xlsname,nabs,1)
+% xlswrite(xlsname,eabs,2)
+% xlswrite(xlsname,neutabs,3)
+% xlswrite(xlsname,emotabs,4)
+% % neu=conabs(1:92,:);
+% % abst=conabs(93:end,:);
+% % abst([2,4,6,13,19,48,62,68,77,86],:)=[];
+% % con([20,26,39,51,75],:)=[];
+% % group=[zeros(87,1);ones(82,1)];% Design matrix
+% %
+% %
+% %  X=[con(:,2);abst(:,2)];
+% %  X=cell2mat(X);
+% %  y=abs(5-X);
+% % n = 10000;
+% % b = zeros(n,1);
+% % for i=1:n,
+% %     r  = randperm(169);
+% %     X1 = group;
+% %     X1 = X1(r); % permute the thing of interest
+% %     beta = X1\y;
+% %     b(i) = beta;
+% % end
+% %
+% % beta = group\y;
+% % p = sum(b>beta)/n % non-parametric t statistic
+% %
+% % hist(b,100); hold on; plot(beta,0,'r+'); hold off
+% %
+% % p = tstat(X,y,[0 0 0 1])

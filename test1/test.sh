@@ -1,0 +1,19 @@
+inpath='/imaging/rf02/TypLexMEG'
+new='new'
+out_path=${inpath}/${new}
+echo ${out_path}
+conds=(\
+'Permutation_ttest_tmap_SemLoc_ConcreteAbstract_SourcePower_ratio_m500_700_Gamma' \
+'Permutation_ttest_tmap_SemLoc_ConcreteAbstract_SourcePower_ratio_m500_700_Beta' \
+'Permutation_ttest_tmap_SemLoc_ConcreteAbstract_SourcePower_ratio_m500_700_Alpha' \
+'Permutation_ttest_tmap_SemLoc_ConcreteAbstract_SourcePower_ratio_m500_700_Theta' \
+)
+
+nconds=${#conds[*]}
+lastcond=`expr $nconds - 1`
+
+for cc in `seq 0 ${lastcond}`
+do
+   dd=${conds[cc]}
+   echo ${dd}
+done

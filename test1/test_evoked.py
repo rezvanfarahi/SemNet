@@ -1,0 +1,41 @@
+# Authors: Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
+#
+# License: BSD (3-clause)
+
+print(__doc__)
+
+import numpy as np
+
+import mne
+from mne import io
+from mne.time_frequency import single_trial_power
+from mne.stats import permutation_cluster_1samp_test
+from mne.datasets import sample
+
+###############################################################################
+# Set parameters
+data_path = '/imaging/rf02/TypLexMEG/'
+meg='meg10_0378/101209/'
+raw_fname = data_path + meg + '/semloc_raw_ssstf_raw.fif'
+event_id = {'cncrt_wrd': 1, 'abs_wrd': 2}
+tmin = -0.5
+tmax = 0.7
+
+# Setup for reading the raw data
+raw = io.Raw(raw_fname)
+events = mne.find_events(raw, stim_channel='STI101')
+
+include = []
+
+# picks MEG gradiometers
+picks = mne.pick_types(raw.info, meg=True, eeg=True, eog=True,
+                       stim=False, include=include, exclude='bads')
+
+# Load condition 1
+reject = dict(eeg=120e-6, eog=150e-6, grad=200e-12, mag=4e-12)
+event_id = 1#{'cncrt_wrd': 1, 'abs_wrd': 2}
+epochs = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks,
+                    baseline=(None, 0), reject=reject)
+#epochs=epochs['cncrt_wrd']
+evoked=epochs.average()
+evoked.plot_image()

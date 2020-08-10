@@ -1,0 +1,312 @@
+"""
+=========================================================
+TF representation of SemLoc for frequency bands in source labels
+=========================================================
+
+"""
+# Authors: Alexandre Gramfort <gramfort@nmr.mgh.harvard.edu>
+#
+# License: BSD (3-clause)
+
+
+print(__doc__)
+
+import sys
+sys.path.append('/imaging/local/software/python_packages/nibabel/1.3.0')
+sys.path.append('/imaging/local/software/python_packages/pysurfer/v0.4')
+sys.path.append('/imaging/local/software/python_packages/scikit-learn/v0.14.1')
+sys.path.append('/imaging/local/software/mne_python/latest')
+
+# for qsub
+# (add ! here if needed) 
+#sys.path.append('/imaging/local/software/anaconda/latest/x86_64/bin/python')
+sys.path.append('/imaging/local/software/mne_python/git-master-0.8/mne-python/')
+###
+import os.path as op
+import matplotlib.pyplot as plt
+import numpy as np
+import mne
+from mne import io
+from mne.io import Raw
+import pylab as pl
+from mne import (stats, read_evokeds, equalize_channels,read_proj, read_selection)
+from mne.preprocessing.ica import ICA
+import scipy.io as sio
+import operator
+
+from mne.minimum_norm import (read_inverse_operator, make_inverse_operator, write_inverse_operator, apply_inverse, read_inverse_operator,apply_inverse_epochs, apply_inverse, source_induced_power,source_band_induced_power)
+from mne.minimum_norm.inverse import (prepare_inverse_operator, _assemble_kernel)
+
+from surfer import Brain
+from surfer.io import read_stc
+import logging
+import os
+import sklearn
+import scipy.io
+from mne import filter
+from mne import find_events
+from mne.epochs import combine_event_ids
+from mne import (io, spatial_tris_connectivity, compute_morph_matrix,
+                 grade_to_tris)
+from mne.epochs import equalize_epoch_counts
+from mne.stats import (spatio_temporal_cluster_1samp_test,
+                       summarize_clusters_stc)
+from mne.minimum_norm import apply_inverse, read_inverse_operator
+from mne.datasets import sample
+from mne.layouts import read_layout
+from mne.time_frequency import compute_raw_psd
+from mne.connectivity import seed_target_indices, spectral_connectivity
+
+###############################################################################
+data_path = '/imaging/rf02/TypLexMEG/' # root directory for your MEG data
+os.chdir(data_path)
+subjects_dir = '/home/rf02/rezvan/TypLexMEG/'    # where your MRI subdirectories are
+# where event-files are
+event_path = '/imaging/rf02/TypLexMEG/'    # where event files are
+
+label_path = '/home/rf02/rezvan/TypLexMEG/createdlabels_SL/'
+
+inv_path = '/imaging/rf02/TypLexMEG/'
+inv_fname = 'InverseOperator_EMEG-inv.fif'
+
+# get indices for subjects to be processed from command line input
+# 
+print sys.argv
+subject_inds = []
+for ss in sys.argv[1:]:
+   subject_inds.append( int( ss ) )
+
+subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+print "subject_inds:"
+print subject_inds
+print "No rejection"
+
+list_all = ['meg10_0378/101209/', 
+'meg10_0390/101214/',
+'meg11_0026/110223/', 
+'meg11_0050/110307/', 
+'meg11_0052/110307/', 
+'meg11_0069/110315/', 
+'meg11_0086/110322/', 
+'meg11_0091/110328/', 
+'meg11_0096/110404/', 
+'meg11_0101/110411/', 
+'meg11_0102/110411/', 
+'meg11_0112/110505/',
+'meg11_0104/110412/',  
+'meg11_0118/110509/', 
+'meg11_0131/110519/', 
+'meg11_0144/110602/', 
+'meg11_0147/110603/', 
+
+
+]
+
+# subjects names used for MRI data
+subjects=['SS1_Meg10_0378',
+'SS2_Meg10_0390',
+'SS3_Meg11_0026',
+'SS4_Meg11_0050',
+'SS5_Meg11_0052',
+'SS6_Meg11_0069',
+'SS9_Meg11_0086',
+'SS10_Meg11_0091',
+'SS12_Meg11_0096',
+'SS13_Meg11_0101',
+'SS14_Meg11_0102',
+'SS15_Meg11_0112',
+'SS16_Meg11_0104',
+'SS18_Meg11_0118',
+'SS19_Meg11_0131',
+'SS20_Meg11_0144',
+'SS21_Meg11_0147'
+]
+
+ll = []
+for ss in subject_inds:
+ ll.append(list_all[ss])
+
+print "ll:"
+print ll
+
+
+
+# Labels/ROIs
+#labellist = ['atlleft-lh']#, 'atlleftt-rh'
+tmin, tmax = -0.5, 0.7
+reject = dict(eeg=120e-6, eog=150e-6, grad=200e-12, mag=4e-12)
+event_ids = {'cncrt_wrd': 1, 'abs_wrd': 2}
+# frequency bands with variable number of cycles for wavelets
+stim_delay = 0.034 # delay in s
+frequencies = np.arange(8, 45, 1)
+n_cycles = frequencies / float(7)
+n_cycles[frequencies<=20] = 2
+n_cycles[frequencies<=20] += np.arange(0,1,0.077)
+    # n_cycles[np.logical_and((frequencies>10), (frequencies<=20))] = 3
+labellist = ['atlleft-lh', 'atlright-rh','medialtempright-rh','medialtempleft-lh']
+
+
+
+ii=-1
+#X=np.zeros((20484,2,17))
+X0=np.zeros((20484,17))
+X1=np.zeros((20484,17))
+Xabs0=np.zeros((20484,17))
+Xabs1=np.zeros((20484,17))
+Xcncrt0=np.zeros((20484,17))
+Xcncrt1=np.zeros((20484,17))
+X2=np.zeros((20484,17))
+X3=np.zeros((20484,17))
+X4=np.zeros((20484,17))
+X5=np.zeros((20484,17))
+
+for meg in ll:
+	ii=ii+1;
+	print ii
+
+### Concrete
+	fname_cncrt = data_path + meg + 'Morphed_SemLoc_icaclean_Concrete_Power_ratio_m500_700_theta'
+	stc_cncrt = mne.read_source_estimate(fname_cncrt)
+	fname_abs = data_path + meg + 'Morphed_SemLoc_icaclean_Abstract_Power_ratio_m500_700_theta'
+	stc_abs = mne.read_source_estimate(fname_abs)
+	
+	abslt_cncrt= stc_cncrt.copy().crop(0.15,0.35).data.mean(axis=1)
+	abslt_abs= stc_abs.copy().crop(0.15,0.35).data.mean(axis=1)
+	data_subtract=np.subtract(abslt_cncrt,abslt_abs)
+	X0[:,ii]=data_subtract
+	Xabs0[:,ii]=abslt_abs
+	Xcncrt0[:,ii]=abslt_cncrt
+
+	abslt_cncrt= stc_cncrt.copy().crop(0.35,0.55).data.mean(axis=1)
+	abslt_abs= stc_abs.copy().crop(0.35,0.55).data.mean(axis=1)
+	data_subtract=np.subtract(abslt_cncrt,abslt_abs)
+	X1[:,ii]=data_subtract
+	Xabs1[:,ii]=abslt_abs
+	Xcncrt1[:,ii]=abslt_cncrt
+	"""
+	abslt_cncrt= np.absolute(stc_cncrt.copy().crop(.2,.3).data)
+	abslt_abs= np.absolute(stc_abs.copy().crop(.2,.3).data)
+	data_subtract=np.subtract(abslt_cncrt,abslt_abs)
+	X2[:,ii]=data_subtract.mean(axis=1)
+
+	abslt_cncrt= np.absolute(stc_cncrt.copy().crop(.3,.4).data)
+	abslt_abs= np.absolute(stc_abs.copy().crop(.3,.4).data)
+	data_subtract=np.subtract(abslt_cncrt,abslt_abs)
+	X3[:,ii]=data_subtract.mean(axis=1)
+
+	abslt_cncrt= np.absolute(stc_cncrt.copy().crop(.4,.5).data)
+	abslt_abs= np.absolute(stc_abs.copy().crop(.4,.5).data)
+	data_subtract=np.subtract(abslt_cncrt,abslt_abs)
+	X4[:,ii]=data_subtract.mean(axis=1)
+
+	abslt_cncrt= np.absolute(stc_cncrt.copy().crop(.5,.6).data)
+	abslt_abs= np.absolute(stc_abs.copy().crop(.5,.6).data)
+	data_subtract=np.subtract(abslt_cncrt,abslt_abs)
+	X5[:,ii]=data_subtract.mean(axis=1)
+	#X[:,:,ii]=stc_subtract.data	
+	"""
+X1st=np.subtract(Xcncrt0.mean(axis=1),Xabs0.mean(axis=1))
+X2nd=np.subtract(Xcncrt1.mean(axis=1),Xabs1.mean(axis=1))
+#X = np.transpose(X, [2, 1, 0])	
+#X = np.transpose(X, [1, 0])
+X0=np.transpose(X0,[1,0])
+X1=np.transpose(X1,[1,0])
+"""
+X2=np.transpose(X2,[1,0])
+X3=np.transpose(X3,[1,0])
+X4=np.transpose(X4,[1,0])
+X5=np.transpose(X5,[1,0])
+"""
+p_threshold = 0.05
+n_subjects=17
+t_threshold = -scipy.stats.distributions.t.ppf(p_threshold / 2., n_subjects - 1)
+t0, p0, h0= mne.stats.permutation_t_test(X0, n_permutations=1024, tail=0)
+print "per1 done"
+t1, p1, h1 = mne.stats.permutation_t_test(X1, n_permutations=1024, tail=0)
+print "per2 done"
+"""
+t0, p0, h0= mne.stats.permutation_t_test(X0, n_permutations=1024, tail=0, n_jobs=1, verbose=None)
+print "per1 done"
+t1, p1, h1 = mne.stats.permutation_t_test(X1, n_permutations=1024, tail=0, n_jobs=1, verbose=None)
+print "per2 done"
+t2, p2, h2 = mne.stats.permutation_t_test(X2, n_permutations=1024, tail=0, n_jobs=1, verbose=None)
+print "per3 done"
+t3, p3, h3 = mne.stats.permutation_t_test(X3, n_permutations=1024, tail=0, n_jobs=1, verbose=None)
+print "per4 done"
+t4, p4, h4 = mne.stats.permutation_t_test(X4, n_permutations=1024, tail=0, n_jobs=1, verbose=None)
+print "per5 done"
+t5, p5, h5 = mne.stats.permutation_t_test(X5, n_permutations=1024, tail=0, n_jobs=1, verbose=None)
+print "per6 done"
+"""
+connectivity = spatial_tris_connectivity(grade_to_tris(5))
+
+fsave_vertices = [np.arange(10242), np.arange(10242)]
+n_permutations=1024
+
+p_map=np.zeros((20484,2))
+p_map[:,0]=p0
+p_map[:,1]=p1
+"""
+p_map[:,2]=p2
+p_map[:,3]=p3
+p_map[:,4]=p4
+p_map[:,5]=p5
+"""
+p_map=np.subtract(1,p_map)
+pm=p_map.max()
+print pm
+t_map=np.zeros((20484,2))
+t_map[:,0]=t0
+t_map[:,1]=t1
+X_map=np.zeros((20484,2))
+X_map[:,0]=X1st
+X_map[:,1]=X2nd
+p_stc = mne.SourceEstimate(p_map, vertices=fsave_vertices, tmin=1e-3, tstep=1e-3, subject='avgsubject', verbose=None)
+print "se1 done"
+t_stc = mne.SourceEstimate(t_map, vertices=fsave_vertices, tmin=1e-3, tstep=1e-3, subject='avgsubject', verbose=None)
+Xmap_stc = mne.SourceEstimate(X_map, vertices=fsave_vertices, tmin=1e-3, tstep=1e-3, subject='avgsubject', verbose=None)
+print "se1 done"
+#t_beta_stc = mne.SourceEstimate(t_beta, tmin=0, tstep=0, vertices=fsave_vertices)
+#p_beta_stc = mne.SourceEstimate(p_beta, tmin=0, tstep=0, vertices=fsave_vertices)
+"""
+X1=np.zeros((20484,4))
+X1[:,0]=X_theta[0,:]
+X1[:,1]=X_alpha[0,:]
+X1[:,2]=X_beta[0,:]
+X1[:,3]=X_gamma[0,:]
+Xstc=t_stc = mne.SourceEstimate(X1, vertices=fsave_vertices, tmin=1e-3*2, tstep=1e-3*2, subject='average', verbose=None)
+out_filet=data_path + 'UVttest_Test' + label_name[0:-3]
+t_stc.save(out_filet)
+"""
+
+"""
+print('Computing connectivity.')
+connectivity = spatial_tris_connectivity(grade_to_tris(5))
+
+#    Note that X needs to be a multi-dimensional array of shape
+#    samples (subjects) x time x space, so we permute dimensions
+X = np.transpose(X, [2, 1, 0])
+
+#    Now let's actually do the clustering. This can take a long time...
+#    Here we set the threshold quite high to reduce computation.
+p_threshold = 0.001
+n_subjects=17
+#t_threshold = -stats.distributions.t.ppf(p_threshold / 2., n_subjects - 1)
+print('Clustering.')
+T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=2, threshold=None)
+#    Now select the clusters that are sig. at p < 0.05 (note that this value
+#    is multiple-comparisons corrected).
+#good_cluster_inds = np.where(cluster_p_values < 0.05)[0]
+tstep=stc_abs.tstep
+fsave_vertices = [np.arange(10242), np.arange(10242)]
+stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep,
+                                     vertno=fsave_vertices,
+                                     subject='average')
+"""
+out_file1=data_path + 'Permutation_ttest_pmap_SemLoc_icaclean_ConcreteAbstract_SourcePower_ratio_m500_700_Theta' 
+p_stc.save(out_file1)
+out_file2=data_path + 'Permutation_ttest_tmap_SemLoc_icaclean_ConcreteAbstract_SourcePower_ratio_m500_700_Theta' 
+t_stc.save(out_file2)
+
+out_file3=data_path + 'GrandAverage_windowaverage_SemLoc_icaclean_ConcreteAbstract_SourcePower_ratio_m500_700_Gamma' 
+Xmap_stc.save(out_file3)

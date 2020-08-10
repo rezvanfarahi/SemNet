@@ -1,0 +1,180 @@
+"""
+Preprocessing MEG and EEG data using filters and ICA
+====================================================
+
+This examples filters MEG and EEG data and subsequently computes separate
+ICA solutions for MEG and EEG. An html report is created, which includes
+diagnostic plots of the preprocessing steps.
+"""
+# Author: Denis A. Engemann <denis.engemann@gmail.com>
+# License: BSD (3-clause)
+import sys
+sys.path.insert(1,'/imaging/rf02/TypLexMEG/mne_python_v8')
+sys.path.insert(1,'/home/rf02/rezvan/test1')
+#sys.path.insert(1,'/imaging/local/software/python_packages/scikit-learn/v0.14.1')
+sys.path.insert(1,'/imaging/rf02/scikit-learn-0.16.1')
+sys.path.insert(1,'/home/rf02/.local/lib/python2.7/site-packages')
+# for qsub
+# (add ! here if needed) 
+#sys.path.append('/imaging/local/software/anaconda/latest/x86_64/bin/python')
+#sys.path.append('/imaging/local/software/mne_python/git-master-0.8/mne-python/')
+###
+
+import mne
+#import pylab as pl
+#from mne import (fiff, read_evokeds, equalize_channels,read_proj, read_selection)
+#from mne import filter
+#import sklearn
+#reload(sklearn)
+from meeg_preprocessing import compute_ica
+from meeg_preprocessing.utils import get_data_picks
+from mne.preprocessing import read_ica
+
+
+data_path = '/imaging/rf02/TypLexMEG/'
+print sys.argv
+subject_inds = []
+for ss in sys.argv[1:]:
+   subject_inds.append( int( ss ) )
+
+subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+print "subject_inds:"
+print subject_inds
+print "No rejection"
+
+list_all = ['meg10_0378/101209/', 
+'meg10_0390/101214/',
+'meg11_0026/110223/', 
+'meg11_0050/110307/', 
+'meg11_0052/110307/', 
+'meg11_0069/110315/', 
+'meg11_0086/110322/', 
+'meg11_0091/110328/', 
+'meg11_0096/110404/', 
+'meg11_0101/110411/', 
+'meg11_0102/110411/', 
+'meg11_0112/110505/',
+'meg11_0104/110412/',  
+'meg11_0118/110509/', 
+'meg11_0131/110519/', 
+'meg11_0144/110602/', 
+'meg11_0147/110603/'
+]
+
+subjects=['SS1_Meg10_0378',
+'SS2_Meg10_0390',
+'SS3_Meg11_0026',
+'SS4_Meg11_0050',
+'SS5_Meg11_0052',
+'SS6_Meg11_0069',
+'SS9_Meg11_0086',
+'SS10_Meg11_0091',
+'SS12_Meg11_0096',
+'SS13_Meg11_0101',
+'SS14_Meg11_0102',
+'SS15_Meg11_0112',
+'SS16_Meg11_0104',
+'SS18_Meg11_0118',
+'SS19_Meg11_0131',
+'SS20_Meg11_0144',
+'SS21_Meg11_0147'
+]
+
+ll = []
+for ss in subject_inds:
+ ll.append(list_all[ss])
+
+print "ll:"
+print ll
+
+
+
+# Labels/ROIs
+#labellist = ['atlleft-lh']#, 'atlright-rh'
+#tmin, tmax = -0.5, 0.7
+#event_ids = {'cncrt_wrd': 1, 'abs_wrd': 2}
+# frequency bands with variable number of cycles for wavelets
+stim_delay = 0.034 # delay in s
+"""
+frequencies = np.arange(8, 45, 1)
+n_cycles = frequencies / float(7)
+n_cycles[frequencies<=20] = 2
+n_cycles[frequencies<=20] += np.arange(0,1,0.077)
+    # n_cycles[np.logical_and((frequencies>10), (frequencies<=20))] = 3
+"""
+
+
+##loop across subjects...
+for cnt, meg in enumerate(ll):
+	subject=subjects[cnt]
+	print meg
+	fname = data_path + meg + 'imlex_pw_ssstf_fft_1_48_raw.fif'
+
+	raw = mne.io.Raw(fname, preload=True)
+	print "raw loaded"
+	include = []  # or stim channels ['STI 014']
+
+	################################################################################
+	# jobs and runtime performance
+	n_jobs = 1
+	"""
+	################################################################################
+	# Filters
+
+	# can be a list for repeated filtering
+	filter_params = [dict(l_freq=1.0, h_freq=100, n_jobs=n_jobs, method='fft',
+		              l_trans_bandwidth=0.1, h_trans_bandwidth=0.5)]
+
+	notch_filter_params = dict(freqs=(50, 100, 150,))
+
+	# margins for the PSD plot
+	plot_fmin = 0.0
+	plot_fmax = 120.0
+	"""
+	################################################################################
+	# ICA
+
+	n_components = 0.99
+	# comment out to select ICA components via rank (useful with SSSed data):
+	# n_components = 'rank'
+
+	ica_meg_combined = True  # esimtate combined MAG and GRADs
+	decim = 5  # decimation
+	n_max_ecg, n_max_eog = 3, 2  # limit components detected due to ECG / EOG
+	ica_reject = {'mag': 5e-12, 'grad': 5000e-13, 'eeg': 200e-6}
+
+	################################################################################
+	# Report
+
+	img_scale = 1.5  # make big PNG images
+
+	"""
+	fig, report = check_apply_filter(raw, subject=subject,
+		                         filter_params=filter_params,
+		                         notch_filter_params=notch_filter_params,
+		                         plot_fmin=plot_fmin, plot_fmax=plot_fmax,
+		                         n_jobs=n_jobs, img_scale=img_scale)
+	"""
+
+	# get picks and iterate over channels
+	for picks, ch_type in get_data_picks(raw, meg_combined=ica_meg_combined):
+	    ica, report = compute_ica(raw, picks=picks,
+		                 subject=subject, n_components=n_components,
+		                 n_max_ecg=n_max_ecg, n_max_eog=n_max_eog,
+		                 reject=ica_reject,
+		                 decim=decim, report=None, img_scale=img_scale)
+	    out_path=data_path+meg+'{}-ica_imlex.fif'.format(ch_type)
+	    print ch_type + " finished"
+	    ica.save(out_path)
+	#raw.append(ica)
+	#out_path2=data_path+meg+'semloc_ssstf_fft_1_48_clean_ica_raw.fif'
+	#raw.save(out_path2)
+	    report.save(data_path+'imlex_preprocessing-report-'+subject+'-'+ch_type+'.html', open_browser=False, overwrite=True)
+	ica_path=data_path+meg+'meg-ica_imlex.fif'
+	ica=read_ica(ica_path)
+	raw=ica.apply(raw)
+	ica_path=data_path+meg+'eeg-ica_imlex.fif'
+	ica=read_ica(ica_path)
+	raw=ica.apply(raw)
+	data_out_path=data_path+meg+'imlex_pw_ssstf_fft_1_48_clean_ica_raw.fif'
+	raw.save(data_out_path, overwrite=True)

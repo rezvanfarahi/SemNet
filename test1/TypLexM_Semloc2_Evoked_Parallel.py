@@ -1,0 +1,134 @@
+"""
+=========================================================
+Test script to compute  evoked data
+=========================================================
+
+"""
+# Authors: Alexandre Gramfort <gramfort@nmr.mgh.harvard.edu>
+#
+# License: BSD (3-clause)
+
+print __doc__
+
+# Russell's addition
+import sys
+sys.path.append('/imaging/local/software/python_packages/nibabel/1.3.0')
+sys.path.append('/imaging/local/software/python_packages/pysurfer/v0.4')
+# End
+
+# for qsub
+# (add ! here if needed) /imaging/local/software/anaconda/latest/x86_64/bin/python
+sys.path.append('/imaging/local/software/mne_python/git-master-0.8/mne-python/')
+###
+
+import os
+import numpy as np
+import mne
+from mne import read_proj, read_selection, io
+# from mne.datasets import sample
+from mne.io import Raw
+from mne.minimum_norm import apply_inverse_epochs, apply_inverse, read_inverse_operator, source_induced_power
+import pylab as pl
+from mne.layouts import read_layout
+from mne.connectivity import seed_target_indices, spectral_connectivity
+
+###############################################################################
+data_path = '/imaging/rf02/TypLexMEG/'	# where subdirs for MEG data are
+#os.chdir('/home/rf02/rezvan/test1')
+orig_path='/group/erp/data/olaf.hauk/MEG/TypLexM/data/MF22_new/'
+
+# get indices for subjects to be processed from command line input
+# 
+print sys.argv
+subject_inds = [3]
+for ss in sys.argv[1:]:
+ subject_inds.append( int( ss ) )
+
+#subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+print "subject_inds:"
+print subject_inds
+print "No rejection"
+
+list_all = ['meg10_0378/101209/', 
+'meg10_0390/101214/',
+'meg11_0026/110223/', 
+'meg11_0050/110307/', 
+'meg11_0052/110307/', 
+'meg11_0069/110315/', 
+'meg11_0086/110322/', 
+'meg11_0091/110328/', 
+'meg11_0096/110404/', 
+'meg11_0101/110411/', 
+'meg11_0102/110411/', 
+'meg11_0112/110505/',
+'meg11_0104/110412/',  
+'meg11_0118/110509/', 
+'meg11_0131/110519/', 
+'meg11_0144/110602/', 
+'meg11_0147/110603/'
+]
+
+
+ll = []
+for ss in subject_inds:
+ ll.append(list_all[ss])
+
+print "ll:"
+print ll
+
+stim_delay = 0.034 # delay in s ((NOTE! not in the example, taken from Olaf's script. Rezvan))
+tmin, tmax = -0.5, 0.7
+event_id = {'cncrt_wrd': 1, 'abs_wrd': 2}
+enum_c=np.zeros((1,17))
+enum_a=np.zeros((1,17))
+##loop across subjects...
+for ii, meg in enumerate(ll):
+	print ii
+## Get raw data
+	print "reading raw filtered file"
+	raw_fname = data_path + meg + 'semloc_ssstf_fft_1_48_clean_ica_raw.fif'
+	event_fname = orig_path + meg + 'semloc_raw_ssstnew.txt'
+	raw = Raw(raw_fname)
+
+ 
+##events
+	print "reading events"
+	events = mne.read_events(event_fname)
+	events[:,0] += np.round( raw.info['sfreq']*stim_delay ) #((NOTE! not in the example, taken from Olaf's script. Rezvan))
+
+
+#   Plot raw data
+#fig = raw.plot(events=events)
+
+	#   Set up pick list: EEG + STI 014 - bad channels (modify to your needs)
+	include = []  # or stim channels ['STI 014']
+	exclude = raw.info['bads'] # bads
+	print "pick required channels"
+	# pick EEG and MEG channels
+	picks = mne.pick_types(raw.info, meg=True, eeg=True, stim=False, eog=True,
+		               include=include, exclude='bads')
+	# Read epochs
+	print "read epochs"
+	reject = dict(eeg=140e-6, grad=200e-12, mag=4e-12)#eog=150e-6,
+	epochs = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks, baseline=(None, 0), proj=True, reject=reject)
+	out_evoked_fname = data_path + meg + 'semloc_ssstf_fft_1_48_clean_ica_raw-ave.fif'
+	epochs_concrete = epochs['cncrt_wrd']
+    	epochs_abstract = epochs['abs_wrd']
+    	#mne.epochs.equalize_epoch_counts([epochs_concrete,epochs_abstract])
+	enum_a[0,ii]=epochs_abstract.get_data().shape[0]
+	print enum_a[0,ii]
+	enum_c[0,ii]=epochs_concrete.get_data().shape[0]
+	print enum_c[0,ii]
+	fig_path='/home/rf02/rezvan/test1/raw ecg_eog cleaning/'
+	import matplotlib.pyplot as plt
+	evokeds_concrete=epochs_concrete.average()
+	evokeds_concrete.plot(exclude=[])
+	#out_evokedfig_fname1 = fig_path + meg[:10] + '_evoked_concrete_butterfly_ica.png'
+	#plt.savefig(out_evokedfig_fname1)
+	
+	evokeds_abstract=epochs_abstract.average()
+	evokeds_abstract.plot(exclude=[])
+	#out_evokedfig_fname2 = fig_path + meg[:10] + 'evoked_abstract_butterfly_ica.png'
+	#plt.savefig(out_evokedfig_fname2)
+	#print "averaging"
+	

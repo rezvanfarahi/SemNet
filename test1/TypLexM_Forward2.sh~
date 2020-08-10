@@ -1,0 +1,113 @@
+#!/bin/sh
+#
+
+## Your variables:
+
+# datapath='/imaging/ec02/MEG/data/'    # root directory for your MEG data
+datapath='/imaging/rf02/TypLexMEG'
+
+MRIpath='/imaging/rf02/TypLexMEG'    # where your MRI subdirectories are
+
+# subjects names used for MRI data
+subjects=(\
+         'SS1_Meg10_0378' #\
+	'SS2_Meg10_0390' \
+	'SS3_Meg11_0026' \
+	'SS4_Meg11_0050' \
+	'SS5_Meg11_0052' \
+	'SS6_Meg11_0069' \
+	'SS9_Meg11_0086' \
+	'SS10_Meg11_0091' \
+	'SS12_Meg11_0096' \
+	'SS13_Meg11_0101' \
+	'SS14_Meg11_0102' \
+	'SS15_Meg11_0112' \
+	'SS16_Meg11_0104' \
+	'SS18_Meg11_0118' \
+	'SS19_Meg11_0131' \
+	'SS20_Meg11_0144' \
+	'SS21_Meg11_0147' \
+        )
+
+# MEG IDs (your directory structure may differ)
+subj_pre=(\
+	'meg10_0378'\
+       #'meg10_0378' #\
+        'meg10_0390'\
+       'meg11_0026' \
+       'meg11_0050' \
+       'meg11_0052' \
+       'meg11_0069' \
+       'meg11_0086' \
+       'meg11_0091' \
+       'meg11_0096' \
+      'meg11_0101' \
+       'meg11_0102' \
+        'meg11_0112' \
+	'meg11_0104' \
+       'meg11_0118' \
+      'meg11_0131' \
+       'meg11_0144' \
+       'meg11_0147' \
+)
+	 
+
+# MEG subdirectories (your directory structure may differ)      
+subj_dir=(\
+	'101209' #\
+	'101214' \
+	'110223' \
+	'110307' \
+	 '110307' \
+	 '110315' \
+	'110322' \
+	 '110328' \
+	 '110404' \
+	 '110411' \
+	 '110411' \
+	 '110505' \
+	 '110412' \
+	 '110509' \
+	 '110519' \
+	'110602' \
+	 '110603' \
+        )
+        
+
+## Processing:
+
+nsubjects=${#subjects[*]}
+lastsubj=`expr $nsubjects - 1`
+
+for m in `seq 0 ${lastsubj}`
+do
+  echo " "
+  echo " Computing forward solution for SUBJECT  ${subjects[m]}"
+  echo " "
+  mne_watershed_bem --subject ${subjects[m]} --overwrite --atlas
+  mne_check_eeg_locations --file ${datapath}/${subj_pre[m]}/${subj_dir[m]}/semloc_raw_ssstf_clean_ica_raw.fif  \
+                           #--fix
+                           
+  ## setup model 3 layers (EEG+MEG)
+  
+  mne_setup_forward_model --overwrite  --subject ${subjects[m]} --surf --ico 4
+   
+  mne_setup_source_space  --subject ${subjects[m]} --ico 5 
+ 
+  mne_do_forward_solution \
+                        --overwrite \
+                        --subject ${subjects[m]} \
+                        --mindist 5 \
+                        --spacing ico-5 \
+                        --bem ${MRIpath}/${subjects[m]}/bem/${subjects[m]}-5120-5120-5120-bem-sol.fif \
+                        --src ${MRIpath}/${subjects[m]}/bem/${subjects[m]}-ico-5-src.fif \
+                        --meas ${datapath}/${subj_pre[m]}/${subj_dir[m]}/semloc_ssstf_fft_1_48_clean_ica_raw.fif  \
+                        --fwd ${datapath}/${subj_pre[m]}/${subj_dir[m]}/ico5_forward_5-3L-EMEG-fwd.fif
+
+
+
+
+done # subjects
+
+
+#--trans ${MRIpath}/${subjects[m]}/bem/${subjects[m]}-trans.fif

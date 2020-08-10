@@ -1,0 +1,23 @@
+clear
+
+t=-pi:0.01:pi;
+S2=sin(t+pi/4);
+S1=0.5*sin(t)+0.5*sin(2*t+pi/3);
+C=corrcoef(S1,S1); C=C(1,2);
+ii=0;jj=0;
+for A=0:100
+    ii=ii+1; jj=0;
+    for B=0:100
+        jj=jj+1;
+        Sp1=A*S1+B*S2;
+        rat(ii,jj)=A/B;
+        Rp=corrcoef(Sp1,S2);R_uncorrected(ii,jj)=Rp(1,2); %Rs is before correction
+        Spnew=Sp1-Sp1.*S2;
+        Rp=corrcoef(Spnew,S2);R_corrected(ii,jj)=Rp(1,2); %Rc is after correction
+    end
+end
+X=0:100;Y=0:100;
+figure,pcolor(X,Y,R_uncorrected)
+colorbar()
+xlabel('B')
+ylabel('A')
