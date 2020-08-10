@@ -128,26 +128,26 @@ for cnt=1:length(list_all)
     end
     
     
-    ftdata.fsample = Fsample;
-    ftdata.label = chlabels;
-    ftdata.label = ftdata.label(:);
-    
-    % Convert the ftdata struct to SPM M\EEG dataset
-    %--------------------------------------------------------------------------
-    D = spm_eeg_ft2spm(ftdata, fname_out);
-    
-    % Examples of providing additional information in a script
-    % [] comes instead of an index vector and means that the command
-    % applies to all channels/all trials.
-    %--------------------------------------------------------------------------
-    D = type(D, 'single');                        % Sets the dataset type
-    D = chantype(D, ':', 'LFP');                   % Sets the channel type
-    D = conditions(D, 1, 'Concrete');  % Sets the condition label
-    D = conditions(D, 2, 'Emotional');
-    
-    % save
-    %--------------------------------------------------------------------------
-    save(D);
+%     ftdata.fsample = Fsample;
+%     ftdata.label = chlabels;
+%     ftdata.label = ftdata.label(:);
+%     
+%     % Convert the ftdata struct to SPM M\EEG dataset
+%     %--------------------------------------------------------------------------
+%     D = spm_eeg_ft2spm(ftdata, fname_out);
+%     
+%     % Examples of providing additional information in a script
+%     % [] comes instead of an index vector and means that the command
+%     % applies to all channels/all trials.
+%     %--------------------------------------------------------------------------
+%     D = type(D, 'single');                        % Sets the dataset type
+%     D = chantype(D, ':', 'LFP');                   % Sets the channel type
+%     D = conditions(D, 1, 'Concrete');  % Sets the condition label
+%     D = conditions(D, 2, 'Emotional');
+%     
+%     % save
+%     %--------------------------------------------------------------------------
+%     save(D);
 end
 
 % Datafiltered
