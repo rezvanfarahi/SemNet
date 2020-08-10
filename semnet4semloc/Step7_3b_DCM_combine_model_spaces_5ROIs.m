@@ -120,7 +120,7 @@ dcm_paths={'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_
             '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f250_oldreg.mat',
            '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_oldreg.mat'};
 ii=0;    
-for path_cnt=1:3
+for path_cnt=1:2
     load(dcm_paths{path_cnt})
     jj=0;
     for ss=1:length(subj)
@@ -135,16 +135,16 @@ for path_cnt=1:3
     end
 end
 subj=all_subjs([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_allmaxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_allmaxCTF_250ms.mat','subj')
 subj=all_subjs_hubs([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_hubsmaxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_hubsmaxCTF_250ms.mat','subj')
 subj=all_subjs_nohubs([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_nohubsmaxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_nohubsmaxCTF_250ms.mat','subj')
 
 subj=all_subjs_atlhub([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_atlhub_maxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_atlhub_maxCTF_250ms.mat','subj')
 subj=all_subjs_aghub([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_inone_modelspace_aghub_maxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_aghub_maxCTF_250ms.mat','subj')
 
 
 cd '/imaging/rf02/Semnet/semnet4semloc/dcm/'   
