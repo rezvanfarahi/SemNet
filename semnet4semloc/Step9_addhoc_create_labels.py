@@ -164,6 +164,8 @@ for this_labelc, this_label in enumerate(labellist):
     thisstc_label=mne.stc_to_label(thisstc_tolabel, src_avg,smooth=True)[0]
     label_path=out_path+'/'+'mask_labels_ATL_IFG_MTG_AG-lh'
     thisstc_label.save(label_path)
+    label_path=out_path+'/'+'mask_labels_ATL_IFG_MTG_AG-rh'
+    thisstc_label.save(label_path)
 
 #    vertices_test = [np.arange(10242), np.arange(10242)]
 #            np.intersect1d(label_verts,vertices_to[0])
