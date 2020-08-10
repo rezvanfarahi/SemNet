@@ -134,16 +134,16 @@ for path_cnt=1:2
         all_subjs_aghub(1,ii).sess.model= subj(1,jj).sess.model(13:16);
     end
 end
-subj=all_subjs([1:17,19:end]);
+subj=all_subjs([1:17,18:end]);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_allmaxCTF_450ms.mat','subj')
-subj=all_subjs_hubs([1:17,19:end]);
+subj=all_subjs_hubs([1:17,18:end]);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_hubsmaxCTF_450ms.mat','subj')
-subj=all_subjs_nohubs([1:17,19:end]);
+subj=all_subjs_nohubs([1:17,18:end]);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_nohubsmaxCTF_450ms.mat','subj')
 
-subj=all_subjs_atlhub([1:17,19:end]);
+subj=all_subjs_atlhub([1:17,18:end]);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_atlhub_maxCTF_450ms.mat','subj')
-subj=all_subjs_aghub([1:17,19:end]);
+subj=all_subjs_aghub([1:17,18:end]);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_aghub_maxCTF_450ms.mat','subj')
 
 
