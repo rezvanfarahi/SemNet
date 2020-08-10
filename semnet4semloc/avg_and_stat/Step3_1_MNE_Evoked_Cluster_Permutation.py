@@ -180,18 +180,20 @@ for p_threshold in ll:
     if exclude_wbmedial:
         fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
         fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
-        labelss=labelL+labelR
-        bb=stc_cond.in_label(labelss)  
-        nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-        nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
-        spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
+        
     if exclude_ROIs:
-        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'
-        labelmask=mne.read_label(fname_label,subject='fsaverage')
-        labelmask.values.fill(1.0)
-        bb=stc_cond.in_label(labelmask)
-        nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-        spatial_exclude=fsave_vertices[0][nnl].copy()
+        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'; labelL = mne.read_label(fname_label)
+        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-rh.label'; labelR = mne.read_label(fname_label)
+        #labelmask=mne.read_label(fname_label,subject='fsaverage')
+        #labelmask.values.fill(1.0)
+        #bb=stc_cond.in_label(labelmask)
+        #nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+        #spatial_exclude=fsave_vertices[0][nnl].copy()
+    labelss=labelL+labelR
+    bb=stc_cond.in_label(labelss)  
+    nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+    nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
+    spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
 
     print('Clustering.')
     t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
