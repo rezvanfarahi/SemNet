@@ -114,11 +114,11 @@ all_subjs_hubs=struct();
 all_subjs_nohubs=struct();
 all_subjs_atlhub=struct();
 all_subjs_aghub=struct();
-% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_aifg_ERP_dtr1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/';
-% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated_thesis/model15/';
-dcm_paths={'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f250.mat',
-            '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f250_oldreg.mat',
-           '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_oldreg.mat'};
+% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_aifg_ERP_dtr1/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/';
+% dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated_thesis/model15/';
+dcm_paths={'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f450.mat',
+            '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f450_oldreg.mat',
+           '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_oldreg.mat'};
 ii=0;    
 for path_cnt=1:2
     load(dcm_paths{path_cnt})
@@ -135,26 +135,26 @@ for path_cnt=1:2
     end
 end
 subj=all_subjs([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_allmaxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_allmaxCTF_450ms.mat','subj')
 subj=all_subjs_hubs([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_hubsmaxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_hubsmaxCTF_450ms.mat','subj')
 subj=all_subjs_nohubs([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_nohubsmaxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_nohubsmaxCTF_450ms.mat','subj')
 
 subj=all_subjs_atlhub([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_atlhub_maxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_atlhub_maxCTF_450ms.mat','subj')
 subj=all_subjs_aghub([1:17,19:end]);
-save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_aghub_maxCTF_250ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_aghub_maxCTF_450ms.mat','subj')
 
 
 cd '/imaging/rf02/Semnet/semnet4semloc/dcm/'   
 % 
-% %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
+% %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';
 % 
-% % dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';
+% % dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';
 % 
 % 
-% % /imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_50verts_dtr1_dip/ctf
+% % /imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/avg_50verts_dtr1_dip/ctf
 % 
 % for s = 1:length(dosubs) %parfor
 %     sess=struct();
@@ -186,7 +186,7 @@ cd '/imaging/rf02/Semnet/semnet4semloc/dcm/'
 %     subj(1,s).sess=sess;
 % end
 % out_dir=dcm_path;
-% %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/home/rf02/rezvan/test1/step_by_step/dcm/latest/200ms_7models/semloc';
+% %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/avg_allverts_dtr0_dip/dip/';%/simulated/inverted/';%'/home/rf02/rezvan/test1/step_by_step/dcm/latest/200ms_7models/semloc';
 % if ~exist(out_dir,'dir')
 %     mkdir(out_dir)
 % end
