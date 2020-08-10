@@ -119,7 +119,8 @@ all_subjs_aghub=struct();
 dcm_paths={'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f450.mat',
             '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_f450_oldreg.mat',
            '/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/modelspace_allmaxCTF_all_oldreg.mat'};
-ii=0;    
+ii=0; 
+LogEvd=[];
 for path_cnt=1:2
     load(dcm_paths{path_cnt})
     jj=0;
@@ -132,19 +133,37 @@ for path_cnt=1:2
         
         all_subjs_atlhub(1,ii).sess.model= subj(1,jj).sess.model(1:4);
         all_subjs_aghub(1,ii).sess.model= subj(1,jj).sess.model(13:16);
+        for model_cnt=1:28
+            LogEvd(ii,model_cnt)=subj(1,jj).sess.model(model_cnt).F;
+        end
     end
 end
 subj=all_subjs([1:17,18:end]);
+F=LogEvd([1:17,18:end],:);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_allmaxCTF_450ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_logevd_allmaxCTF_450ms.mat','F')
+
 subj=all_subjs_hubs([1:17,18:end]);
+F=LogEvd([1:17,18:end],1:16);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_hubsmaxCTF_450ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_logevd_hubsmaxCTF_450ms.mat','F')
+
 subj=all_subjs_nohubs([1:17,18:end]);
+F=LogEvd([1:17,18:end],17:26);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_nohubsmaxCTF_450ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_logevd_nohubsmaxCTF_450ms.mat','F')
+
 
 subj=all_subjs_atlhub([1:17,18:end]);
+F=LogEvd([1:17,18:end],1:4);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_atlhub_maxCTF_450ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_logevd_atlhub_maxCTF_450ms.mat','F')
+
+
 subj=all_subjs_aghub([1:17,18:end]);
+F=LogEvd([1:17,18:end],13:16);
 save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_modelspace_aghub_maxCTF_450ms.mat','subj')
+save('/imaging/rf02/Semnet/semnet4semloc/dcm/alltasks_semantic_logevd_aghub_maxCTF_450ms.mat','F')
 
 
 cd '/imaging/rf02/Semnet/semnet4semloc/dcm/'   
