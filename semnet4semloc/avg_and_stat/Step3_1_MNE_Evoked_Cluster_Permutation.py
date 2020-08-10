@@ -47,11 +47,11 @@ import os
 exclude_wbmedial=False
 exclude_ROIs=True
 if exclude_wbmedial:
-    out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/SD/' # root LD or SD
-uvttest_path = '/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/SD/1_48/' # root
+    out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/LD/' # root LD or SD
+uvttest_path = '/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/LD/1_48/' # root
 
 if exclude_ROIs:
-    out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/masked_ROIs/evoked/SD/' # root LD or SD
+    out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/masked_ROIs/evoked/LD/' # root LD or SD
 
 if not os.path.exists(out_path):
     os.makedirs(out_path)
@@ -141,7 +141,7 @@ for p_threshold in ll:
     for ii, meg in enumerate(list_all):
         print ii
         for event_no in range(n_levels):     
-            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#'firstMorphed_ico_SemDec_pnt1_30ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
+            fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_names[event_no]+'_Source_Evoked_m300_600'#'firstMorphed_ico_SemDec_pnt1_30ica_'+event_names[event_no]+'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'#'_Source_Evoked_m300_600'#'_Source_Evoked_mnrsmpl_50_550_100ms_0ov'
             stc_cond = read_source_estimate(fname_in)
 #            stc_cond.resample(60)
 #            stc_cond.crop(0.050,0.450)
