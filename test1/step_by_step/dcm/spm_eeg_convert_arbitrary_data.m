@@ -57,6 +57,8 @@ chlabels = {
 
 };
 input_path='/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/dipole/';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD.mat';
+
 list_all = {'/meg10_0378',
     '/meg10_0390',
     '/meg11_0026',
@@ -149,7 +151,7 @@ end
 % Datafiltered
 % lpfilter = designfilt('lowpassfir', 'FilterOrder',399,'PassbandFrequency', 30, 'StopbandFrequency', 35, 'SampleRate', 1000);
 % ddf=filtfilt(lpfilter,dd);
-D1=Dataf(:,:,:,7);%mean(Dataf,4);%abs(squeeze(Dataf(:,:,:,7)));%mean(Dataf,4);
+D1=Dataf(:,:,:,7);%mean(Dataf,4);%abs(squeeze(Dataf(:,:,:,8)));%mean(Dataf,4);
 Dstd=zeros(size(Dataf,1),size(Dataf,2),size(Dataf,3));
 for dcnt1=1:size(Dstd,1)
     for dcnt2=1:size(Dstd,2)
@@ -167,14 +169,26 @@ for dcnt1=1:size(Dstd,1)
             Dt(dcnt1,dcnt2)=tstat1.tstat;
     end
 end
-ntimewins=10;
+% ntimewins=4;
+% Dpm=zeros(size(Dataf,1),ntimewins);
+% for ii=1:ntimewins
+%     Datafm=squeeze(mean((Dataf(:,(300+50*ii)/q:(350+50*ii)/q,:,:)),2));%5x2x17
+%     for dcnt1=1:size(Dpm,1)
+%             [h,Dpm(dcnt1,ii)]=ttest(squeeze(Datafm(dcnt1,1,:))-squeeze(Datafm(dcnt1,2,:)));
+%     end
+% end
+
+ntimewins=4;
 Dpm=zeros(size(Dataf,1),ntimewins);
+Datafm_wins=zeros(size(Dataf,1),ntimewins,size(Dataf,3),size(Dataf,4));
 for ii=1:ntimewins
-    Datafm=squeeze(mean((Dataf(:,(300+50*ii)/q:(350+50*ii)/q,:,:)),2));%5x2x17
+    Datafm=squeeze(mean((Dataf(:,(450+100*(ii-1))/q:(450+100*ii)/q,:,:)),2));%5x2x17
+    Datafm_wins(:,ii,:,:)=Datafm;
     for dcnt1=1:size(Dpm,1)
             [h,Dpm(dcnt1,ii)]=ttest(squeeze(Datafm(dcnt1,1,:))-squeeze(Datafm(dcnt1,2,:)));
     end
 end
+save(outpath_anova,'Datafm_wins')
 
 
 Dse=Dstd/sqrt(size(Dataf,4));
