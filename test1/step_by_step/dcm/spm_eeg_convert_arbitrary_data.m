@@ -149,7 +149,7 @@ end
 % Datafiltered
 % lpfilter = designfilt('lowpassfir', 'FilterOrder',399,'PassbandFrequency', 30, 'StopbandFrequency', 35, 'SampleRate', 1000);
 % ddf=filtfilt(lpfilter,dd);
-D1=Dataf(:,:,:,8);%mean(Dataf,4);%abs(squeeze(Dataf(:,:,:,7)));%mean(Dataf,4);
+D1=Dataf(:,:,:,7);%mean(Dataf,4);%abs(squeeze(Dataf(:,:,:,7)));%mean(Dataf,4);
 Dstd=zeros(size(Dataf,1),size(Dataf,2),size(Dataf,3));
 for dcnt1=1:size(Dstd,1)
     for dcnt2=1:size(Dstd,2)
