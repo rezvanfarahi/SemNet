@@ -25,7 +25,7 @@ for r = 1:Nr
 %     perm_conds=zeros(nperms,Nsubj);
 %     for pcnt=1:nperms
 %         perm_cond=rand(1,Nsubj)-0.5;perm_cond(perm_cond>0)=1;perm_cond(perm_cond<=0)=-1;
-%         perm_conds(pcnt,:)=perm_cond;
+%         perm_conds(pcnt,:)=perm_cond; 
 %     end
     
     for t = 1:Nt
