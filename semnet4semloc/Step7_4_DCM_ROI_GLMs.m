@@ -30,5 +30,5 @@ alpha = 0.05 % uncorrected
 %alpha = alpha/(Nr*Nt) % extreme Bonferonni, ignoring that time windows correlated
 %alpha = alpha/Nr % compromise!
 
-figure,imagesc(Pcom),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:Nt],'XTickLabel',[50:5:445],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Common condition effect across exps')
-figure,imagesc(Pdif),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:Nt],'XTickLabel',[50:5:445],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Interaction between exp and condition')
+figure,imagesc(Pcom),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:10:Nt],'XTickLabel',[50:50:445],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Common condition effect across exps')
+figure,imagesc(Pdif),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:10:Nt],'XTickLabel',[50:50:445],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Interaction between exp and condition')
