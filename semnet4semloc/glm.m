@@ -111,6 +111,7 @@ if pflag==1
         plot(Xc,Yc,'b-')
     end
 end
+p
 
 return
 
