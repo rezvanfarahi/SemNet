@@ -57,7 +57,7 @@ chlabels = {
 
 };
 input_path='/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/dipole/';
-outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD_80wins.mat';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD.mat';
 
 list_all = {'/meg10_0378',
     '/meg10_0390',
