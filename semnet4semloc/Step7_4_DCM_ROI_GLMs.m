@@ -15,11 +15,12 @@ X = [X; zeros(2*Ns(2),1) kron(eye(2),ones(Ns(2),1))]
 X = [X [zeros(Ns(1),Ns(2)); eye(Ns(2)); eye(Ns(2))]];
 figure,imagesc(X)
 
+nperms=1000;
+
 Tcom = zeros(Nr,Nt); Fcom = zeros(Nr,Nt); Pcom = zeros(Nr,Nt); 
 Tdif = zeros(Nr,Nt); Fdif = zeros(Nr,Nt); Pdif = zeros(Nr,Nt);
 Tcom_perm = zeros(Nr,Nt,nperms); Fcom_perm = zeros(Nr,Nt,nperms); Pcom_perm = zeros(Nr,Nt,nperms); 
 Tdif_perm = zeros(Nr,Nt,nperms); Fdif_perm = zeros(Nr,Nt,nperms); Pdif_perm = zeros(Nr,Nt,nperms);
-nperms=1000;
 for r = 1:Nr
     %since we want to cluster over time points,we use the same randomisation order for all of them
     perm_conds=round(rand(nperms,Nsubj));
