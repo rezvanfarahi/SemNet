@@ -1,7 +1,7 @@
 
-exp1  = load('/imaging/rf02/Semnet/semnet4semloc/SemLoc_SD.mat');
-exp2a = load('/imaging/rf02/Semnet/semnet4semloc/SemNet_SD.mat');
-exp2b = load('/imaging/rf02/Semnet/semnet4semloc/SemNet_LD.mat');
+exp1  = load('/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD_80wins.mat');
+exp2a = load('/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_SD_80wins.mat');
+exp2b = load('/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_LD_80wins.mat');
 
 Nr = size(exp1.Datafm_wins,1)
 Nt = size(exp1.Datafm_wins,2)
