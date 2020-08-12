@@ -5,7 +5,7 @@ exp2b = load('/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_LD_80wins.mat');
 
 Nr = size(exp1.Datafm_wins,1)
 Nt = size(exp1.Datafm_wins,2)
-
+xaxis=[50:5:50+79*5];
 Ns(1) = size(exp1.Datafm_wins,4);
 Ns(2) = size(exp2a.Datafm_wins,4)
 
@@ -30,5 +30,5 @@ alpha = 0.05 % uncorrected
 %alpha = alpha/(Nr*Nt) % extreme Bonferonni, ignoring that time windows correlated
 %alpha = alpha/Nr % compromise!
 
-figure,imagesc(Pcom),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:4],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Common condition effect across exps')
-figure,imagesc(Pdif),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:4],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Interaction between exp and condition')
+figure,imagesc(Pcom),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[xaxis],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Common condition effect across exps')
+figure,imagesc(Pdif),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[xaxis],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Interaction between exp and condition')
