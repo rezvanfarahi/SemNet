@@ -57,7 +57,7 @@ chlabels = {
 
 };
 input_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/dipole/';
-outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_SD.mat';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_SD_80wins.mat';
 
 list_all =  {%'/meg16_0030', not needed for LD
             '/meg16_0032', 
@@ -181,7 +181,7 @@ for ii=1:ntimewins
             [h,Dpm(dcnt1,ii)]=ttest(squeeze(Datafm(dcnt1,1,:))-squeeze(Datafm(dcnt1,2,:)));
     end
 end
-% save(outpath_anova,'Datafm_wins')
+save(outpath_anova,'Datafm_wins')
 
 Dse=Dstd/sqrt(size(Dataf,4));
 ts=tinv([0.025,0.975],size(Dataf,4)-1);
