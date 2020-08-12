@@ -18,23 +18,23 @@ Fcom = []; Pcom = []; Fdif = []; Pdif = [];
 Fcom_perm = []; Pcom_perm = []; Fdif_perm = []; Pdif_perm = [];
 nperms=5000;
 for r = 1:Nr
+    %since we want to cluster over time points,we use the same randomisation order for all of them
+    perm_conds=repmat([1 -1],nperms,1);
+    randorder=randperm(length(perm_conds));
+    perm_conds(randorder(1:nperms/2),:)=repmat([-1 1],nperms/2,1);
     for t = 1:Nt
         y =     squeeze(exp1.Datafm_wins(r,t,:,:))'  * [1 -1]'; % contrast of conditions
         y = [y; squeeze(exp2a.Datafm_wins(r,t,:,:))' * [1 -1]']; % contrast of conditions
         y = [y; squeeze(exp2b.Datafm_wins(r,t,:,:))' * [1 -1]']; % contrast of conditions
         %[Tval,Fcom(r,t),Pcom(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[1 1 1 zeros(1,Ns(2))]');
         [Tval,Fcom(r,t),Pcom(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]'); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
-        [Tval,Fdif(r,t),Pdif(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[detrend(eye(3),0) zeros(3,Ns(2))]');
-        
-        perm_conds=repmat([1 -1],nperms,1);
-        randorder=randperm(length(perm_conds));
-        perm_conds(randorder(1:nperms/2),:)=repmat([-1 1],nperms/2,1);
+        [Tval,Fdif(r,t),Pdif(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[detrend(eye(3),0) zeros(3,Ns(2))]');        
         for pcnt=1:nperms
             y_perm =     squeeze(exp1.Datafm_wins(r,t,:,:))'  * perm_conds(pcnt,:)'; % contrast of conditions
             y_perm = [y_perm; squeeze(exp2a.Datafm_wins(r,t,:,:))' * perm_conds(pcnt,:)']; % contrast of conditions
             y_perm = [y_perm; squeeze(exp2b.Datafm_wins(r,t,:,:))' * perm_conds(pcnt,:)']; % contrast of conditions
-            [Tval,Fcom_perm(r,t,pcnt),Pcom_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]'); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
-            [Tval,Fdif_perm(r,t,pcnt),Pdif_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[detrend(eye(3),0) zeros(3,Ns(2))]');
+            [Tval,Fcom_perm(r,t,pcnt),Pcom_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]',-1); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
+            [Tval,Fdif_perm(r,t,pcnt),Pdif_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[detrend(eye(3),0) zeros(3,Ns(2))]',-1);
         end
     end
 end
