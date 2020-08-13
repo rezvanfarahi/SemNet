@@ -15,9 +15,12 @@ X = [X; zeros(2*Ns(2),1) kron(eye(2),ones(Ns(2),1))]
 X = [X [zeros(Ns(1),Ns(2)); eye(Ns(2)); eye(Ns(2))]];
 figure,imagesc(X)
 
-Tcom = []; Fcom = []; Pcom = []; Tdif = []; Fdif = []; Pdif = [];
-Tcom_perm = []; Fcom_perm = []; Pcom_perm = []; Fdif_perm = []; Pdif_perm = [];
 nperms=1000;
+
+Tcom = zeros(Nr,Nt); Fcom = zeros(Nr,Nt); Pcom = zeros(Nr,Nt); 
+Tdif = zeros(Nr,Nt); Fdif = zeros(Nr,Nt); Pdif = zeros(Nr,Nt);
+Tcom_perm = zeros(Nr,Nt,nperms); Fcom_perm = zeros(Nr,Nt,nperms); Pcom_perm = zeros(Nr,Nt,nperms); 
+Tdif_perm = zeros(Nr,Nt,nperms); Fdif_perm = zeros(Nr,Nt,nperms); Pdif_perm = zeros(Nr,Nt,nperms);
 for r = 1:Nr
     %since we want to cluster over time points,we use the same randomisation order for all of them
     perm_conds=round(rand(nperms,Nsubj));
@@ -25,7 +28,7 @@ for r = 1:Nr
 %     perm_conds=zeros(nperms,Nsubj);
 %     for pcnt=1:nperms
 %         perm_cond=rand(1,Nsubj)-0.5;perm_cond(perm_cond>0)=1;perm_cond(perm_cond<=0)=-1;
-%         perm_conds(pcnt,:)=perm_cond;
+%         perm_conds(pcnt,:)=perm_cond; 
 %     end
     
     for t = 1:Nt
@@ -33,12 +36,12 @@ for r = 1:Nr
         y = [y; squeeze(exp2a.Datafm_wins(r,t,:,:))' * [1 -1]']; % contrast of conditions
         y = [y; squeeze(exp2b.Datafm_wins(r,t,:,:))' * [1 -1]']; % contrast of conditions
         %[Tval,Fcom(r,t),Pcom(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[1 1 1 zeros(1,Ns(2))]');
-        [Tval,Fcom(r,t),Pcom(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]'); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
-        [Tval,Fdif(r,t),Pdif(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[detrend(eye(3),0) zeros(3,Ns(2))]');        
+        [Tcom,Fcom(r,t),Pcom(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]'); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
+        [Tdif,Fdif(r,t),Pdif(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[detrend(eye(3),0) zeros(3,Ns(2))]');        
         for pcnt=1:nperms
             y_perm =y.* perm_conds(pcnt,:)';            
-            [Tval,Fcom_perm(r,t,pcnt),Pcom_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]',-1); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
-            [Tval,Fdif_perm(r,t,pcnt),Pdif_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[detrend(eye(3),0) zeros(3,Ns(2))]',-1);
+            [Tcom_perm,Fcom_perm(r,t,pcnt),Pcom_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]',-1); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
+            [Tdif_perm,Fdif_perm(r,t,pcnt),Pdif_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[detrend(eye(3),0) zeros(3,Ns(2))]',-1);
         end
     end
 end
@@ -49,3 +52,44 @@ alpha = 0.05 % uncorrected
 
 figure,imagesc(Pcom),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:10:Nt],'XTickLabel',[50:50:445],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Common condition effect across exps')
 figure,imagesc(Pdif),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:10:Nt],'XTickLabel',[50:50:445],'YTick',[1:5]),colormap('gray'),caxis([0 alpha]),title('Interaction between exp and condition')
+
+
+%% cluster-based permutation
+Pcom_bin=Pcom;
+Pcom_bin(Pcom_bin>=0.05)=1;Pcom_bin(Pcom_bin<1)=0;Pcom_bin=1-Pcom_bin;
+Pcom_perm_bin=Pcom_perm;
+Pcom_perm_bin(Pcom_perm_bin>=0.05)=1;Pcom_perm_bin(Pcom_perm_bin<1)=0;Pcom_perm_bin=1-Pcom_perm_bin;
+for r = 1:Nr
+    pcom_row=Pcom_bin(r,:);
+    tcom_row=Tcom(r,:);
+     
+    %find clusters in real data
+    clu = pcom_row ~= 0;
+    clu_b=findstr([0 clu], [0 1])-1;
+    clu_e=findstr([clu 0], [1 0]);
+    tcluster=[];
+    for cc=1:length(clu_b)
+        tcluster(cc)=sum(tcom_row(clu_b(cc):clu_e(cc)));
+    end
+    %find largest cluster in surrogate data
+    tcluster_perm=[];
+    for pcnt=1:nperms
+        pcom_row=squeeze(Pcom_perm_bin(r,:,pcnt));
+        tcom_row=squeeze(Tcom_perm(r,:,pcnt));
+        
+        clu = pcom_row ~= 0;
+        clu_b=findstr([0 clu], [0 1])-1;
+        clu_e=findstr([clu 0], [1 0]);
+        tclu_perm=[];
+        for cc=1:length(clu_b)
+            tclu_perm(cc)=sum(tcom_row(clu_b(cc):clu_e(cc)));
+        end
+        tcluster_perm(pcnt)=max(tclu_perm);
+    end
+    for cnt=1:length(tcluster)
+        sum(tcluster(cnt)<f)
+    end
+    
+    
+    
+end
