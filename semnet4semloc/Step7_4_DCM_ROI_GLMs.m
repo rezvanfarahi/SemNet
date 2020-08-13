@@ -55,35 +55,35 @@ figure,imagesc(Pdif),colorbar,xlabel('Twin'),ylabel('ROI'),set(gca,'XTick',[1:10
 
 
 %% cluster-based permutation
-Pcom_bin=Pcom;
-Pcom_bin(Pcom_bin>=0.05)=1;Pcom_bin(Pcom_bin<1)=0;Pcom_bin=1-Pcom_bin;
-Pcom_perm_bin=Pcom_perm;
-Pcom_perm_bin(Pcom_perm_bin>=0.05)=1;Pcom_perm_bin(Pcom_perm_bin<1)=0;Pcom_perm_bin=1-Pcom_perm_bin;
+Pdif_bin=Pdif;
+Pdif_bin(Pdif_bin>=0.05)=1;Pdif_bin(Pdif_bin<1)=0;Pdif_bin=1-Pdif_bin;
+Pdif_perm_bin=Pdif_perm;
+Pdif_perm_bin(Pdif_perm_bin>=0.05)=1;Pdif_perm_bin(Pdif_perm_bin<1)=0;Pdif_perm_bin=1-Pdif_perm_bin;
 for r = 1:Nr
-    pcom_row=Pcom_bin(r,:);
-    tcom_row=Tcom(r,:);
+    pdif_row=Pdif_bin(r,:);
+    tdif_row=Fdif(r,:);
      
     %find clusters in real data
-    clu = pcom_row ~= 0;
+    clu = pdif_row ~= 0;
     clu_b=findstr([0 clu], [0 1]);
     clu_e=findstr([clu 0], [1 0]);
     tcluster=[];
     for cc=1:length(clu_b)
-        tcluster(cc)=sum(tcom_row(clu_b(cc):clu_e(cc)));
+        tcluster(cc)=sum(tdif_row(clu_b(cc):clu_e(cc)));
     end
     %find largest cluster in surrogate data
     tcluster_perm=[];
     for pcnt=1:nperms
-        pcom_row=squeeze(Pcom_perm_bin(r,:,pcnt));
-        tcom_row=squeeze(Tcom_perm(r,:,pcnt));
+        pdif_row=squeeze(Pdif_perm_bin(r,:,pcnt));
+        tdif_row=squeeze(Fdif_perm(r,:,pcnt));
         
-        clu = pcom_row ~= 0;
+        clu = pdif_row ~= 0;
         if sum(clu)>0
             clu_bp=findstr([0 clu], [0 1]);
             clu_ep=findstr([clu 0], [1 0]);
             tclu_perm=[];
             for cc=1:length(clu_bp)
-                tclu_perm(cc)=sum(tcom_row(clu_bp(cc):clu_ep(cc)));
+                tclu_perm(cc)=sum(tdif_row(clu_bp(cc):clu_ep(cc)));
             end
             tcluster_perm(pcnt)=max(abs(tclu_perm));
         else
