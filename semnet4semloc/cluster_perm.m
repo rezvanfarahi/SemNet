@@ -1,8 +1,9 @@
 function [cluster_pvalues,cstart,cend,rois] = cluster_perm(Pval,Pval_perm,Tval,Tval_perm,xaxis);
 
-% a quick implementation of cluster-based permutation over a time series
+% a quick and dirtly implementation of cluster-based permutation over time
+% points- wrote for concreteness paper, August 2020
 
-
+wcluster=0;
 Pval_bin=Pval;
 Pval_bin(Pval_bin>=0.05)=1;Pval_bin(Pval_bin<1)=0;Pval_bin=1-Pval_bin;
 Pval_perm_bin=Pval_perm;
@@ -24,7 +25,11 @@ for r = 1:Nr
     clu_e=findstr([clu 0], [1 0]);
     tcluster=[];
     for cc=1:length(clu_b)
-        tcluster(cc)=sum(Tval_row(clu_b(cc):clu_e(cc)));
+        if wcluster>0
+            tcluster(cc)=sum(Tval_row(clu_b(cc):clu_e(cc)));
+        else
+            tcluster(cc)=sum(Pval_row(clu_b(cc):clu_e(cc)));
+        end
     end
     %find largest cluster in surrogate data
     tcluster_perm=[];
@@ -38,7 +43,11 @@ for r = 1:Nr
             clu_ep=findstr([clu 0], [1 0]);
             tclu_perm=[];
             for cc=1:length(clu_bp)
-                tclu_perm(cc)=sum(Tval_row(clu_bp(cc):clu_ep(cc)));
+                if wcluster>0
+                    tclu_perm(cc)=sum(Tval_row(clu_bp(cc):clu_ep(cc)));
+                else
+                    tclu_perm(cc)=sum(Pval_row(clu_bp(cc):clu_ep(cc)));
+                end
             end
             tcluster_perm(pcnt)=max(abs(tclu_perm));
         else

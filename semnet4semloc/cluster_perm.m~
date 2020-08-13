@@ -1,38 +1,20 @@
-function [t,F,p,df,R2,cR2,B,r,aR2,iR2,Bcov] = cluster_perm(Pval,Pval_perm,Tval,Tval_perm,xaxis);
+function [cluster_pvalues,cstart,cend,rois] = cluster_perm(Pval,Pval_perm,Tval,Tval_perm,xaxis);
 
-% [t,F,p,df,R2,cR2,B,r,aR2,iR2,Bcov] = glm(y,X,c,pflag);
-%
-% Generic function for General Linear Model (GLM)
-% Note: assumes error is spherical (residuals white)
-% Rik Henson, 2004
-%
-% (Note requires Matlab stats toolbox, or SPM functions to be on path)
-%
-% Input:
-%    y = n column vector of observations
-%    X = n x p (design) matrix 
-%    c = p x e contrast matrix for T- (e=1) or F- (e>1) contrast
-%    pflag = whether to print fit
-%
-% Output
-%    t = T-value
-%    F = F-value
-%    p = p-value
-%    df = degrees of freedom 
-%    R2  = model fit (% variance explained)
-%    cR2 = contrast fit (% variance explained)
-%    B = p betas (parameter estimates)
-%    aR2 = adjusted model fit (% variance explained)
-%    iR2 = hacky incremental model fit (not validated)
-%    Bcov = covariance of B (zero if errors white?)
+% a quick and dirtly implementation of cluster-based permutation over time
+% points- wrote for concreteness paper, August 2020
 
+wcluster=0;
 Pval_bin=Pval;
 Pval_bin(Pval_bin>=0.05)=1;Pval_bin(Pval_bin<1)=0;Pval_bin=1-Pval_bin;
 Pval_perm_bin=Pval_perm;
 Pval_perm_bin(Pval_perm_bin>=0.05)=1;Pval_perm_bin(Pval_perm_bin<1)=0;Pval_perm_bin=1-Pval_perm_bin;
 Nr=size(Pval,1);
 nperms=size(Pval_perm,3);
-
+cluster_pvalues=[];
+cstart=[];
+cend=[];
+rois=[];
+cpcnt=0;
 for r = 1:Nr
     Pval_row=Pval_bin(r,:);
     Tval_row=Tval(r,:);
@@ -57,7 +39,11 @@ for r = 1:Nr
             clu_ep=findstr([clu 0], [1 0]);
             tclu_perm=[];
             for cc=1:length(clu_bp)
-                tclu_perm(cc)=sum(Tval_row(clu_bp(cc):clu_ep(cc)));
+                if wcluster>0
+                    tclu_perm(cc)=sum(Tval_row(clu_bp(cc):clu_ep(cc)));
+                else
+                    tclu_perm(cc)=sum(Pval_row(clu_bp(cc):clu_ep(cc)));
+                end
             end
             tcluster_perm(pcnt)=max(abs(tclu_perm));
         else
@@ -65,14 +51,16 @@ for r = 1:Nr
         end
         
     end
-    cluster_pvalues=[];
-    cpcnt=0;
+    
     for cnt=1:length(tcluster)
         cluster_pvalue=sum(abs(tcluster(cnt))<tcluster_perm)/nperms;
         if cluster_pvalue<0.05
             cpcnt=cpcnt+1;
             cluster_pvalues(cpcnt)=cluster_pvalue;
-            fprintf('cluster-pvalue=%f, start=%d,  end=%d, ROI=%d \n',cluster_pvalue,xaxis(clu_b(cnt)),xaxis(clu_e(cnt)),r);       
+            cstart(cpcnt)=xaxis(clu_b(cnt));
+            cend(cpcnt)=xaxis(clu_e(cnt));
+            rois(cpcnt)=r;
+            fprintf('cluster-pvalue=%3.6f, start=%d,  end=%d, ROI=%d \n',cluster_pvalue,xaxis(clu_b(cnt)),xaxis(clu_e(cnt)),r);       
         end
     end    
     

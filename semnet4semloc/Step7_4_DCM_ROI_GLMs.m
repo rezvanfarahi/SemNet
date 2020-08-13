@@ -21,6 +21,19 @@ Tcom = zeros(Nr,Nt); Fcom = zeros(Nr,Nt); Pcom = zeros(Nr,Nt);
 Tdif = zeros(Nr,Nt); Fdif = zeros(Nr,Nt); Pdif = zeros(Nr,Nt);
 Tcom_perm = zeros(Nr,Nt,nperms); Fcom_perm = zeros(Nr,Nt,nperms); Pcom_perm = zeros(Nr,Nt,nperms); 
 Tdif_perm = zeros(Nr,Nt,nperms); Fdif_perm = zeros(Nr,Nt,nperms); Pdif_perm = zeros(Nr,Nt,nperms);
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Pdif_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Pdif_perm_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Fdif_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Fdif_perm_80wins.mat')
+
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Pcom_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Pcom_perm_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Fcom_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Fcom_perm_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Tcom_80wins.mat')
+load('/imaging/rf02/Semnet/semnet4semloc/dcm/Tcom_perm_80wins.mat')
+
+
 for r = 1:Nr
     %since we want to cluster over time points,we use the same randomisation order for all of them
     perm_conds=round(rand(nperms,Nsubj));
