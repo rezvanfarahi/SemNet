@@ -3,7 +3,7 @@ function [cluster_pvalues,cstart,cend,rois] = cluster_perm(Pval,Pval_perm,Tval,T
 % a quick and dirtly implementation of cluster-based permutation over time
 % points- wrote for concreteness paper, August 2020
 
-wcluster=0;
+wcluster=1;
 Pval_bin=Pval;
 Pval_bin(Pval_bin>=0.05)=1;Pval_bin(Pval_bin<1)=0;Pval_bin=1-Pval_bin;
 Pval_perm_bin=Pval_perm;
