@@ -93,7 +93,7 @@ for r = 1:Nr
     end
     cluster_pvalue=[];
     for cnt=1:length(tcluster)
-        cluster_pvalue=sum(abs(tcluster(cnt))<tcluster_perm)/nperms;
+        cluster_pvalue=sum(abs(tcluster(cnt))<tcluster_perm)/nperms
         if cluster_pvalue<0.2
             fprintf('cluster-pvalue=%f, start=%d,  end=%d, ROI=%d \n',cluster_pvalue,xaxis(clu_b(cnt)),xaxis(clu_e(cnt)),r);       
         end
