@@ -9,7 +9,11 @@ Pval_perm_bin=Pval_perm;
 Pval_perm_bin(Pval_perm_bin>=0.05)=1;Pval_perm_bin(Pval_perm_bin<1)=0;Pval_perm_bin=1-Pval_perm_bin;
 Nr=size(Pval,1);
 nperms=size(Pval_perm,3);
-
+cluster_pvalues=[];
+cstart=[];
+cend=[];
+rois=[];
+cpcnt=0;
 for r = 1:Nr
     Pval_row=Pval_bin(r,:);
     Tval_row=Tval(r,:);
@@ -42,11 +46,7 @@ for r = 1:Nr
         end
         
     end
-    cluster_pvalues=[];
-    cstart=[];
-    cend=[];
-    rois=[];
-    cpcnt=0;
+    
     for cnt=1:length(tcluster)
         cluster_pvalue=sum(abs(tcluster(cnt))<tcluster_perm)/nperms;
         if cluster_pvalue<0.05
