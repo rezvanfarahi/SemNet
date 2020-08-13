@@ -55,7 +55,7 @@ for r = 1:Nr
             cstart(cpcnt)=xaxis(clu_b(cnt));
             cend(cpcnt)=xaxis(clu_e(cnt));
             rois(cpcnt)=r;
-            fprintf('cluster-pvalue=%f, start=%d,  end=%d, ROI=%d \n',cluster_pvalue,xaxis(clu_b(cnt)),xaxis(clu_e(cnt)),r);       
+            fprintf('cluster-pvalue=%3.2f, start=%d,  end=%d, ROI=%d \n',cluster_pvalue,xaxis(clu_b(cnt)),xaxis(clu_e(cnt)),r);       
         end
     end    
     
