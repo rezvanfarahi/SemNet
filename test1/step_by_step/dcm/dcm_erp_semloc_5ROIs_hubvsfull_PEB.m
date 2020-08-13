@@ -856,8 +856,8 @@ for s = 1:length(dosubs) %parfor
     sub    = dosubs(s);
     
     DCMsub = DCMbase;
-    fname_a='_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_forDCM';%'_TypLex_Evoked_ATL_WFA_forDCM';
-    path_in='/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_whoshub/';
+    fname_a='_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%
+    path_in='/imaging/rf02/TypLexMEG/dcm/maxCTF/';%
     fname_in=[path_in,list_all{sub}(3:end),fname_a,'_filtered_cnvrt'];
     %     this_dir='./5ROIs_whoshub/';
     %     fname_a='_SemLoc_Evoked_5ROIs_forDCM';
