@@ -37,11 +37,11 @@ for r = 1:Nr
         y = [y; squeeze(exp2b.Datafm_wins(r,t,:,:))' * [1 -1]']; % contrast of conditions
         %[Tval,Fcom(r,t),Pcom(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[1 1 1 zeros(1,Ns(2))]');
         [Tcom(r,t),Fcom(r,t),Pcom(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]'); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
-        [Tdif(r,t),Fdif(r,t),Pdif(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[detrend(eye(3),0) zeros(3,Ns(2))]');        
+        [Tdif,Fdif(r,t),Pdif(r,t),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y,X,[detrend(eye(3),0) zeros(3,Ns(2))]');        
         for pcnt=1:nperms
             y_perm =y.* perm_conds(pcnt,:)';            
             [Tcom_perm(r,t,pcnt),Fcom_perm(r,t,pcnt),Pcom_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[1 1 1 ones(1,Ns(2))*2/Ns(2)]',-1); % http://www.sbirc.ed.ac.uk/cyril/download/Contrast_Weighting_Glascher_Gitelman_2008.pdf
-            [Tdif_perm(r,t,pcnt),Fdif_perm(r,t,pcnt),Pdif_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[detrend(eye(3),0) zeros(3,Ns(2))]',-1);
+            [Tdif_perm,Fdif_perm(r,t,pcnt),Pdif_perm(r,t,pcnt),df,R2,cR2,B,res,aR2,iR2,Bcov] = glm(y_perm,X,[detrend(eye(3),0) zeros(3,Ns(2))]',-1);
         end
     end
 end
