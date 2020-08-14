@@ -763,6 +763,34 @@ Model(end).B{1} =  [0 0 0 1 0
                     0 0 0 1 0
                     1 1 1 0 1
                     0 0 0 1 1];
+% 47 full model for PEB                
+Model(end+1)=Model(end);
+Model(end).A{1} =[0 1 1 1 1
+                1 0 1 1 1
+                1 1 0 1 1
+                1 1 1 0 1
+                0 0 0 0 0];
+Model(end).A{2} =[0 1 1 1 0
+                1 0 1 1 0
+                1 1 0 1 0
+                1 1 1 0 0
+                1 1 1 1 0];
+Model(end).A{3} =[0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0];
+
+
+% 1 For modulatory (B) connections, {n} = nth effect   , bidir-bidirs,
+% input to WFA, no input self-modulation, spokes self-modulation
+Model(end).B{1} =ones(5);
+Model(end).C =    [0
+    0
+    0
+    0
+    1];
+
 length(Model)
 
 %% Fit models
@@ -821,7 +849,7 @@ DCMbase.xU.name = {'C-A'};
 
 
 % LogEvd=[]; DCMname={};
-this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
+this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/forPEB/450ms/SemNet_LD/';%'/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'./16models_200ms/semloc';
 if ~exist(this_model_dir,'dir')
     mkdir(this_model_dir)
 end
@@ -846,7 +874,7 @@ parfor s = 1:length(dosubs) %parfor
     
     DCMsub = spm_dcm_erp_dipfit(DCMsub);  % Either convert your LFP data into an SPM object or replace this function with something that returns DCM structure with relevant field
     
-    for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[22:2:36,37:38]%39:46%1:numel(Model)
+    for n=47%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[22:2:36,37:38]%39:46%1:numel(Model)
         
         ['model ', num2str(n)]
         this_filename=sprintf([this_model_dir,'/DCM_erpf_ConEmot_LD_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);
