@@ -1,0 +1,809 @@
+Node file: node-e[01-02]
+Starting SMPD on node-e01 node-e02  ...
+srun --ntasks-per-node=1 --ntasks=2 /hpc-software/matlab/r2015a/bin/mw_smpd -phrase MATLAB -port 20137 -debug 0 &
+Checking that SMPD processes are running (Attempt 1 of 60)
+/hpc-software/matlab/r2015a/bin/mw_smpd -phrase MATLAB -port 20137 -status node-e01 > /dev/null 2>&1
+SMPD process found running on node-e01
+/hpc-software/matlab/r2015a/bin/mw_smpd -phrase MATLAB -port 20137 -status node-e02 > /dev/null 2>&1
+SMPD process found running on node-e02
+All SMPDs launched
+Machine args: -hosts 2 node-e01 14 node-e02 5
+/hpc-software/matlab/r2015a/bin/mw_mpiexec -phrase MATLAB -port 20137 -l -hosts 2 node-e01 14 node-e02 5 -genvlist MDCE_DECODE_FUNCTION,MDCE_STORAGE_LOCATION,MDCE_STORAGE_CONSTRUCTOR,MDCE_JOB_LOCATION,MDCE_DEBUG,MDCE_LICENSE_NUMBER,MLM_WEB_LICENSE,MLM_WEB_USER_CRED,MLM_WEB_ID "/hpc-software/matlab/r2015a/bin/worker" -parallel
+[18]                            < M A T L A B (R) >
+[18]                  Copyright 1984-2015 The MathWorks, Inc.
+[18]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[18]                             February 12, 2015
+[17]                            < M A T L A B (R) >
+[17]                  Copyright 1984-2015 The MathWorks, Inc.
+[17]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[17]                             February 12, 2015
+[16]                            < M A T L A B (R) >
+[16]                  Copyright 1984-2015 The MathWorks, Inc.
+[16]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[16]                             February 12, 2015
+[15]                            < M A T L A B (R) >
+[15]                  Copyright 1984-2015 The MathWorks, Inc.
+[15]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[15]                             February 12, 2015
+[14]                            < M A T L A B (R) >
+[14]                  Copyright 1984-2015 The MathWorks, Inc.
+[14]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[14]                             February 12, 2015
+[13]                            < M A T L A B (R) >
+[13]                  Copyright 1984-2015 The MathWorks, Inc.
+[13]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[13]                             February 12, 2015
+[1]                            < M A T L A B (R) >
+[1]                  Copyright 1984-2015 The MathWorks, Inc.
+[1]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[1]                             February 12, 2015
+[0]                            < M A T L A B (R) >
+[0]                  Copyright 1984-2015 The MathWorks, Inc.
+[0]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[0]                             February 12, 2015
+[12]                            < M A T L A B (R) >
+[12]                  Copyright 1984-2015 The MathWorks, Inc.
+[12]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[12]                             February 12, 2015
+[9]                            < M A T L A B (R) >
+[9]                  Copyright 1984-2015 The MathWorks, Inc.
+[9]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[9]                             February 12, 2015
+[8]                            < M A T L A B (R) >
+[8]                  Copyright 1984-2015 The MathWorks, Inc.
+[8]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[8]                             February 12, 2015
+[7]                            < M A T L A B (R) >
+[7]                  Copyright 1984-2015 The MathWorks, Inc.
+[7]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[7]                             February 12, 2015
+[4]                            < M A T L A B (R) >
+[4]                  Copyright 1984-2015 The MathWorks, Inc.
+[4]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[4]                             February 12, 2015
+[3]                            < M A T L A B (R) >
+[3]                  Copyright 1984-2015 The MathWorks, Inc.
+[3]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[3]                             February 12, 2015
+[2]                            < M A T L A B (R) >
+[2]                  Copyright 1984-2015 The MathWorks, Inc.
+[2]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[2]                             February 12, 2015
+[11]                            < M A T L A B (R) >
+[11]                  Copyright 1984-2015 The MathWorks, Inc.
+[11]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[11]                             February 12, 2015
+[10]                            < M A T L A B (R) >
+[10]                  Copyright 1984-2015 The MathWorks, Inc.
+[10]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[10]                             February 12, 2015
+[5]                            < M A T L A B (R) >
+[5]                  Copyright 1984-2015 The MathWorks, Inc.
+[5]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[5]                             February 12, 2015
+[6]                            < M A T L A B (R) >
+[6]                  Copyright 1984-2015 The MathWorks, Inc.
+[6]                   R2015a (8.5.0.197613) 64-bit (glnxa64)
+[6]                             February 12, 2015
+[16] 
+[15] 
+[18] 
+[17] 
+[14] 
+[13] 
+[9] 
+[8] 
+[3] 
+[2] 
+[1] 
+[11] 
+[0] 
+[12] 
+[6] 
+[4] 
+[5] 
+[10] 
+[7] 
+[16]To get started, type one of these: helpwin, helpdesk, or demo.
+[15]To get started, type one of these: helpwin, helpdesk, or demo.
+[18]To get started, type one of these: helpwin, helpdesk, or demo.
+[14]To get started, type one of these: helpwin, helpdesk, or demo.
+[17]To get started, type one of these: helpwin, helpdesk, or demo.
+[16]For product information, visit www.mathworks.com.
+[15]For product information, visit www.mathworks.com.
+[18]For product information, visit www.mathworks.com.
+[14]For product information, visit www.mathworks.com.
+[17]For product information, visit www.mathworks.com.
+[16] 
+[15] 
+[18] 
+[17] 
+[14] 
+[12]To get started, type one of these: helpwin, helpdesk, or demo.
+[9]To get started, type one of these: helpwin, helpdesk, or demo.
+[8]To get started, type one of these: helpwin, helpdesk, or demo.
+[1]To get started, type one of these: helpwin, helpdesk, or demo.
+[0]To get started, type one of these: helpwin, helpdesk, or demo.
+[11]To get started, type one of these: helpwin, helpdesk, or demo.
+[6]To get started, type one of these: helpwin, helpdesk, or demo.
+[3]To get started, type one of these: helpwin, helpdesk, or demo.
+[2]To get started, type one of these: helpwin, helpdesk, or demo.
+[13]To get started, type one of these: helpwin, helpdesk, or demo.
+[4]To get started, type one of these: helpwin, helpdesk, or demo.
+[12]For product information, visit www.mathworks.com.
+[11]For product information, visit www.mathworks.com.
+[9]For product information, visit www.mathworks.com.
+[8]For product information, visit www.mathworks.com.
+[6]For product information, visit www.mathworks.com.
+[1]For product information, visit www.mathworks.com.
+[0]For product information, visit www.mathworks.com.
+[11] 
+[9] 
+[8] 
+[3]For product information, visit www.mathworks.com.
+[3] 
+[2]For product information, visit www.mathworks.com.
+[2] 
+[1] 
+[0] 
+[13]For product information, visit www.mathworks.com.
+[13] 
+[12] 
+[6] 
+[4]For product information, visit www.mathworks.com.
+[4] 
+[10]To get started, type one of these: helpwin, helpdesk, or demo.
+[5]To get started, type one of these: helpwin, helpdesk, or demo.
+[10]For product information, visit www.mathworks.com.
+[5]For product information, visit www.mathworks.com.
+[5] 
+[10] 
+[7]To get started, type one of these: helpwin, helpdesk, or demo.
+[7]For product information, visit www.mathworks.com.
+[7] 
+[16][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[16]you rename the function to avoid a potential name conflict.] 
+[16][> In path (line 109)
+[16]  In addpath (line 86)
+[16]  In matlabrc (line 247)] 
+[13][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[13]you rename the function to avoid a potential name conflict.] 
+[13][> In path (line 109)
+[13]  In addpath (line 86)
+[13]  In matlabrc (line 247)] 
+[1][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[1]you rename the function to avoid a potential name conflict.] 
+[1][> In path (line 109)
+[1]  In addpath (line 86)
+[1]  In matlabrc (line 247)] 
+[3][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[3]you rename the function to avoid a potential name conflict.] 
+[3][> In path (line 109)
+[3]  In addpath (line 86)
+[3]  In matlabrc (line 247)] 
+[17][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[17]you rename the function to avoid a potential name conflict.] 
+[17][> In path (line 109)
+[17]  In addpath (line 86)
+[17]  In matlabrc (line 247)] 
+[12][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[12]you rename the function to avoid a potential name conflict.] 
+[12][> In path (line 109)
+[12]  In addpath (line 86)
+[12]  In matlabrc (line 247)] 
+[9][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[9]you rename the function to avoid a potential name conflict.] 
+[9][> In path (line 109)
+[9]  In addpath (line 86)
+[9]  In matlabrc (line 247)] 
+[5][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[5]you rename the function to avoid a potential name conflict.] 
+[5][> In path (line 109)
+[5]  In addpath (line 86)
+[5]  In matlabrc (line 247)] 
+[0][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[0]you rename the function to avoid a potential name conflict.] 
+[0][> In path (line 109)
+[0]  In addpath (line 86)
+[0]  In matlabrc (line 247)] 
+[8][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[8]you rename the function to avoid a potential name conflict.] 
+[8][> In path (line 109)
+[8]  In addpath (line 86)
+[8]  In matlabrc (line 247)] 
+[6][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[6]you rename the function to avoid a potential name conflict.] 
+[6][> In path (line 109)
+[6]  In addpath (line 86)
+[6]  In matlabrc (line 247)] 
+[15][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[15]you rename the function to avoid a potential name conflict.] 
+[15][> In path (line 109)
+[15]  In addpath (line 86)
+[15]  In matlabrc (line 247)] 
+[2][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[2]you rename the function to avoid a potential name conflict.] 
+[2][> In path (line 109)
+[2]  In addpath (line 86)
+[2]  In matlabrc (line 247)] 
+[11][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[11]you rename the function to avoid a potential name conflict.] 
+[11][> In path (line 109)
+[11]  In addpath (line 86)
+[11]  In matlabrc (line 247)] 
+[7][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[7]you rename the function to avoid a potential name conflict.] 
+[7][> In path (line 109)
+[7]  In addpath (line 86)
+[7]  In matlabrc (line 247)] 
+[10][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[10]you rename the function to avoid a potential name conflict.] 
+[10][> In path (line 109)
+[10]  In addpath (line 86)
+[10]  In matlabrc (line 247)] 
+[4][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[4]you rename the function to avoid a potential name conflict.] 
+[4][> In path (line 109)
+[4]  In addpath (line 86)
+[4]  In matlabrc (line 247)] 
+[18][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[18]you rename the function to avoid a potential name conflict.] 
+[18][> In path (line 109)
+[18]  In addpath (line 86)
+[18]  In matlabrc (line 247)] 
+[14][Warning: Function copyfile has the same name as a MATLAB builtin. We suggest
+[14]you rename the function to avoid a potential name conflict.] 
+[14][> In path (line 109)
+[14]  In addpath (line 86)
+[14]  In matlabrc (line 247)] 
+[15]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[17]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[16]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[15]	Academic License
+[14]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[18]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[17]	Academic License
+[16]	Academic License
+[14]	Academic License
+[18]	Academic License
+[3]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[2]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[10]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[1]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[6]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[11]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[7]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[12]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[8]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[9]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[0]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[4]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[5]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[13]Using cbsu startup file /hpc-software/matlab/cbu/cbu_startup
+[6]	Academic License
+[2]	Academic License
+[1]	Academic License
+[4]	Academic License
+[8]	Academic License
+[7]	Academic License
+[9]	Academic License
+[11]	Academic License
+[0]	Academic License
+[12]	Academic License
+[10]	Academic License
+[3]	Academic License
+[13]	Academic License
+[5]	Academic License
+[17]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[16]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[18]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[15]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[14]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[3]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[12]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[0]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[8]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[2]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[9]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[7]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[1]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[11]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[13]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[5]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[4]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[10]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[6]2020-08-14 23:09:07 | About to evaluate task with DistcompEvaluateFileTask
+[15]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[14]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[13]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[12]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[11]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[10]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[9]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[6]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[5]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[3]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[2]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[8]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[7]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[4]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[1]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[0]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[17]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[16]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[18]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core
+[15]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[14]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[13]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[10]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[6]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[5]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[4]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[3]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[12]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[11]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[9]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[8]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[7]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[2]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[1]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[0]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[17]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[16]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[18]2020-08-14 23:09:08 | Enter distcomp_evaluate_filetask_core/iSetup
+[15]2020-08-14 23:09:08 | This process will exit on any fault.
+[14]2020-08-14 23:09:08 | This process will exit on any fault.
+[17]2020-08-14 23:09:08 | This process will exit on any fault.
+[16]2020-08-14 23:09:08 | This process will exit on any fault.
+[18]2020-08-14 23:09:08 | This process will exit on any fault.
+[15]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[14]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[18]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[17]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[16]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[12]2020-08-14 23:09:08 | This process will exit on any fault.
+[11]2020-08-14 23:09:08 | This process will exit on any fault.
+[9]2020-08-14 23:09:08 | This process will exit on any fault.
+[8]2020-08-14 23:09:08 | This process will exit on any fault.
+[7]2020-08-14 23:09:08 | This process will exit on any fault.
+[4]2020-08-14 23:09:08 | This process will exit on any fault.
+[0]2020-08-14 23:09:08 | This process will exit on any fault.
+[10]2020-08-14 23:09:08 | This process will exit on any fault.
+[6]2020-08-14 23:09:08 | This process will exit on any fault.
+[5]2020-08-14 23:09:08 | This process will exit on any fault.
+[3]2020-08-14 23:09:08 | This process will exit on any fault.
+[2]2020-08-14 23:09:08 | This process will exit on any fault.
+[1]2020-08-14 23:09:08 | This process will exit on any fault.
+[13]2020-08-14 23:09:08 | This process will exit on any fault.
+[12]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[11]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[9]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[8]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[7]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[4]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[0]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[10]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[6]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[5]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[3]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[2]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[1]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[13]2020-08-14 23:09:08 | This process will exit when its parent process dies.
+[15]2020-08-14 23:09:08 | About to initialize MPI.
+[14]2020-08-14 23:09:08 | About to initialize MPI.
+[17]2020-08-14 23:09:08 | About to initialize MPI.
+[16]2020-08-14 23:09:08 | About to initialize MPI.
+[18]2020-08-14 23:09:08 | About to initialize MPI.
+[12]2020-08-14 23:09:08 | About to initialize MPI.
+[11]2020-08-14 23:09:08 | About to initialize MPI.
+[7]2020-08-14 23:09:08 | About to initialize MPI.
+[0]2020-08-14 23:09:08 | About to initialize MPI.
+[9]2020-08-14 23:09:08 | About to initialize MPI.
+[3]2020-08-14 23:09:08 | About to initialize MPI.
+[1]2020-08-14 23:09:08 | About to initialize MPI.
+[13]2020-08-14 23:09:08 | About to initialize MPI.
+[5]2020-08-14 23:09:08 | About to initialize MPI.
+[4]2020-08-14 23:09:08 | About to initialize MPI.
+[8]2020-08-14 23:09:08 | About to initialize MPI.
+[2]2020-08-14 23:09:08 | About to initialize MPI.
+[6]2020-08-14 23:09:08 | About to initialize MPI.
+[10]2020-08-14 23:09:08 | About to initialize MPI.
+[13]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[8]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[3]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[2]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[1]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[0]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[9]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[18]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[17]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[12]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[16]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[15]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[14]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[10]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[6]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[5]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[4]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[7]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[11]2020-08-14 23:09:10 | About to call mpiParallelSessionStarting.
+[17]2020-08-14 23:09:10 | Finished initializing MPI.
+[15]2020-08-14 23:09:10 | Finished initializing MPI.
+[16]2020-08-14 23:09:10 | Finished initializing MPI.
+[18]2020-08-14 23:09:10 | Finished initializing MPI.
+[14]2020-08-14 23:09:10 | Finished initializing MPI.
+[11]2020-08-14 23:09:10 | Finished initializing MPI.
+[5]2020-08-14 23:09:10 | Finished initializing MPI.
+[10]2020-08-14 23:09:10 | Finished initializing MPI.
+[8]2020-08-14 23:09:10 | Finished initializing MPI.
+[12]2020-08-14 23:09:10 | Finished initializing MPI.
+[13]2020-08-14 23:09:10 | Finished initializing MPI.
+[9]2020-08-14 23:09:10 | Finished initializing MPI.
+[7]2020-08-14 23:09:10 | Finished initializing MPI.
+[0]2020-08-14 23:09:10 | Finished initializing MPI.
+[1]2020-08-14 23:09:10 | Finished initializing MPI.
+[4]2020-08-14 23:09:10 | Finished initializing MPI.
+[3]2020-08-14 23:09:10 | Finished initializing MPI.
+[2]2020-08-14 23:09:10 | Finished initializing MPI.
+[6]2020-08-14 23:09:10 | Finished initializing MPI.
+[17]2020-08-14 23:09:10 | About to call decode function.
+[15]2020-08-14 23:09:10 | About to call decode function.
+[14]2020-08-14 23:09:10 | About to call decode function.
+[16]2020-08-14 23:09:10 | About to call decode function.
+[18]2020-08-14 23:09:10 | About to call decode function.
+[13]2020-08-14 23:09:10 | About to call decode function.
+[1]2020-08-14 23:09:10 | About to call decode function.
+[7]2020-08-14 23:09:10 | About to call decode function.
+[4]2020-08-14 23:09:10 | About to call decode function.
+[11]2020-08-14 23:09:10 | About to call decode function.
+[9]2020-08-14 23:09:10 | About to call decode function.
+[8]2020-08-14 23:09:10 | About to call decode function.
+[0]2020-08-14 23:09:10 | About to call decode function.
+[12]2020-08-14 23:09:10 | About to call decode function.
+[10]2020-08-14 23:09:10 | About to call decode function.
+[18]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[5]2020-08-14 23:09:10 | About to call decode function.
+[17]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[16]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[15]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[14]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[3]2020-08-14 23:09:10 | About to call decode function.
+[13]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[1]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[7]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[4]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[11]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[9]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[8]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[0]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[12]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[5]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[10]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[2]2020-08-14 23:09:10 | About to call decode function.
+[3]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[2]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[6]2020-08-14 23:09:10 | About to call decode function.
+[6]2020-08-14 23:09:10 | In parallel.cluster.generic.communicatingDecodeFcn
+[3]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[13]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[3]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[13]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[1]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[6]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[10]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[2]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[1]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[6]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[10]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[17]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[16]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[18]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[2]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[4]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[15]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[14]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[17]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[16]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[18]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[5]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[12]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[15]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[4]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[14]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[5]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[12]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[8]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[8]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[9]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[0]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[9]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[0]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[11]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[11]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[7]2020-08-14 23:09:11 | Setting the desktop client to a new client with username 
+[7]2020-08-14 23:09:11 | About to construct the storage object using constructor "makeFileStorageObject" and location "PC{}:UNIX{/imaging/rf02/semnet_git/SemNet/semnet4semloc}:"
+[17]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task18"
+[16]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task17"
+[18]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task19"
+[14]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task15"
+[15]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task16"
+[3]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task4"
+[13]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task14"
+[12]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task13"
+[10]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task11"
+[1]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task2"
+[8]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task9"
+[4]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task5"
+[5]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task6"
+[6]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task7"
+[11]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task12"
+[9]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task10"
+[0]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task1"
+[7]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task8"
+[2]2020-08-14 23:09:12 | About to find job and task using locations "Job2" and "Job2/Task3"
+[17]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[16]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[14]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[18]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[15]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[12]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[10]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[8]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[2]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[5]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[11]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[6]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[4]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[7]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[3]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[1]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[13]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[9]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[0]2020-08-14 23:09:12 | Setting the TaskEvaluator to the CJSStreamingEvaluator
+[15]2020-08-14 23:09:12 | Completed pre-execution phase
+[14]2020-08-14 23:09:12 | Completed pre-execution phase
+[12]2020-08-14 23:09:12 | Completed pre-execution phase
+[11]2020-08-14 23:09:12 | Completed pre-execution phase
+[17]2020-08-14 23:09:12 | Completed pre-execution phase
+[3]2020-08-14 23:09:12 | Completed pre-execution phase
+[7]2020-08-14 23:09:12 | Completed pre-execution phase
+[18]2020-08-14 23:09:12 | Completed pre-execution phase
+[16]2020-08-14 23:09:12 | Completed pre-execution phase
+[4]2020-08-14 23:09:12 | Completed pre-execution phase
+[6]2020-08-14 23:09:12 | Completed pre-execution phase
+[10]2020-08-14 23:09:12 | Completed pre-execution phase
+[13]2020-08-14 23:09:12 | Completed pre-execution phase
+[8]2020-08-14 23:09:12 | Completed pre-execution phase
+[2]2020-08-14 23:09:12 | Completed pre-execution phase
+[1]2020-08-14 23:09:12 | Completed pre-execution phase
+[5]2020-08-14 23:09:12 | Completed pre-execution phase
+[9]2020-08-14 23:09:12 | Completed pre-execution phase
+[0]2020-08-14 23:09:12 | Completed pre-execution phase
+[18]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[17]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[16]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[15]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[14]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[13]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[10]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[6]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[3]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[2]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[1]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[8]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[4]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[7]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[12]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[11]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[5]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[0]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[9]2020-08-14 23:09:13 | About to pPreJobEvaluate
+[13]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[6]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[1]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[12]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[11]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[9]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[8]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[7]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[0]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[17]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[16]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[18]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[3]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[4]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[14]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[2]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[15]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[5]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[10]2020-08-14 23:09:16 | About to pPreTaskEvaluate
+[0]2020-08-14 23:09:16 | About to add job dependencies
+[18]2020-08-14 23:09:16 | About to add job dependencies
+[17]2020-08-14 23:09:16 | About to add job dependencies
+[16]2020-08-14 23:09:16 | About to add job dependencies
+[14]2020-08-14 23:09:16 | About to add job dependencies
+[15]2020-08-14 23:09:16 | About to add job dependencies
+[1]2020-08-14 23:09:16 | About to add job dependencies
+[6]2020-08-14 23:09:16 | About to add job dependencies
+[3]2020-08-14 23:09:16 | About to add job dependencies
+[7]2020-08-14 23:09:16 | About to add job dependencies
+[11]2020-08-14 23:09:16 | About to add job dependencies
+[13]2020-08-14 23:09:16 | About to add job dependencies
+[2]2020-08-14 23:09:16 | About to add job dependencies
+[10]2020-08-14 23:09:16 | About to add job dependencies
+[12]2020-08-14 23:09:16 | About to add job dependencies
+[9]2020-08-14 23:09:16 | About to add job dependencies
+[4]2020-08-14 23:09:16 | About to add job dependencies
+[5]2020-08-14 23:09:16 | About to add job dependencies
+[8]2020-08-14 23:09:16 | About to add job dependencies
+[17]2020-08-14 23:09:16 | About to call jobStartup
+[16]2020-08-14 23:09:16 | About to call jobStartup
+[15]2020-08-14 23:09:16 | About to call jobStartup
+[14]2020-08-14 23:09:16 | About to call jobStartup
+[15]2020-08-14 23:09:16 | About to push FileWriter on stack
+[14]2020-08-14 23:09:16 | About to push FileWriter on stack
+[16]2020-08-14 23:09:16 | About to push FileWriter on stack
+[17]2020-08-14 23:09:16 | About to push FileWriter on stack
+[18]2020-08-14 23:09:16 | About to call jobStartup
+[15]2020-08-14 23:09:16 | FileWriter popped off stack
+[14]2020-08-14 23:09:16 | FileWriter popped off stack
+[17]2020-08-14 23:09:16 | FileWriter popped off stack
+[16]2020-08-14 23:09:16 | FileWriter popped off stack
+[15]2020-08-14 23:09:16 | About to call taskStartup
+[14]2020-08-14 23:09:16 | About to call taskStartup
+[17]2020-08-14 23:09:16 | About to call taskStartup
+[16]2020-08-14 23:09:16 | About to call taskStartup
+[18]2020-08-14 23:09:16 | About to push FileWriter on stack
+[18]2020-08-14 23:09:16 | FileWriter popped off stack
+[18]2020-08-14 23:09:16 | About to call taskStartup
+[6]2020-08-14 23:09:16 | About to call jobStartup
+[11]2020-08-14 23:09:16 | About to call jobStartup
+[12]2020-08-14 23:09:16 | About to call jobStartup
+[2]2020-08-14 23:09:16 | About to call jobStartup
+[1]2020-08-14 23:09:16 | About to call jobStartup
+[8]2020-08-14 23:09:16 | About to call jobStartup
+[13]2020-08-14 23:09:16 | About to call jobStartup
+[3]2020-08-14 23:09:16 | About to call jobStartup
+[4]2020-08-14 23:09:16 | About to call jobStartup
+[5]2020-08-14 23:09:16 | About to call jobStartup
+[10]2020-08-14 23:09:16 | About to call jobStartup
+[7]2020-08-14 23:09:16 | About to call jobStartup
+[12]2020-08-14 23:09:16 | About to push FileWriter on stack
+[11]2020-08-14 23:09:16 | About to push FileWriter on stack
+[2]2020-08-14 23:09:16 | About to push FileWriter on stack
+[6]2020-08-14 23:09:16 | About to push FileWriter on stack
+[8]2020-08-14 23:09:16 | About to push FileWriter on stack
+[1]2020-08-14 23:09:16 | About to push FileWriter on stack
+[13]2020-08-14 23:09:16 | About to push FileWriter on stack
+[3]2020-08-14 23:09:16 | About to push FileWriter on stack
+[0]2020-08-14 23:09:16 | About to call jobStartup
+[14]2020-08-14 23:09:16 | About to push FileWriter on stack
+[9]2020-08-14 23:09:16 | About to call jobStartup
+[5]2020-08-14 23:09:16 | About to push FileWriter on stack
+[4]2020-08-14 23:09:16 | About to push FileWriter on stack
+[16]2020-08-14 23:09:16 | About to push FileWriter on stack
+[15]2020-08-14 23:09:16 | About to push FileWriter on stack
+[18]2020-08-14 23:09:16 | About to push FileWriter on stack
+[17]2020-08-14 23:09:16 | About to push FileWriter on stack
+[16]2020-08-14 23:09:16 | FileWriter popped off stack
+[14]2020-08-14 23:09:16 | FileWriter popped off stack
+[18]2020-08-14 23:09:16 | FileWriter popped off stack
+[15]2020-08-14 23:09:16 | FileWriter popped off stack
+[13]2020-08-14 23:09:16 | FileWriter popped off stack
+[12]2020-08-14 23:09:16 | FileWriter popped off stack
+[11]2020-08-14 23:09:16 | FileWriter popped off stack
+[10]2020-08-14 23:09:16 | About to push FileWriter on stack
+[2]2020-08-14 23:09:16 | FileWriter popped off stack
+[17]2020-08-14 23:09:16 | FileWriter popped off stack
+[16]2020-08-14 23:09:16 | About to get evaluation data
+[18]2020-08-14 23:09:16 | About to get evaluation data
+[14]2020-08-14 23:09:16 | About to get evaluation data
+[17]2020-08-14 23:09:16 | About to get evaluation data
+[15]2020-08-14 23:09:16 | About to get evaluation data
+[3]2020-08-14 23:09:16 | FileWriter popped off stack
+[12]2020-08-14 23:09:16 | About to call taskStartup
+[11]2020-08-14 23:09:16 | About to call taskStartup
+[2]2020-08-14 23:09:16 | About to call taskStartup
+[13]2020-08-14 23:09:16 | About to call taskStartup
+[1]2020-08-14 23:09:16 | FileWriter popped off stack
+[0]2020-08-14 23:09:16 | About to push FileWriter on stack
+[3]2020-08-14 23:09:16 | About to call taskStartup
+[6]2020-08-14 23:09:16 | FileWriter popped off stack
+[12]2020-08-14 23:09:16 | About to push FileWriter on stack
+[2]2020-08-14 23:09:16 | About to push FileWriter on stack
+[11]2020-08-14 23:09:16 | About to push FileWriter on stack
+[13]2020-08-14 23:09:16 | About to push FileWriter on stack
+[1]2020-08-14 23:09:16 | About to call taskStartup
+[10]2020-08-14 23:09:16 | FileWriter popped off stack
+[3]2020-08-14 23:09:16 | About to push FileWriter on stack
+[5]2020-08-14 23:09:16 | FileWriter popped off stack
+[6]2020-08-14 23:09:16 | About to call taskStartup
+[12]2020-08-14 23:09:16 | FileWriter popped off stack
+[2]2020-08-14 23:09:16 | FileWriter popped off stack
+[7]2020-08-14 23:09:16 | About to push FileWriter on stack
+[13]2020-08-14 23:09:16 | FileWriter popped off stack
+[11]2020-08-14 23:09:16 | FileWriter popped off stack
+[8]2020-08-14 23:09:16 | FileWriter popped off stack
+[1]2020-08-14 23:09:16 | About to push FileWriter on stack
+[9]2020-08-14 23:09:16 | About to push FileWriter on stack
+[3]2020-08-14 23:09:16 | FileWriter popped off stack
+[10]2020-08-14 23:09:16 | About to call taskStartup
+[12]2020-08-14 23:09:16 | About to get evaluation data
+[13]2020-08-14 23:09:16 | About to get evaluation data
+[11]2020-08-14 23:09:16 | About to get evaluation data
+[5]2020-08-14 23:09:16 | About to call taskStartup
+[2]2020-08-14 23:09:16 | About to get evaluation data
+[3]2020-08-14 23:09:16 | About to get evaluation data
+[0]2020-08-14 23:09:16 | FileWriter popped off stack
+[8]2020-08-14 23:09:16 | About to call taskStartup
+[0]2020-08-14 23:09:16 | About to call taskStartup
+[6]2020-08-14 23:09:16 | About to push FileWriter on stack
+[10]2020-08-14 23:09:16 | About to push FileWriter on stack
+[8]2020-08-14 23:09:16 | About to push FileWriter on stack
+[5]2020-08-14 23:09:16 | About to push FileWriter on stack
+[1]2020-08-14 23:09:16 | FileWriter popped off stack
+[4]2020-08-14 23:09:16 | FileWriter popped off stack
+[0]2020-08-14 23:09:16 | About to push FileWriter on stack
+[9]2020-08-14 23:09:16 | FileWriter popped off stack
+[7]2020-08-14 23:09:16 | FileWriter popped off stack
+[8]2020-08-14 23:09:16 | FileWriter popped off stack
+[10]2020-08-14 23:09:16 | FileWriter popped off stack
+[5]2020-08-14 23:09:16 | FileWriter popped off stack
+[6]2020-08-14 23:09:16 | FileWriter popped off stack
+[1]2020-08-14 23:09:16 | About to get evaluation data
+[4]2020-08-14 23:09:16 | About to call taskStartup
+[0]2020-08-14 23:09:16 | FileWriter popped off stack
+[10]2020-08-14 23:09:16 | About to get evaluation data
+[8]2020-08-14 23:09:16 | About to get evaluation data
+[5]2020-08-14 23:09:16 | About to get evaluation data
+[9]2020-08-14 23:09:16 | About to call taskStartup
+[6]2020-08-14 23:09:16 | About to get evaluation data
+[7]2020-08-14 23:09:16 | About to call taskStartup
+[0]2020-08-14 23:09:16 | About to get evaluation data
+[4]2020-08-14 23:09:16 | About to push FileWriter on stack
+[9]2020-08-14 23:09:16 | About to push FileWriter on stack
+[7]2020-08-14 23:09:16 | About to push FileWriter on stack
+[4]2020-08-14 23:09:16 | FileWriter popped off stack
+[9]2020-08-14 23:09:16 | FileWriter popped off stack
+[7]2020-08-14 23:09:16 | FileWriter popped off stack
+[4]2020-08-14 23:09:16 | About to get evaluation data
+[9]2020-08-14 23:09:16 | About to get evaluation data
+[7]2020-08-14 23:09:16 | About to get evaluation data
+[17]2020-08-14 23:09:16 | About to pInstantiatePool
+[16]2020-08-14 23:09:16 | About to pInstantiatePool
+[15]2020-08-14 23:09:16 | About to pInstantiatePool
+[14]2020-08-14 23:09:16 | About to pInstantiatePool
+[18]2020-08-14 23:09:16 | About to pInstantiatePool
+[11]2020-08-14 23:09:16 | About to pInstantiatePool
+[12]2020-08-14 23:09:16 | About to pInstantiatePool
+[3]2020-08-14 23:09:16 | About to pInstantiatePool
+[13]2020-08-14 23:09:16 | About to pInstantiatePool
+[5]2020-08-14 23:09:16 | About to pInstantiatePool
+[2]2020-08-14 23:09:16 | About to pInstantiatePool
+[10]2020-08-14 23:09:16 | About to pInstantiatePool
+[9]2020-08-14 23:09:16 | About to pInstantiatePool
+[6]2020-08-14 23:09:16 | About to pInstantiatePool
+[0]2020-08-14 23:09:16 | About to pInstantiatePool
+[7]2020-08-14 23:09:16 | About to pInstantiatePool
+[4]2020-08-14 23:09:16 | About to pInstantiatePool
+[1]2020-08-14 23:09:16 | About to pInstantiatePool
+[8]2020-08-14 23:09:16 | About to pInstantiatePool
+[15]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[14]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[16]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[18]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[17]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[2]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[3]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[0]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[8]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[12]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[11]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[10]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[13]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[7]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[6]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[5]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[9]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[4]2020-08-14 23:09:16 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
+[1]2020-08-14 23:09:17 | Creating session with strategy: ALL_WORKERS_CONNECT_TO_CLIENT
