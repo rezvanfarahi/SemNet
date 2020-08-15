@@ -826,7 +826,7 @@ DCMbase.options.trials  = [1 2];  % [3 4] for CROI ([1 2] ROI)
 DCMbase.options.Tdcm(1) = 0;      % start of peri-stimulus time to be modelled
 DCMbase.options.Tdcm(2) = 250;   % end of peri-stimulus time to be modelled
 DCMbase.options.Nmodes  = 8;      % nr of modes for data selection
-DCMbase.options.h       = 0;      % nr of DCT components for detrending [increase to 4????]
+DCMbase.options.h       = 1;      % nr of DCT components for detrending [increase to 4????]
 DCMbase.options.onset   = 60;     % selection of onset (prior mean = 60ms for onset at 0)
 DCMbase.options.D       = 1;      % downsampling
 DCMbase.options.han     = 0;      % Hanning
@@ -846,7 +846,7 @@ DCMbase.xU.name = {'C-A'};
 
 
 % LogEvd=[]; DCMname={};
-this_model_dir='/imaging/rf02/Semnet/semnet4semloc/dcm/forPEB/250ms/SemLoc_SD/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0';%'./16models_200ms/semloc';
+this_model_dir='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0';%'./16models_200ms/semloc';
 if ~exist(this_model_dir,'dir')
     mkdir(this_model_dir)
 end
@@ -871,7 +871,7 @@ parfor s = 1:length(dosubs) %parfor
     
     DCMsub = spm_dcm_erp_dipfit(DCMsub);  % Either convert your LFP data into an SPM object or replace this function with something that returns DCM structure with relevant field
     
-    for n=47%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[22:2:36,37:38]%39:46%1:numel(Model)
+    for n=[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46,18:2:36,37:38]%[22:2:36,37:38]%39:46%1:numel(Model)
         
         ['model ', num2str(n)]
         this_filename=sprintf([this_model_dir,'/DCM_erpf_SemLoc_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n);
