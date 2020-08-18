@@ -124,7 +124,8 @@ n_cycles[frequencies<=20] += np.arange(0,1,0.077)
     # n_cycles[np.logical_and((frequencies>10), (frequencies<=20))] = 3
 labellist = ['atlleft-lh', 'atlright-rh','medialtempright-rh','medialtempleft-lh']
 
-
+exclude_wbmedial=False   
+exclude_ROIs=True
 
 ii=-1
 ntimes=5
@@ -199,18 +200,37 @@ for p_threshold in ll:
     Xcf=np.hstack((np.squeeze(Xc[:,:,0,:]),np.squeeze(Xc[:,:,1,:]),np.squeeze(Xc[:,:,2,:]),np.squeeze(Xc[:,:,3,:]))) #mi,  coh
     Xaf=np.hstack((np.squeeze(Xa[:,:,0,:]),np.squeeze(Xa[:,:,1,:]),np.squeeze(Xa[:,:,2,:]),np.squeeze(Xa[:,:,3,:])))
     X = np.subtract(Xcf,Xaf)#np.subtract(np.abs(Xcf-1),np.abs(Xaf-1))
-    fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
-    fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
-    labelss=labelL+labelR
-    bb=stc_cncrt.in_label(labelss)
+    n_permutations = 5000  # ... run fewer permutations (reduces sensitivity)
     fsave_vertices = [np.arange(10242), np.arange(10242)]
+    if exclude_wbmedial:
+        fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
+        fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)       
+    if exclude_ROIs:
+        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'; labelL = mne.read_label(fname_label)
+        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-rh.label'; labelR = mne.read_label(fname_label)
+        #labelmask=mne.read_label(fname_label,subject='fsaverage')
+        #labelmask.values.fill(1.0)
+        #bb=stc_cond.in_label(labelmask)
+        #nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+        #spatial_exclude=fsave_vertices[0][nnl].copy()
+    labelss=labelL+labelR
+    bb=stc_cond.in_label(labelss)  
     nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
     nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
     spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
+
+    # fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
+    # fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
+    # labelss=labelL+labelR
+    # bb=stc_cncrt.in_label(labelss)
+    # fsave_vertices = [np.arange(10242), np.arange(10242)]
+    # nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+    # nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
+    # spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
     
     connectivity = spatial_tris_connectivity(grade_to_tris(5))
-    fsave_vertices = [np.arange(10242), np.arange(10242)]
-    n_permutations=5000
+    # fsave_vertices = [np.arange(10242), np.arange(10242)]
+    # n_permutations=5000
     
     #    Note that X needs to be a multi-dimensional array of shape
     #    samples (subjects) x time x space, so we permute dimensions
