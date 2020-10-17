@@ -53,7 +53,7 @@ if not os.path.exists(uvttest_path):
 data_path = '/imaging/rf02/Semnet/'	# where subdirs for MEG data are
 inv_path = '/imaging/rf02/Semnet/'
 print (sys.argv)
-p_inds = []
+p_inds = [10]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
@@ -194,6 +194,8 @@ for p_threshold in ll:
         f_thresh = f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
         def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires 
             return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=this_effect, return_pvals=False)[0]
+
+        print(rezvan)
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
