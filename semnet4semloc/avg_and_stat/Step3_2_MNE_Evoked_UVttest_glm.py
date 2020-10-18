@@ -160,18 +160,20 @@ X=np.zeros((Nsubj,nconds,Nv,Nt))#np.zeros((n_subjects,n_times,20484,n_levels))
 #Xmean=np.zeros((n_subjects,nwins,20484,n_levels))
 ii=-1  
 for taski,task_name in enumerate(list_all.keys()):
+    print(task_name)
     for meg in list_all[task_name]:
         ii=ii+1
         tecnt=-1
         for evcnt, event_name in enumerate(event_names[task_name]):#contrast is B
+            print(event_name)
             tecnt=tecnt+1
             if task_name=='semloc':
                 fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700'
             if task_name=='semnet1':
                 fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
-            if task_name=='semnet1':
+            if task_name=='semnet2':
                 fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
-            
+            print(fname_in)
             stc_cond = mne.read_source_estimate(fname_in)
             #            stc_cond.resample(100)
             #            stc_cond.crop(0.050,0.450)
