@@ -140,7 +140,7 @@ print (ll)
 #X_list=range(2)
 semtasks=['SemDec','LD']#
 event_names = {'semloc':['Concrete','Abstract'],'semnet1':['Concrete','Emotional'],'semnet2':['Concrete','Emotional']}#, ,'Pwordc']'Neutral', 'Emotional',
-#effect_names=['contrast','interaction','task']
+effect_names=['contrast','interaction']#,'task']
 #all_effects=['B','A:B','A']
 
 vertices_avg = [np.arange(10242), np.arange(10242)]
