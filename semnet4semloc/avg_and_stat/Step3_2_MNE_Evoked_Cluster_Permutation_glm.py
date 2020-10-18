@@ -41,8 +41,8 @@ import copy
 
 ###############################################################################
 # Set parameters
-exclude_wbmedial=False
-exclude_ROIs=True
+exclude_wbmedial=True
+exclude_ROIs=False
 if exclude_wbmedial:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/glm/' # root
 if exclude_ROIs:
@@ -160,7 +160,7 @@ X=np.zeros((Nsubj,nconds,Nv,Nt))#np.zeros((n_subjects,n_times,20484,n_levels))
 #Xmean=np.zeros((n_subjects,nwins,20484,n_levels))
 for p_threshold in ll: 
     ii=-1  
-    for taski,task_name in enumerate(list_all.keys()):
+    for taski,task_name in enumerate(['semloc','semnet1','semnet2']):
         for meg in list_all[task_name]:
             ii=ii+1
             tecnt=-1
@@ -170,7 +170,7 @@ for p_threshold in ll:
                     fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700'
                 if task_name=='semnet1':
                     fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
-                if task_name=='semnet1':
+                if task_name=='semnet2':
                     fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
                 
                 stc_cond = mne.read_source_estimate(fname_in)
