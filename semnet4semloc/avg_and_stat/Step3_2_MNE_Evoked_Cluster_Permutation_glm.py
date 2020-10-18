@@ -35,6 +35,7 @@ from mne.stats import f_threshold_mway_rm, f_mway_rm, fdr_correction, spatio_tem
 from mne.datasets import sample
 from mne.viz import mne_analyze_colormap
 import os
+import copy
 
 ###############################################################################
 # Set parameters
