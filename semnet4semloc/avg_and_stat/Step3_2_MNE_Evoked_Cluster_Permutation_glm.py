@@ -150,7 +150,7 @@ tmin1=50
 tstep1=100
 Nv = len(vertices_avg[0])+len(vertices_avg[1])
 Nt=copy.deepcopy(n_times)
-Ns = [len(list_all['semloc'])+len(list_all['semnet1'])+len(list_all['semnet2'])]
+Ns = [len(list_all['semloc']),len(list_all['semnet1']),len(list_all['semnet2'])]
 Nsubj=Ns[0]+Ns[1]+Ns[2]
 
 X=np.zeros((Nsubj,nconds,Nv,Nt))#np.zeros((n_subjects,n_times,20484,n_levels))
