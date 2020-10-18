@@ -143,7 +143,8 @@ event_names = {'semloc':['Concrete','Abstract'],'semnet1':['Concrete','Emotional
 
 vertices_avg = [np.arange(10242), np.arange(10242)]
 n_levels=len(semtasks)
-nconds=len(event_names['semloc']+event_names['semnet1']+event_names['semnet2'])
+all_nconds=[len(event_names['semloc']),len(event_names['semnet1']),len(event_names['semnet2'])]
+nconds=copy.deepcopy(all_nconds[0])
 factor_levels = [n_levels,n_levels]  # number of levels in each factor
 n_times=len(list(np.arange(350,651,100)))
 tmin1=50
@@ -153,7 +154,7 @@ Nt=copy.deepcopy(n_times)
 Ns = [len(list_all['semloc']),len(list_all['semnet1']),len(list_all['semnet2'])]
 Nsubj=Ns[0]+Ns[1]+Ns[2]
 
-X=np.zeros((Nsubj,nconds,Nv,Nt))#np.zeros((n_subjects,n_times,20484,n_levels))
+X=np.zeros((Nsubj,nconds[0],Nv,Nt))#np.zeros((n_subjects,n_times,20484,n_levels))
 #Xmean=np.zeros((n_subjects,nwins,20484,n_levels))
 for p_threshold in ll: 
     ii=-1  
@@ -177,7 +178,7 @@ for p_threshold in ll:
                 for wcnt1,wcnt2 in zip(list(np.arange(350,651,100)),list(np.arange(450,751,100))):#range(nwins):
                     print (wcnt1,wcnt2)
                     wcnt=wcnt+1
-                    X[ii,tecnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
+                    X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 
                 #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
     X1=np.transpose(X, [0, 3, 2, 1]).copy()#XX needs to be (Nsub, Ntime, Nvox, Ncond)
