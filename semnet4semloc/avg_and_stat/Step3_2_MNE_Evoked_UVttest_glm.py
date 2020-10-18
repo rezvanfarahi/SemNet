@@ -158,121 +158,100 @@ Nsubj=Ns[0]+Ns[1]+Ns[2]
 
 X=np.zeros((Nsubj,nconds,Nv,Nt))#np.zeros((n_subjects,n_times,20484,n_levels))
 #Xmean=np.zeros((n_subjects,nwins,20484,n_levels))
-for p_threshold in ll: 
-    ii=-1  
-    for taski,task_name in enumerate(list_all.keys()):
-        for meg in list_all[task_name]:
-            ii=ii+1
-            tecnt=-1
-            for evcnt, event_name in enumerate(event_names[task_name]):#contrast is B
-                tecnt=tecnt+1
-                if task_name=='semloc':
-                    fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700'
-                if task_name=='semnet1':
-                    fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
-                if task_name=='semnet1':
-                    fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
-                
-                stc_cond = mne.read_source_estimate(fname_in)
-                #            stc_cond.resample(100)
-                #            stc_cond.crop(0.050,0.450)
-                wcnt=-1
-                for wcnt1,wcnt2 in zip(list(np.arange(350,651,100)),list(np.arange(450,751,100))):#range(nwins):
-                    print (wcnt1,wcnt2)
-                    wcnt=wcnt+1
-                    X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
+ii=-1  
+for taski,task_name in enumerate(list_all.keys()):
+    for meg in list_all[task_name]:
+        ii=ii+1
+        tecnt=-1
+        for evcnt, event_name in enumerate(event_names[task_name]):#contrast is B
+            tecnt=tecnt+1
+            if task_name=='semloc':
+                fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700'
+            if task_name=='semnet1':
+                fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
+            if task_name=='semnet1':
+                fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
+            
+            stc_cond = mne.read_source_estimate(fname_in)
+            #            stc_cond.resample(100)
+            #            stc_cond.crop(0.050,0.450)
+            wcnt=-1
+            for wcnt1,wcnt2 in zip(list(np.arange(350,651,100)),list(np.arange(450,751,100))):#range(nwins):
+                print (wcnt1,wcnt2)
+                wcnt=wcnt+1
+                X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 
-                #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
-    X1=np.transpose(X, [0, 3, 2, 1]).copy()#X1 needs to be (Nsub, Ntime, Nvox, Ncond)
-    X_list=[np.squeeze(x) for x in np.split(X1, nconds, axis=-1)]#Xlist is now (Ncond,Nsub, Ntime, Nvox)
+            #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
+X1=np.transpose(X, [0, 3, 2, 1]).copy()#X1 needs to be (Nsub, Ntime, Nvox, Ncond)
+X_list=[np.squeeze(x) for x in np.split(X1, nconds, axis=-1)]#Xlist is now (Ncond,Nsub, Ntime, Nvox)
+
+
+source_space = grade_to_tris(5)
+print('Computing connectivity.')
+connectivity = spatial_tris_connectivity(source_space)
+
+
+#    t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
+#t_threshold=2
+tail=0
+max_step=1
+desing_mat = np.hstack((np.ones((Ns[0],1)),np.zeros((Ns[0],2))))
+desing_mat = np.vstack((desing_mat, np.hstack((np.zeros((2*Ns[1],1)), np.kron(np.eye(2),np.ones((Ns[1],1)))))))
+desing_mat = np.hstack((desing_mat ,np.vstack((np.zeros((Ns[0],Ns[1])), np.eye(Ns[1]), np.eye(Ns[1])))))
+
+effects={'contrast':np.hstack((np.asarray([1, 1, 1])[np.newaxis,:],np.ones((1,Ns[1]))*2/Ns[1] )),#this is for the main effect
+'interaction':np.hstack((np.eye(3)-np.mean(np.eye(3)),np.zeros((3,Ns[1]))))}    
+for effect_name in effect_names:
+    f_thresh = 0.95 #f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
+    #NOTEE! stat_fun will have to return a 1-D array 
+    def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires
+        cond1=args[0].copy()#cond1 is Nsub x Ntime x Nv
+        cond1=cond1.reshape(cond1.shape[0], np.prod(cond1.shape[1:]))#now cond1 is Nsub x Ntime*Nv
+        cond2=args[1].copy()
+        cond2=cond2.reshape(cond2.shape[0], np.prod(cond2.shape[1:]))#now cond2 is Nsub x Ntime*Nv
+        cond_subtract=cond1-cond2
+        model = GeneralLinearModel(desing_mat)
+        model.fit(cond_subtract)
+        glm_pvals = model.contrast(effects[effect_name]).p_value()
+        glm_tvalues = model.contrast(effects[effect_name]).stat()
+        return glm_pvals,glm_tvalues
+    this_pval,this_tval=stat_fun(X_list)
+    print(rezvan)
+
+    #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
+    return_pvals = False         
+    T_obs, clusters, cluster_p_values, H0 = clu = \
+    spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,t_power=1,
+                                    threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
+                                    n_permutations=n_permutations,
+                                    buffer_size=None)
+
+    print('Visualizing clusters.')
+    if len(cluster_p_values)>-1:
+        if cluster_p_values.min()<1:
+            p_thr=cluster_p_values.min()
+            good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]
+            print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
+            stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
+            
+            out_file1=out_path + 'ClusPer_GLM_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_53subj_pnt1_48ica_'+effect_name+'_'+str(max_step)
+            stc_all_cluster_vis.save(out_file1)
+            
+            Matx=np.zeros((20484,n_times))
+            T=np.divide(T_obs,np.absolute(T_obs))
+            for cc in range(good_cluster_inds.shape[0]):
+                Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
+                
+            
+            #aa=Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]
+            #bb=T_obs[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]<0
+            #aa[bb]=-1
+            #Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=aa
+            
+            
+            matx_stc = mne.SourceEstimate(Matx, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+            out_file2=out_path + 'ClusPer_GLM_Evoked_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_53subj_pnt1_48ica_'+effect_name+'_'+str(max_step)
+            matx_stc.save(out_file2)
     
-
-    source_space = grade_to_tris(5)
-    print('Computing connectivity.')
-    connectivity = spatial_tris_connectivity(source_space)
-
-    pthresh = p_threshold
-    # max_step=1;
-    
-
-    #    To speed things up a bit we will ...
-    n_permutations = 10000  # ... run fewer permutations (reduces sensitivity)
-    fsave_vertices = [np.arange(10242), np.arange(10242)]
-    if exclude_wbmedial:
-        fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
-        fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)       
-    if exclude_ROIs:
-        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'; labelL = mne.read_label(fname_label)
-        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-rh.label'; labelR = mne.read_label(fname_label)
-        #labelmask=mne.read_label(fname_label,subject='fsaverage')
-        #labelmask.values.fill(1.0)
-        #bb=stc_cond.in_label(labelmask)
-        #nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-        #spatial_exclude=fsave_vertices[0][nnl].copy()
-    labelss=labelL+labelR
-    bb=stc_cond.in_label(labelss)  
-    nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-    nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
-    spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
-    print('Clustering.')
-    #    t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
-    #t_threshold=2
-    tail=0
-    max_step=1
-    desing_mat = np.hstack((np.ones((Ns[0],1)),np.zeros((Ns[0],2))))
-    desing_mat = np.vstack((desing_mat, np.hstack((np.zeros((2*Ns[1],1)), np.kron(np.eye(2),np.ones((Ns[1],1)))))))
-    desing_mat = np.hstack((desing_mat ,np.vstack((np.zeros((Ns[0],Ns[1])), np.eye(Ns[1]), np.eye(Ns[1])))))
-
-    effects={'contrast':np.hstack((np.asarray([1, 1, 1])[np.newaxis,:],np.ones((1,Ns[1]))*2/Ns[1] )),#this is for the main effect
-    'interaction':np.hstack((np.eye(3)-np.mean(np.eye(3)),np.zeros((3,Ns[1]))))}    
-    for effect_name in effect_names:
-        f_thresh = 0.95 #f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
-        #NOTEE! stat_fun will have to return a 1-D array 
-        def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires
-            cond1=args[0].copy()#cond1 is Nsub x Ntime x Nv
-            cond1=cond1.reshape(cond1.shape[0], np.prod(cond1.shape[1:]))#now cond1 is Nsub x Ntime*Nv
-            cond2=args[1].copy()
-            cond2=cond2.reshape(cond2.shape[0], np.prod(cond2.shape[1:]))#now cond2 is Nsub x Ntime*Nv
-            cond_subtract=cond1-cond2
-            model = GeneralLinearModel(desing_mat)
-            model.fit(cond_subtract)
-            glm_pvals = model.contrast(effects[effect_name]).p_value()
-            return 1-glm_pvals
-
-        #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
-        return_pvals = False         
-        T_obs, clusters, cluster_p_values, H0 = clu = \
-        spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,t_power=1,
-                                        threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
-                                        n_permutations=n_permutations,
-                                        buffer_size=None)
-    
-        print('Visualizing clusters.')
-        if len(cluster_p_values)>-1:
-            if cluster_p_values.min()<1:
-                p_thr=cluster_p_values.min()
-                good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]
-                print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
-                stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
-                
-                out_file1=out_path + 'ClusPer_GLM_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_53subj_pnt1_48ica_'+effect_name+'_'+str(max_step)
-                stc_all_cluster_vis.save(out_file1)
-                
-                Matx=np.zeros((20484,n_times))
-                T=np.divide(T_obs,np.absolute(T_obs))
-                for cc in range(good_cluster_inds.shape[0]):
-                    Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
-                    
-                
-                #aa=Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]
-                #bb=T_obs[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]<0
-                #aa[bb]=-1
-                #Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=aa
-                
-                
-                matx_stc = mne.SourceEstimate(Matx, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-                out_file2=out_path + 'ClusPer_GLM_Evoked_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_53subj_pnt1_48ica_'+effect_name+'_'+str(max_step)
-                matx_stc.save(out_file2)
-        
 
     	
