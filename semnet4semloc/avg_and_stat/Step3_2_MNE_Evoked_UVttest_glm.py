@@ -159,7 +159,7 @@ Nsubj=Ns[0]+Ns[1]+Ns[2]
 X=np.zeros((Nsubj,nconds,Nv,Nt))#np.zeros((n_subjects,n_times,20484,n_levels))
 #Xmean=np.zeros((n_subjects,nwins,20484,n_levels))
 ii=-1  
-for taski,task_name in enumerate(list_all.keys()):
+for taski,task_name in enumerate(['semloc','semnet1', 'semnet2']):
     print(task_name)
     for meg in list_all[task_name]:
         ii=ii+1
