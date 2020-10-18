@@ -132,7 +132,7 @@ for ss in p_inds:
 print ("ll:")
 print (ll)
 
-n_subjects=len(subjects)
+#n_subjects=len(subjects)
 # so we have X: observations * time * vertices in each condition
 #X_list=range(2)
 semtasks=['SemDec','LD']#
