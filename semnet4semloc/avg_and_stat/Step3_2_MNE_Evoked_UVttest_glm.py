@@ -214,44 +214,17 @@ for effect_name in effect_names:
         model.fit(cond_subtract)
         glm_pvals = model.contrast(effects[effect_name]).p_value()
         glm_tvalues = model.contrast(effects[effect_name]).stat()
-        return glm_pvals,glm_tvalues
-    this_pval,this_tval=stat_fun(X_list)
-    print(rezvan)
+        return 1-glm_pvals,glm_tvalues
+    this_pval,this_tval=stat_fun(*X_list)
+    this_pval=this_pval.reshape(Nt,Nv).T
+    this_tval=this_tval.reshape(Nt,Nv).T
 
-    #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
-    return_pvals = False         
-    T_obs, clusters, cluster_p_values, H0 = clu = \
-    spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,t_power=1,
-                                    threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
-                                    n_permutations=n_permutations,
-                                    buffer_size=None)
+    tval_stc = mne.SourceEstimate(this_tval, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+    out_file3=uvttest_path + 'UVTtest_t_icomorphed_oldreg_53subj_GLM_50_450_100ms_1_48ica_'+effect_name#+'_'+b
+    tval_stc.save(out_file3)
 
-    print('Visualizing clusters.')
-    if len(cluster_p_values)>-1:
-        if cluster_p_values.min()<1:
-            p_thr=cluster_p_values.min()
-            good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]
-            print (cluster_p_values[good_cluster_inds]); print (good_cluster_inds)
-            stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=1e-3 * tstep1, vertices=fsave_vertices, subject='fsaverage', p_thresh=p_thr+0.0001)
-            
-            out_file1=out_path + 'ClusPer_GLM_Evoked_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_53subj_pnt1_48ica_'+effect_name+'_'+str(max_step)
-            stc_all_cluster_vis.save(out_file1)
-            
-            Matx=np.zeros((20484,n_times))
-            T=np.divide(T_obs,np.absolute(T_obs))
-            for cc in range(good_cluster_inds.shape[0]):
-                Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
-                
-            
-            #aa=Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]
-            #bb=T_obs[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]<0
-            #aa[bb]=-1
-            #Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=aa
-            
-            
-            matx_stc = mne.SourceEstimate(Matx, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-            out_file2=out_path + 'ClusPer_GLM_Evoked_sw_icomorphed_oldreg_clusterp'+str(p_threshold)[2:]+'_p'+str(p_thr)[2:]+'_53subj_pnt1_48ica_'+effect_name+'_'+str(max_step)
-            matx_stc.save(out_file2)
+    pval_stc = mne.SourceEstimate(this_pval, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+    out_file3=uvttest_path + 'UVTtest_p_icomorphed_oldreg_53subj_GLM_50_450_100ms_1_48ica_'+effect_name#+'_'+b
+    pval_stc.save(out_file3)
+
     
-
-    	
