@@ -41,8 +41,8 @@ import copy
 
 ###############################################################################
 # Set parameters
-exclude_wbmedial=True
-exclude_ROIs=False
+exclude_wbmedial=False
+exclude_ROIs=True
 if exclude_wbmedial:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/glm/' # root
 if exclude_ROIs:
