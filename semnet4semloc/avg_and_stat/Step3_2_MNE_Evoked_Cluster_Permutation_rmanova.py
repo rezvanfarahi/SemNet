@@ -192,10 +192,10 @@ for p_threshold in ll:
     
     for this_effect,effect_name in zip(all_effects,effect_names):
         f_thresh = f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
-        def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires 
+        #NOTEE! stat_fun will have to return a 1-D array 
+        def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires
             return f_mway_rm(np.swapaxes(args, 1, 0), factor_levels=factor_levels,effects=this_effect, return_pvals=False)[0]
 
-        print(rezvan)
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
