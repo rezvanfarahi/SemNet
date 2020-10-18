@@ -168,12 +168,14 @@ for taski,task_name in enumerate(['semloc','semnet1', 'semnet2']):
             print(event_name)
             tecnt=tecnt+1
             if task_name=='semloc':
-                #fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Signed_Evoked_m500_700'
-                fname_in = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700'
+                fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Signed_Evoked_m500_700'
+                #fname_in = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700'
             if task_name=='semnet1':
-                fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Signed_Evoked_m300_600'
+                fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
+                #fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Signed_Evoked_m300_600'
             if task_name=='semnet2':
-                fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Signed_Evoked_m300_600'
+                fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Evoked_m300_600'
+                #fname_in = data_path + meg + 'firstMorphed_ico_oldreg_LD_SL_1_48ica_'+event_name+'_Source_Signed_Evoked_m300_600'
             print(fname_in)
             stc_cond = mne.read_source_estimate(fname_in)
             #            stc_cond.resample(100)
@@ -223,11 +225,11 @@ for effect_name in effect_names:
     this_tval=this_tval.reshape(Nt,Nv).T
 
     tval_stc = mne.SourceEstimate(this_tval, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-    out_file3=uvttest_path + 'UVTtest_t_icomorphed_oldreg_53subj_GLM_50_450_100ms_1_48ica_Signed_'+effect_name#+'_'+b
+    out_file3=uvttest_path + 'UVTtest_t_icomorphed_oldreg_53subj_GLM_50_450_100ms_1_48ica_'+effect_name#+'_'+b
     tval_stc.save(out_file3)
 
     pval_stc = mne.SourceEstimate(this_pval, vertices=vertices_avg,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-    out_file3=uvttest_path + 'UVTtest_p_icomorphed_oldreg_53subj_GLM_50_450_100ms_1_48ica_Signed_'+effect_name#+'_'+b
+    out_file3=uvttest_path + 'UVTtest_p_icomorphed_oldreg_53subj_GLM_50_450_100ms_1_48ica_'+effect_name#+'_'+b
     pval_stc.save(out_file3)
 
     
