@@ -196,7 +196,7 @@ for p_threshold in ll:
     
 
     #    To speed things up a bit we will ...
-    n_permutations = 10000  # ... run fewer permutations (reduces sensitivity)
+    n_permutations = 5000  # ... run fewer permutations (reduces sensitivity)
     fsave_vertices = [np.arange(10242), np.arange(10242)]
     if exclude_wbmedial:
         fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
@@ -226,7 +226,7 @@ for p_threshold in ll:
     effects={'contrast':np.hstack((np.asarray([1, 1, 1])[np.newaxis,:],np.ones((1,Ns[1]))*2/Ns[1] )),#this is for the main effect
     'interaction':np.hstack((np.eye(3)-np.mean(np.eye(3)),np.zeros((3,Ns[1]))))}    
     for effect_name in effect_names:
-        f_thresh = 0.95 #f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
+        f_thresh = 1.69 #f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
         #NOTEE! stat_fun will have to return a 1-D array 
         def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires
             cond1=args[0].copy()#cond1 is Nsub x Ntime x Nv
@@ -237,14 +237,15 @@ for p_threshold in ll:
             model = GeneralLinearModel(desing_mat)
             model.fit(cond_subtract)
             glm_pvals = model.contrast(effects[effect_name]).p_value()
-            return 1-glm_pvals
+            glm_tvalues = model.contrast(effects[effect_name]).stat()
+            return glm_tvalues
 
         #effects = 'B'  # A*B is the default signature for computing all effects, A here is task effect, B contrast 
         return_pvals = False         
         T_obs, clusters, cluster_p_values, H0 = clu = \
         spatio_temporal_cluster_test(X_list, connectivity=connectivity, n_jobs=4,step_down_p=0.05,max_step=max_step,t_power=1,
                                         threshold=f_thresh, stat_fun=stat_fun, spatial_exclude=spatial_exclude,
-                                        n_permutations=n_permutations,
+                                        n_permutations=n_permutations,tail=0,
                                         buffer_size=None)
     
         print('Visualizing clusters.')
