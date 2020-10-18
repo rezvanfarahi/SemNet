@@ -176,7 +176,7 @@ for taski,task_name in enumerate(list_all.keys()):
             #            stc_cond.resample(100)
             #            stc_cond.crop(0.050,0.450)
             wcnt=-1
-            for wcnt1,wcnt2 in zip(list(np.arange(350,751,100)),list(np.arange(450,751,100))):#range(nwins):
+            for wcnt1,wcnt2 in zip(list(np.arange(350,751,100)),list(np.arange(450,851,100))):#range(nwins):
                 print (wcnt1,wcnt2)
                 wcnt=wcnt+1
                 X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
