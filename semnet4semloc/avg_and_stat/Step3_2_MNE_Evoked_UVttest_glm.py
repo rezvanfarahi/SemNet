@@ -168,7 +168,8 @@ for taski,task_name in enumerate(['semloc','semnet1', 'semnet2']):
             print(event_name)
             tecnt=tecnt+1
             if task_name=='semloc':
-                fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Signed_Evoked_m500_700'
+                #fname_in = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Signed_Evoked_m500_700'
+                fname_in = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700'
             if task_name=='semnet1':
                 fname_in = data_path + meg + 'firstMorphed_ico_oldreg_SemDec_SL_1_48ica_'+event_name+'_Source_Signed_Evoked_m300_600'
             if task_name=='semnet2':
