@@ -54,9 +54,9 @@ for s = 1:length(dosubs) %parfor
         H_A(:,:,ncnt,s)=DCM.H{1,2};%DCM.xY.y{1,2};%
     end
 end
-asig=mean(H_A(1:251,:,:,:),4);%H_A(:,:,4,7);%
+asig=mean(H_A(1:451,:,:,:),4);%H_A(:,:,4,7);%
 asig=mean(asig,3);%squeeze(asig(:,:,4));%
-csig=mean(H_C(1:251,:,:,:),4);%H_C(:,:,4,7);%
+csig=mean(H_C(1:451,:,:,:),4);%H_C(:,:,4,7);%
 csig=mean(csig,3);%squeeze(csig(:,:,4));%
 
 figure,
