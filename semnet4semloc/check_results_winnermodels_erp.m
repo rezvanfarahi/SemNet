@@ -33,8 +33,8 @@ dosubs = [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 19];
 
 
 
-dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
-outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_LD_predicted_450ms_AG.mat';
+dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_SD_predicted_450ms_AG.mat';
 %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';%
 H_C=[];
 H_A=[];
