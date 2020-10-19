@@ -33,19 +33,19 @@ dosubs = [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
 
 
 
-dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_250ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
-outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_LD_predicted_250ms_ATL.mat';
+dcm_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/LD/oldreg_filtered_450ms_28models_5ROIs/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_LD_predicted_450ms_AG.mat';
 %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';%
 H_C=[];
 H_A=[];
-tmax=251;
+tmax=451;
 
 for s = 1:length(dosubs) %parfor
     sess=struct();
     sub    = dosubs(s);
     
    ncnt=0;
-    for n=[2,4,39:40]%[30,32]%[14,16,45:46]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
+    for n=[14,16,45:46]%[2,4,39:40]%[30,32]%[2,4,39:40,6,8,41:42,10,12,43:44,14,16,45:46]%,18:2:36,37:38]%[2:2:36,37:38]%1:38%numel(Model)
         ncnt=ncnt+1;
         sub
         n
