@@ -50,7 +50,7 @@ for s = 1:length(dosubs) %parfor
         sub
         n
 
-        load(sprintf([dcm_path,'DCM_erpf_ConEmot_LD_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n));%DCM_erpf_SemLoc_5ROIs_mpowavg_sub%d_mod%d.mat
+        load(sprintf([dcm_path,'DCM_erpf_ConEmot_SL_oldreg_5ROIs_avg_maxCTF_sub%d_mod%d.mat'],sub,n));%DCM_erpf_SemLoc_5ROIs_mpowavg_sub%d_mod%d.mat
 %         DCM_erpf_SemLoc_5ROIs_avg_allverts_pifg_sub11_mod8
         H_C(:,:,ncnt,s)=DCM.H{1,1};%DCM.xY.y{1,1};%
         H_A(:,:,ncnt,s)=DCM.H{1,2};%DCM.xY.y{1,2};%
