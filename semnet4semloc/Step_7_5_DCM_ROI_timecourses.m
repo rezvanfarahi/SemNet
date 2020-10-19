@@ -3,8 +3,8 @@ clear
 clc
 close all
 inpath='/Users/rezvanh/Documents/PhD/manuscripts/semloc_july2020/semnet4semloc/';
-filenames={'SemLoc_SD_100wins.mat','SemNet_SD_100wins.mat','SemNet_LD_100wins.mat'};
-X=zeros(5,100,2,53);
+filenames={'SemLoc_SD_500wins.mat','SemNet_SD_500wins.mat','SemNet_LD_500wins.mat'};
+X=zeros(5,500,2,53);
 for ii=1:3
     inname=[inpath,filenames{ii}];
     load(inname)
@@ -24,9 +24,9 @@ for ii=1:5
     figure();
     conmat=squeeze(Xm(ii,:,1));
     absmat=squeeze(Xm(ii,:,2));
-    plot(-50:5:449,conmat,'r','LineWidth',5)
+    plot(-50:1:449,conmat,'r','LineWidth',5)
     hold on   
-    plot(-50:5:449,absmat,'b','LineWidth',5)
+    plot(-50:1:449,absmat,'b','LineWidth',5)
     set(gca,'FontSize',20)
     legend('Concrete','Abstract')
 end
