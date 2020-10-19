@@ -57,7 +57,7 @@ chlabels = {
 
 };
 input_path='/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/dipole/';
-outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD_80wins.mat';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD_100wins.mat';
 
 list_all = {'/meg10_0378',
     '/meg10_0390',
@@ -178,11 +178,11 @@ end
 %     end
 % end
 
-ntimewins=80;
+ntimewins=100;
 Dpm=zeros(size(Dataf,1),ntimewins);
 Datafm_wins=zeros(size(Dataf,1),ntimewins,size(Dataf,3),size(Dataf,4));
 for ii=1:ntimewins
-    Datafm=squeeze(mean((Dataf(:,(450+5*(ii-1))/q:(450+5*ii)/q,:,:)),2));%5x2x17
+    Datafm=squeeze(mean((Dataf(:,(350+5*(ii-1))/q:(350+5*ii)/q,:,:)),2));%5x2x17
     Datafm_wins(:,ii,:,:)=Datafm;
     for dcnt1=1:size(Dpm,1)
             [h,Dpm(dcnt1,ii)]=ttest(squeeze(Datafm(dcnt1,1,:))-squeeze(Datafm(dcnt1,2,:)));
