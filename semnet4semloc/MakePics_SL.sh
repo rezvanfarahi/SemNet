@@ -16,9 +16,9 @@
 #path='/group/erp/data/olaf.hauk/Others/Miozzo/data'
 #MRIpath='/group/erp/data/olaf.hauk/Others/Miozzo/MRIs'
 
-outpath='/imaging/rf02/Semnet/semnet4semloc/jpg/permutation/evoked/rmanova' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats/Hand_Hear' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/jpg/GrandAverage/evoked/pnt1_30/newregsigned/cats/Visual' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats'  # output directory for images
+outpath='/imaging/rf02/Semnet/semnet4semloc/jpg/permutation/evoked/glm' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats/Hand_Hear' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/jpg/GrandAverage/evoked/pnt1_30/newregsigned/cats/Visual' #'/imaging/rf02/Semnet/jpg/uvttest/evoked/pnt1_30/newregsigned/cats'  # output directory for images
 #inpath='/imaging/olaf/MEG/GoNoGo/STC/GM'
-inpath='/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/rmanova/' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/wbwnewregsigned2/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #
+inpath='/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/glm' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/wbwnewregsigned2/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/permutation/evoked/bands/newregsigned/mugamma' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/wpw' #'/imaging/rf02/Semnet/stc/uvttest/evoked/pnt1_30/newregsigned/cats' #
 
 
 # /imaging/olaf/MEG/GoNoGo/STC/GM/GM_lex_wdspds_n18.stc
@@ -28,7 +28,7 @@ inpath='/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/rmanova/' #'/i
 conds=(\
 
 #'ClusPer_rmANOVA_Evoked_sw_icomorphed_oldreg_clusterp05_p99900009999e-05_18subj_SDvsLD_pnt1_48ica_task_1' \
-'ClusPer_rmANOVA_Evoked_sw_icomorphed_oldreg_clusterp025_p0966903309669_18subj_SDvsLD_pnt1_48ica_contrast_4' \
+'ClusPer_GLM_Evoked_sw_icomorphed_oldreg_clusterp05_p05718856228754249_53subj_pnt1_48ica_contrast_1' \
 #'ClusPer_rmANOVA_Evoked_sw_icomorphed_oldreg_clusterp05_p502749725027_18subj_SDvsLD_pnt1_48ica_interaction_1' \
 
 )
