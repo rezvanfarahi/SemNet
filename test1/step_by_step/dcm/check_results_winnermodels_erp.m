@@ -33,11 +33,12 @@ list_all = {'./meg10_0378',
 
 
 
-dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/typlex/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
+dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD_predicted_250ms_ATL.mat';
 %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';%
 H_C=[];
 H_A=[];
-
+tmax=251;
 for s = 1:length(dosubs) %parfor
     sess=struct();
     sub    = dosubs(s);
@@ -54,6 +55,11 @@ for s = 1:length(dosubs) %parfor
         H_A(:,:,ncnt,s)=DCM.H{1,2};%DCM.xY.y{1,2};%
     end
 end
+H_CA=zeros(size(H_C,1),size(H_C,2),size(H_C,4),2);
+H_CA(:,:,:,1)=squeeze(mean(H_C,3));
+H_CA(:,:,:,2)=squeeze(mean(H_A,3));
+save(outpath_anova,'H_CA')
+
 asig=mean(H_A(1:451,:,:,:),4);%H_A(:,:,4,7);%
 asig=mean(asig,3);%squeeze(asig(:,:,4));%
 csig=mean(H_C(1:451,:,:,:),4);%H_C(:,:,4,7);%
