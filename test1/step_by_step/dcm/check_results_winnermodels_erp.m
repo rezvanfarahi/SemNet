@@ -34,7 +34,7 @@ list_all = {'./meg10_0378',
 
 
 dcm_path='/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_450ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/';%'/imaging/rf02/TypLexMEG/dcm/latest/150ms_57models_5ROIs/semloc/';%semloc/avg_allverts_dtr0_dip/ctf/';%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/250ms_38models_5ROIs/semloc0/';
-outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD_predicted_450ms_ATL.mat';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemLoc_SD_predicted_450ms_AG.mat';
 %'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/filtered_250ms_28models_5ROIs/semloc/maxCTF_ERP_dtr0/simulated/inverted/model3/';%
 H_C=[];
 H_A=[];
