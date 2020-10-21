@@ -32,6 +32,7 @@ import scipy
 from mne import ( spatial_tris_connectivity, grade_to_tris)
 from mne.stats import (spatio_temporal_cluster_1samp_test, summarize_clusters_stc)
 import scipy.io as scio
+from scipy import stats as sstats
 ###############################################################################
 data_path = '/imaging/rf02/TypLexMEG/' # root directory for your MEG data
 os.chdir(data_path)
@@ -240,7 +241,7 @@ for p_threshold in ll:
     #    Here we set the threshold quite high to reduce computation.
     #p_threshold = 0.05
     n_subjects=17
-    t_threshold = -scipy.stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)
+    t_threshold = -sstats.distributions.t.ppf(p_threshold/2., n_subjects - 1)
     print('Clustering.')
     max_step=1
     T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude)#, max_step=5)
