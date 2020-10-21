@@ -129,7 +129,7 @@ exclude_wbmedial=False
 exclude_ROIs=True
 
 ii=-1
-ntimes=4
+ntimes=5
 nbands=4
 nverts=20484
 nsubjs=17
@@ -244,7 +244,7 @@ for p_threshold in ll:
     t_threshold = -sstats.distributions.t.ppf(p_threshold/2., n_subjects - 1)
     print('Clustering.')
     max_step=1
-    T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude)#, max_step=5)
+    T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, max_step=5)
     
     #    Now select the clusters that are sig. at p < 0.05 (note that this value
     #    is multiple-comparisons corrected).
@@ -264,7 +264,8 @@ for p_threshold in ll:
         	
     if cluster_p_values.min()<=1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
         #print p_thresh
-                
+        p_thr=cluster_p_values.min()
+        good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]      
         stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep2, p_thresh=cluster_p_values.min()+0.000001, vertices=fsave_vertices, subject='fsaverage')
         #t_stc = mne.SourceEstimate(T_obs, vertices=fsave_vertices, tmin=tmin2, tstep=tstep2, subject='average', verbose=None)
         
