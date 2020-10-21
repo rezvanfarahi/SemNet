@@ -37,7 +37,7 @@ data_path = '/imaging/rf02/TypLexMEG/' # root directory for your MEG data
 os.chdir(data_path)
 subjects_dir = '/imaging/rf02/TypLexMEG/'    # where your MRI subdirectories are
 # where event-files are
-out_path = '/imaging/rf02/TypLexMEG/icaanalysis_results/stc/permutation/power/final_allbands/' #
+out_path = '/imaging/rf02/TypLexMEG/icaanalysis_results/stc/permutation/power/masked_ROIs_oct2020/' #
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 
@@ -122,13 +122,13 @@ n_cycles = frequencies / float(7)
 n_cycles[frequencies<=20] = 2
 n_cycles[frequencies<=20] += np.arange(0,1,0.077)
     # n_cycles[np.logical_and((frequencies>10), (frequencies<=20))] = 3
-labellist = ['atlleft-lh', 'atlright-rh','medialtempright-rh','medialtempleft-lh']
+#labellist = ['atlleft-lh', 'atlright-rh','medialtempright-rh','medialtempleft-lh']
 
 exclude_wbmedial=False   
 exclude_ROIs=True
 
 ii=-1
-ntimes=5
+ntimes=4
 nbands=4
 nverts=20484
 nsubjs=17
@@ -158,7 +158,7 @@ for p_threshold in ll:
         	#stc_subtract=np.subtract(stc_cncrt,stc_abs)
         	"""
         	b2=0.05
-        	for cc in range(5):
+        	for cc in range(ntimes):
         		b1=b2+0.0001; b2=b1+0.1-0.0001
         		print b1; print b2
         		Xc1=np.abs(stc_cncrt.copy().crop(b1,b2).mean().data.squeeze())
