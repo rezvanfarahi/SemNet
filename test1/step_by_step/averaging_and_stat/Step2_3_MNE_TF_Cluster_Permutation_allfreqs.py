@@ -49,7 +49,7 @@ inv_fname = 'InverseOperator_EMEG-inv.fif'
 # get indices for subjects to be processed from command line input
 # 
 print sys.argv
-p_inds = []
+p_inds = [0]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 
@@ -210,11 +210,11 @@ for p_threshold in ll:
         fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-rh.label'; labelR = mne.read_label(fname_label)
         #labelmask=mne.read_label(fname_label,subject='fsaverage')
         #labelmask.values.fill(1.0)
-        #bb=stc_cond.in_label(labelmask)
+        #bb=stc_cncrt.in_label(labelmask)
         #nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
         #spatial_exclude=fsave_vertices[0][nnl].copy()
     labelss=labelL+labelR
-    bb=stc_cond.in_label(labelss)  
+    bb=stc_cncrt.in_label(labelss)  
     nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
     nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
     spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
