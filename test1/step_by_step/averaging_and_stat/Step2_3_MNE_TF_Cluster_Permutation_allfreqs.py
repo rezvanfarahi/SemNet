@@ -50,7 +50,7 @@ inv_fname = 'InverseOperator_EMEG-inv.fif'
 # get indices for subjects to be processed from command line input
 # 
 print sys.argv
-p_inds = []
+p_inds = [0]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 
@@ -128,23 +128,19 @@ n_cycles[frequencies<=20] += np.arange(0,1,0.077)
 exclude_wbmedial=False   
 exclude_ROIs=True
 
-ii=-1
 ntimes=5
 nbands=4
 nverts=20484
 nsubjs=17
-X=np.zeros((nverts,ntimes*nbands,nsubjs))
-Xc=np.zeros((nverts,ntimes,nbands,nsubjs))
-Xa=np.zeros((nverts,ntimes,nbands,nsubjs))
+#X=np.zeros((nverts,ntimes*nbands,nsubjs))
+
 #X_beta=np.zeros((20484,16))
 bands=['theta','alpha','beta','gamma']
 for p_threshold in ll:
-    for meg in list_all:
-        ii=ii+1;
-        print ii
-        for bcnt,b in enumerate(bands):
-        	
-        
+    for bcnt,b in enumerate(bands):
+        Xc=np.zeros((nverts,ntimes,nsubjs))
+        Xa=np.zeros((nverts,ntimes,nsubjs))
+        for ii,meg in enumerate(list_all):
             ### word
         	
         	fname_cncrt = data_path + meg + 'mineMorphed_ico_SemLoc_ica_Concrete_Power2_normori_ratio_equalized_m500_700_200hz_' +b#'mineMorphed_ico_TypLex_icaclean_word_Power_ratio_equalized_m500_700_' + b
@@ -165,125 +161,97 @@ for p_threshold in ll:
         		Xc1=np.abs(stc_cncrt.copy().crop(b1,b2).mean().data.squeeze())
         		Xa1=np.abs(stc_abs.copy().crop(b1,b2).mean().data.squeeze())
 #        		X[:,cc,ii]=np.subtract(Xc1,Xa1)#np.subtract(np.abs(Xc1-1),np.abs(Xa1-1))#np.log(np.divide(Xc,Xa))#
-        		Xc[:,cc,bcnt,ii]=Xc1.copy()#np.log(np.divide(Xc,Xa))#
-        		Xa[:,cc,bcnt,ii]=Xa1.copy()#np.log(np.divide(Xc,Xa))#
-      
-    	#X[:,1,:]=X[:,0,:].copy()
-    	#stc_subtract1=stc_subtract.copy().crop(.05,.6)
-    	#stc_subtract1.resample(50)
-    	#stc_cncrt1=stc_cncrt.copy().crop(.15,.351)
-    	#stc_cncrt1.resample(50)
-    	#X[:,:,ii]=stc_subtract1.data#.squeeze() for mean
-    	#X[:,:,ii]=np.absolute(stc_subtract1.data)
-      ####for PCA!!!
-#    print X.shape
-#    path_mtx=data_path+'TF_orig_words_'+b+'.mat'
-#    scio.savemat(path_mtx,{'Xc':Xc})
-#    path_mtx=data_path+'TF_orig_nonwords_'+b+'.mat'
-#    scio.savemat(path_mtx,{'Xa':Xa})     
+        		Xc[:,cc,ii]=Xc1.copy()#np.log(np.divide(Xc,Xa))#
+        		Xa[:,cc,ii]=Xa1.copy()#np.log(np.divide(Xc,Xa))#
+         
      
-     
-    	"""
-    	X[:,0,ii]=bb.squeeze()
-    	stc_subtract1=stc_subtract.crop(.25,.45).copy()
-    	stc_subtract1=stc_subtract1.mean()
-    	bb=stc_subtract1.data
-    	X[:,1,ii]=bb.squeeze()
-    	"""
-    	#X_beta[:,ii]=stc_subtract.data[:,1]	
-    	
-    #X = np.transpose(X, [2, 1, 0])	
-    #X_beta=X_beta.transpose()
-    #X_beta=X_beta.transpose()	
-    #t_beta,p_beta,H0_beta = clu_beta = mne.stats.permutation_t_test(X_beta, n_permutations=10000, tail=0, n_jobs=1, verbose=None)
-    #t_beta,p_beta,H0_beta = clu_beta = mne.stats.permutation_t_test(X_beta, n_permutations=10000, tail=0, n_jobs=1, verbose=None)
-    print('Computing connectivity.')
-    Xcf=np.hstack((np.squeeze(Xc[:,:,0,:]),np.squeeze(Xc[:,:,1,:]),np.squeeze(Xc[:,:,2,:]),np.squeeze(Xc[:,:,3,:]))) #mi,  coh
-    Xaf=np.hstack((np.squeeze(Xa[:,:,0,:]),np.squeeze(Xa[:,:,1,:]),np.squeeze(Xa[:,:,2,:]),np.squeeze(Xa[:,:,3,:])))
-    X = np.subtract(Xcf,Xaf)#np.subtract(np.abs(Xcf-1),np.abs(Xaf-1))
-    n_permutations = 5000  # ... run fewer permutations (reduces sensitivity)
-    fsave_vertices = [np.arange(10242), np.arange(10242)]
-    if exclude_wbmedial:
-        fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
-        fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)       
-    if exclude_ROIs:
-        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'; labelL = mne.read_label(fname_label)
-        fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-rh.label'; labelR = mne.read_label(fname_label)
-        #labelmask=mne.read_label(fname_label,subject='fsaverage')
-        #labelmask.values.fill(1.0)
-        #bb=stc_cncrt.in_label(labelmask)
-        #nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-        #spatial_exclude=fsave_vertices[0][nnl].copy()
-    labelss=labelL+labelR
-    bb=stc_cncrt.in_label(labelss)  
-    nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-    nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
-    spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
+        print('Computing connectivity.')
+        Xcf=Xc.copy()#np.hstack((np.squeeze(Xc[:,:,0,:]),np.squeeze(Xc[:,:,1,:]),np.squeeze(Xc[:,:,2,:]),np.squeeze(Xc[:,:,3,:]))) #mi,  coh
+        Xaf=Xa.copy()#np.hstack((np.squeeze(Xa[:,:,0,:]),np.squeeze(Xa[:,:,1,:]),np.squeeze(Xa[:,:,2,:]),np.squeeze(Xa[:,:,3,:])))
+        X = np.subtract(Xcf,Xaf)#np.subtract(np.abs(Xcf-1),np.abs(Xaf-1))
+        n_permutations = 5000  # ... run fewer permutations (reduces sensitivity)
+        fsave_vertices = [np.arange(10242), np.arange(10242)]
+        if exclude_wbmedial:
+            fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
+            fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)       
+        if exclude_ROIs:
+            fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-lh.label'; labelL = mne.read_label(fname_label)
+            fname_label='/imaging/rf02/Semnet/semnet4semloc//mask_labels_ATL_IFG_MTG_AG-rh.label'; labelR = mne.read_label(fname_label)
+            #labelmask=mne.read_label(fname_label,subject='fsaverage')
+            #labelmask.values.fill(1.0)
+            #bb=stc_cncrt.in_label(labelmask)
+            #nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+            #spatial_exclude=fsave_vertices[0][nnl].copy()
+        labelss=labelL+labelR
+        bb=stc_cncrt.in_label(labelss)  
+        nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+        nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
+        spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
 
-    # fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
-    # fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
-    # labelss=labelL+labelR
-    # bb=stc_cncrt.in_label(labelss)
-    # fsave_vertices = [np.arange(10242), np.arange(10242)]
-    # nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
-    # nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
-    # spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
-    
-    connectivity = spatial_tris_connectivity(grade_to_tris(5))
-    # fsave_vertices = [np.arange(10242), np.arange(10242)]
-    # n_permutations=5000
-    
-    #    Note that X needs to be a multi-dimensional array of shape
-    #    samples (subjects) x time x space, so we permute dimensions
-    X = np.transpose(X, [2, 1, 0])
-    
-    #    Now let's actually do the clustering. This can take a long time...
-    #    Here we set the threshold quite high to reduce computation.
-    #p_threshold = 0.05
-    n_subjects=17
-    t_threshold = -sstats.distributions.t.ppf(p_threshold/2., n_subjects - 1)
-    print('Clustering.')
-    max_step=5
-    T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, max_step=max_step)
-    
-    #    Now select the clusters that are sig. at p < 0.05 (note that this value
-    #    is multiple-comparisons corrected).
+        # fname_label = label_path + '/' + 'toremove_wbspokes-lh.label'; labelL = mne.read_label(fname_label)
+        # fname_label = label_path + '/' + 'toremove_wbspokes-rh.label'; labelR = mne.read_label(fname_label)
+        # labelss=labelL+labelR
+        # bb=stc_cncrt.in_label(labelss)
+        # fsave_vertices = [np.arange(10242), np.arange(10242)]
+        # nnl=np.in1d(fsave_vertices[0],bb.lh_vertno)
+        # nnr=np.in1d(fsave_vertices[1],bb.rh_vertno)
+        # spatial_exclude=np.hstack((fsave_vertices[0][nnl], fsave_vertices[0][nnr]+10242))
+        
+        connectivity = spatial_tris_connectivity(grade_to_tris(5))
+        # fsave_vertices = [np.arange(10242), np.arange(10242)]
+        # n_permutations=5000
+        
+        #    Note that X needs to be a multi-dimensional array of shape
+        #    samples (subjects) x time x space, so we permute dimensions
+        X = np.transpose(X, [2, 1, 0])
+        
+        #    Now let's actually do the clustering. This can take a long time...
+        #    Here we set the threshold quite high to reduce computation.
+        #p_threshold = 0.05
+        n_subjects=17
+        t_threshold = -sstats.distributions.t.ppf(p_threshold/2., n_subjects - 1)
+        print('Clustering.')
+        max_step=5
+        T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, max_step=max_step)
+        
+        #    Now select the clusters that are sig. at p < 0.05 (note that this value
+        #    is multiple-comparisons corrected).
 
-#    good_cluster_inds = np.where(cluster_p_values < 0.05)[0]
-#    print cluster_p_values.min()
-    tstep2=0.1
-    tmin2=0.05
-    clus_p_values=(p_threshold/0.05)*cluster_p_values
-               
-    good_cluster_inds = np.where(cluster_p_values<=0.05)[0]#np.intersect1d(np.where(clus_p_values <= 0.01)[0], np.where(cluster_p_values<=0.1)[0])
-    #print cluster_p_values.min(), clus_p_values.min()
-        
-    fsave_vertices = [np.arange(10242), np.arange(10242)]
-    if good_cluster_inds.size>0:
-        p_thresh=np.max(cluster_p_values[good_cluster_inds])#cluster_p_values.min()+0.000001
-        	
-    if cluster_p_values.min()<=1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
-        #print p_thresh
-        p_thr=cluster_p_values.min()
-        good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]      
-        stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep2, p_thresh=cluster_p_values.min()+0.000001, vertices=fsave_vertices, subject='fsaverage')
-        #t_stc = mne.SourceEstimate(T_obs, vertices=fsave_vertices, tmin=tmin2, tstep=tstep2, subject='average', verbose=None)
-        
-        out_file1=out_path + 'Per_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_ica_Subtract_Power_ratio_ico_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
-        stc_all_cluster_vis.save(out_file1)
-        #out_file2=data_path + 'Permutation_TypLex_Subtract_Coherence_Beta_150_350_' + label_name[0:-3]
-        #clu_beta.save(out_file2)
-        
-        
-        Matx=np.zeros((20484,ntimes*nbands))
-        T=np.divide(T_obs,np.absolute(T_obs))
-        for cc in range(good_cluster_inds.shape[0]):
-        	Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
-        
-        tmin1=50
-        tstep1=100
-        vertices_to = [np.arange(10242), np.arange(10242)]
-        matx_stc = mne.SourceEstimate(Matx, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-        out_file2=out_path + 'Per_sw_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_ica_Subtract_Power_ratio_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
-        matx_stc.save(out_file2)
+    #    good_cluster_inds = np.where(cluster_p_values < 0.05)[0]
+    #    print cluster_p_values.min()
+        tstep2=0.1
+        tmin2=0.05
+        clus_p_values=(p_threshold/0.05)*cluster_p_values
+                
+        good_cluster_inds = np.where(cluster_p_values<=0.05)[0]#np.intersect1d(np.where(clus_p_values <= 0.01)[0], np.where(cluster_p_values<=0.1)[0])
+        #print cluster_p_values.min(), clus_p_values.min()
+            
+        fsave_vertices = [np.arange(10242), np.arange(10242)]
+        if good_cluster_inds.size>0:
+            p_thresh=np.max(cluster_p_values[good_cluster_inds])#cluster_p_values.min()+0.000001
+                
+        if cluster_p_values.min()<=1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
+            #print p_thresh
+            p_thr=cluster_p_values.min()
+            good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]      
+            stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep2, p_thresh=cluster_p_values.min()+0.000001, vertices=fsave_vertices, subject='fsaverage')
+            #t_stc = mne.SourceEstimate(T_obs, vertices=fsave_vertices, tmin=tmin2, tstep=tstep2, subject='average', verbose=None)
+            
+            out_file1=out_path + 'Per_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_'+b+'_ica_Subtract_Power2_ratio_ico_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
+            stc_all_cluster_vis.save(out_file1)
+            #out_file2=data_path + 'Permutation_TypLex_Subtract_Coherence_Beta_150_350_' + label_name[0:-3]
+            #clu_beta.save(out_file2)
+            
+            
+            Matx=np.zeros((20484,ntimes*nbands))
+            T=np.divide(T_obs,np.absolute(T_obs))
+            for cc in range(good_cluster_inds.shape[0]):
+                Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
+            
+            tmin1=50
+            tstep1=100
+            vertices_to = [np.arange(10242), np.arange(10242)]
+            matx_stc = mne.SourceEstimate(Matx, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+            out_file2=out_path + 'Per_sw_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_'+b+'_ica_Subtract_Power2_ratio_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
+            matx_stc.save(out_file2)
 
