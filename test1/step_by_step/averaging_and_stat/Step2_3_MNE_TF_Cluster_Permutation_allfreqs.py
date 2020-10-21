@@ -50,7 +50,7 @@ inv_fname = 'InverseOperator_EMEG-inv.fif'
 # get indices for subjects to be processed from command line input
 # 
 print sys.argv
-p_inds = [0]
+p_inds = []
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 
@@ -243,8 +243,8 @@ for p_threshold in ll:
     n_subjects=17
     t_threshold = -sstats.distributions.t.ppf(p_threshold/2., n_subjects - 1)
     print('Clustering.')
-    max_step=1
-    T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, max_step=5)
+    max_step=5
+    T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, max_step=max_step)
     
     #    Now select the clusters that are sig. at p < 0.05 (note that this value
     #    is multiple-comparisons corrected).
