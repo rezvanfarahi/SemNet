@@ -50,13 +50,13 @@ inv_fname = 'InverseOperator_EMEG-inv.fif'
 # get indices for subjects to be processed from command line input
 # 
 print sys.argv
-p_inds = []
+p_inds = [0]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 
 subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
-p_list=[0.1,0.05,0.045,0.04,0.03,0.025,0.01,0.008,0.005,0.002,0.001,0.0005,0.0001]
+p_list=[0.01,0.05,0.045,0.04,0.03,0.025,0.01,0.008,0.005,0.002,0.001,0.0005,0.0001]
 print "subject_inds:"
 print subject_inds
 print "No rejection"
