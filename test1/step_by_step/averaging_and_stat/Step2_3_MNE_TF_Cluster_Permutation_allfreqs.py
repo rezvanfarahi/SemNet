@@ -256,7 +256,7 @@ for p_threshold in ll:
     clus_p_values=(p_threshold/0.05)*cluster_p_values
                
     good_cluster_inds = np.where(cluster_p_values<=0.05)[0]#np.intersect1d(np.where(clus_p_values <= 0.01)[0], np.where(cluster_p_values<=0.1)[0])
-    print cluster_p_values.min(), clus_p_values.min()
+    #print cluster_p_values.min(), clus_p_values.min()
         
     fsave_vertices = [np.arange(10242), np.arange(10242)]
     if good_cluster_inds.size>0:
