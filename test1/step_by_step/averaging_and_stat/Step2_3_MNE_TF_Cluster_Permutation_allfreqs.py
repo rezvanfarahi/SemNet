@@ -262,7 +262,7 @@ for p_threshold in ll:
     if good_cluster_inds.size>0:
         p_thresh=np.max(cluster_p_values[good_cluster_inds])#cluster_p_values.min()+0.000001
         	
-    if cluster_p_values.min()<=0.1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
+    if cluster_p_values.min()<=1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
         print p_thresh
                 
         stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep2, p_thresh=p_thresh+0.000001, vertices=fsave_vertices, subject='fsaverage')
