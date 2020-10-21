@@ -50,7 +50,7 @@ inv_fname = 'InverseOperator_EMEG-inv.fif'
 # get indices for subjects to be processed from command line input
 # 
 print sys.argv
-p_inds = [0]
+p_inds = []
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 
