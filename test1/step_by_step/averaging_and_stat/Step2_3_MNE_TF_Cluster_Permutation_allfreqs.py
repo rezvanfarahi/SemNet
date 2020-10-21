@@ -263,9 +263,9 @@ for p_threshold in ll:
         p_thresh=np.max(cluster_p_values[good_cluster_inds])#cluster_p_values.min()+0.000001
         	
     if cluster_p_values.min()<=1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
-        print p_thresh
+        #print p_thresh
                 
-        stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep2, p_thresh=p_thresh+0.000001, vertices=fsave_vertices, subject='fsaverage')
+        stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep2, p_thresh=cluster_p_values.min()+0.000001, vertices=fsave_vertices, subject='fsaverage')
         #t_stc = mne.SourceEstimate(T_obs, vertices=fsave_vertices, tmin=tmin2, tstep=tstep2, subject='average', verbose=None)
         
         out_file1=out_path + 'Per_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_ica_Subtract_Power_ratio_ico_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
@@ -283,6 +283,6 @@ for p_threshold in ll:
         tstep1=100
         vertices_to = [np.arange(10242), np.arange(10242)]
         matx_stc = mne.SourceEstimate(Matx, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-        out_file2=out_path + 'Per_sw_clusp'+str(p_threshold)[2:]+'_p'+str(p_thresh)[2:]+'_SL_ica_Subtract_Power_ratio_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
+        out_file2=out_path + 'Per_sw_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_ica_Subtract_Power_ratio_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
         matx_stc.save(out_file2)
 
