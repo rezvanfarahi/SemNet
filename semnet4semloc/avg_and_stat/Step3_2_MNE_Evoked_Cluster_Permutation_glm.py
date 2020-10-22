@@ -43,7 +43,7 @@ import copy
 # Set parameters
 exclude_wbmedial=True
 exclude_ROIs=False
-win_20ms=True
+win_20ms=False
 if exclude_wbmedial:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/glm/' # root
 if exclude_ROIs:
@@ -151,7 +151,9 @@ n_levels=len(semtasks)
 all_nconds=[len(event_names['semloc']),len(event_names['semnet1']),len(event_names['semnet2'])]
 nconds=copy.deepcopy(all_nconds[0])
 factor_levels = [n_levels,n_levels]  # number of levels in each factor
-grand_tstep=20
+grand_tstep=100
+grand_tmin=350
+grand_tmax=751-grand_tstep
 n_times=len(list(np.arange(350,651,grand_tstep)))
 tmin1=50
 tstep1=copy.deepcopy(grand_tstep)
@@ -180,11 +182,18 @@ for p_threshold in ll:
                 stc_cond = mne.read_source_estimate(fname_in)
                 #            stc_cond.resample(100)
                 #            stc_cond.crop(0.050,0.450)
-                wcnt=-1
-                for wcnt1,wcnt2 in zip(list(np.arange(350,651,grand_tstep)),list(np.arange(450,751,grand_tstep))):#range(nwins):
-                    print (wcnt1,wcnt2)
-                    wcnt=wcnt+1
-                    X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
+                if task_name=='semloc':
+                    wcnt=-1
+                    for wcnt1,wcnt2 in zip(list(np.arange(grand_tmin+200,grand_tmax+200,grand_tstep)),list(np.arange(grand_tmin+grand_tstep+200,grand_tmax+grand_tstep+200,grand_tstep))):#range(nwins):
+                        print (wcnt1,wcnt2)
+                        wcnt=wcnt+1
+                        X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
+                    else:
+                        wcnt=-1
+                        for wcnt1,wcnt2 in zip(list(np.arange(grand_tmin,grand_tmax,grand_tstep)),list(np.arange(grand_tmin+grand_tstep,grand_tmax+grand_tstep,grand_tstep))):#range(nwins):
+                            print (wcnt1,wcnt2)
+                            wcnt=wcnt+1
+                            X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 
                 #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
     X1=np.transpose(X, [0, 3, 2, 1]).copy()#X1 needs to be (Nsub, Ntime, Nvox, Ncond)
