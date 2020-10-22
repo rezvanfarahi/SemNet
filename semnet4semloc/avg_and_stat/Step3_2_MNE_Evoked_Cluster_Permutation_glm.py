@@ -41,14 +41,17 @@ import copy
 
 ###############################################################################
 # Set parameters
-exclude_wbmedial=False
-exclude_ROIs=True
+exclude_wbmedial=True
+exclude_ROIs=False
+win_20ms=True
 if exclude_wbmedial:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/glm/' # root
 if exclude_ROIs:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/masked_ROIs/evoked/glm/' # root
 uvttest_path = '/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/glm/' # root
-
+if win_20ms:
+    out_path=out_path+'win_20ms/'
+    uvttest_path=uvttest_path+'win_20ms/'
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 if not os.path.exists(uvttest_path):
@@ -148,9 +151,10 @@ n_levels=len(semtasks)
 all_nconds=[len(event_names['semloc']),len(event_names['semnet1']),len(event_names['semnet2'])]
 nconds=copy.deepcopy(all_nconds[0])
 factor_levels = [n_levels,n_levels]  # number of levels in each factor
-n_times=len(list(np.arange(350,651,100)))
+grand_tstep=20
+n_times=len(list(np.arange(350,651,grand_tstep)))
 tmin1=50
-tstep1=100
+tstep1=copy.deepcopy(grand_tstep)
 Nv = len(vertices_avg[0])+len(vertices_avg[1])
 Nt=copy.deepcopy(n_times)
 Ns = [len(list_all['semloc']),len(list_all['semnet1']),len(list_all['semnet2'])]
@@ -177,7 +181,7 @@ for p_threshold in ll:
                 #            stc_cond.resample(100)
                 #            stc_cond.crop(0.050,0.450)
                 wcnt=-1
-                for wcnt1,wcnt2 in zip(list(np.arange(350,651,100)),list(np.arange(450,751,100))):#range(nwins):
+                for wcnt1,wcnt2 in zip(list(np.arange(350,651,grand_tstep)),list(np.arange(450,751,grand_tstep))):#range(nwins):
                     print (wcnt1,wcnt2)
                     wcnt=wcnt+1
                     X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
@@ -218,7 +222,7 @@ for p_threshold in ll:
     #    t_threshold = -stats.distributions.t.ppf(p_threshold/2., n_subjects - 1)#dict(start=0, step=.1)#
     #t_threshold=2
     tail=0
-    max_step=1
+    max_step=5
     desing_mat = np.hstack((np.ones((Ns[0],1)),np.zeros((Ns[0],2))))
     desing_mat = np.vstack((desing_mat, np.hstack((np.zeros((2*Ns[1],1)), np.kron(np.eye(2),np.ones((Ns[1],1)))))))
     desing_mat = np.hstack((desing_mat ,np.vstack((np.zeros((Ns[0],Ns[1])), np.eye(Ns[1]), np.eye(Ns[1])))))
