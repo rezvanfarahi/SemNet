@@ -188,12 +188,12 @@ for p_threshold in ll:
                         print (wcnt1,wcnt2)
                         wcnt=wcnt+1
                         X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
-                    else:
-                        wcnt=-1
-                        for wcnt1,wcnt2 in zip(list(np.arange(grand_tmin,grand_tmax,grand_tstep)),list(np.arange(grand_tmin+grand_tstep,grand_tmax+grand_tstep,grand_tstep))):#range(nwins):
-                            print (wcnt1,wcnt2)
-                            wcnt=wcnt+1
-                            X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
+                else:
+                    wcnt=-1
+                    for wcnt1,wcnt2 in zip(list(np.arange(grand_tmin,grand_tmax,grand_tstep)),list(np.arange(grand_tmin+grand_tstep,grand_tmax+grand_tstep,grand_tstep))):#range(nwins):
+                        print (wcnt1,wcnt2)
+                        wcnt=wcnt+1
+                        X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 
                 #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
     X1=np.transpose(X, [0, 3, 2, 1]).copy()#X1 needs to be (Nsub, Ntime, Nvox, Ncond)
