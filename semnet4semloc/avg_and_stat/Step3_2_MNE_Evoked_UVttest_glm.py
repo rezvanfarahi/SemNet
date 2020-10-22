@@ -148,9 +148,12 @@ n_levels=len(semtasks)
 all_nconds=[len(event_names['semloc']),len(event_names['semnet1']),len(event_names['semnet2'])]
 nconds=copy.deepcopy(all_nconds[0])
 factor_levels = [n_levels,n_levels]  # number of levels in each factor
-n_times=len(list(np.arange(350,751,100)))
+grand_tstep=100
+grand_tmin=350
+grand_tmax=751-grand_tstep
+n_times=len(list(np.arange(grand_tmin,grand_tmax,grand_tstep)))
 tmin1=50
-tstep1=100
+tstep1=copy.deepcopy(grand_tstep)
 Nv = len(vertices_avg[0])+len(vertices_avg[1])
 Nt=copy.deepcopy(n_times)
 Ns = [len(list_all['semloc']),len(list_all['semnet1']),len(list_all['semnet2'])]
@@ -180,11 +183,18 @@ for taski,task_name in enumerate(['semloc','semnet1', 'semnet2']):
             stc_cond = mne.read_source_estimate(fname_in)
             #            stc_cond.resample(100)
             #            stc_cond.crop(0.050,0.450)
-            wcnt=-1
-            for wcnt1,wcnt2 in zip(list(np.arange(350,751,100)),list(np.arange(450,851,100))):#range(nwins):
-                print (wcnt1,wcnt2)
-                wcnt=wcnt+1
-                X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
+            if task_name=='semloc':
+                wcnt=-1
+                for wcnt1,wcnt2 in zip(list(np.arange(grand_tmin+200,grand_tmax+200,grand_tstep)),list(np.arange(grand_tmin+grand_tstep+200,grand_tmax+grand_tstep+200,grand_tstep))):#range(nwins):
+                    print (wcnt1,wcnt2)
+                    wcnt=wcnt+1
+                    X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
+            else:
+                wcnt=-1
+                for wcnt1,wcnt2 in zip(list(np.arange(grand_tmin,grand_tmax,grand_tstep)),list(np.arange(grand_tmin+grand_tstep,grand_tmax+grand_tstep,grand_tstep))):#range(nwins):
+                    print (wcnt1,wcnt2)
+                    wcnt=wcnt+1
+                    X[ii,evcnt,:,wcnt]=np.mean(stc_cond.data[:,wcnt1:wcnt2],1)
 
             #X[ii,:,:,event_no]=np.transpose(stc_cond.data,[1,0]) #[:,350:650]
 X1=np.transpose(X, [0, 3, 2, 1]).copy()#X1 needs to be (Nsub, Ntime, Nvox, Ncond)
