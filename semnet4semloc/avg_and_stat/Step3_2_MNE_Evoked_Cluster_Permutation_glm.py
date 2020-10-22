@@ -59,14 +59,14 @@ if not os.path.exists(uvttest_path):
 data_path = '/imaging/rf02/'#Semnet/'	# where subdirs for MEG data are
 inv_path = '/imaging/rf02/'#Semnet/'
 print (sys.argv)
-p_inds = [0]
+p_inds = []
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
 
 #subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
-p_list=[0.005]#,0.045,0.04,0.03,0.025,0.02,0.01,0.008,0.005,0.002,0.001, 0.0008,0.0005,0.0002,0.0001,0.00005,0.00001]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
+p_list=[0.05]#,0.045,0.04,0.03,0.025,0.02,0.01,0.008,0.005,0.002,0.001, 0.0008,0.0005,0.0002,0.0001,0.00005,0.00001]#0.001,0.0009,0.0008,0.0007,0.0006,0.0005]#
 #print ("subject_inds:")
 #print (subject_inds)
 print ("No rejection")
