@@ -39,10 +39,10 @@ data_path = '/imaging/rf02/TypLexMEG/' # root directory for your MEG data
 os.chdir(data_path)
 subjects_dir = '/imaging/rf02/TypLexMEG/'    # where your MRI subdirectories are
 # where event-files are
-out_path = '/imaging/rf02/TypLexMEG/icaanalysis_results/stc/permutation/power/masked_ROIs_oct2020/20ms_wins/' #
+out_path = '/imaging/rf02/TypLexMEG/icaanalysis_results/stc/permutation/power/20ms_wins/' #masked_ROIs_oct2020
 if not os.path.exists(out_path):
     os.makedirs(out_path)
-uvttest_path='/imaging/rf02/TypLexMEG/icaanalysis_results/stc/UVttest/power/masked_ROIs_oct2020/20ms_wins/'
+uvttest_path='/imaging/rf02/TypLexMEG/icaanalysis_results/stc/UVttest/power/20ms_wins/'#/masked_ROIs_oct2020
 label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
 
 if not os.path.exists(uvttest_path):
@@ -129,8 +129,8 @@ n_cycles[frequencies<=20] += np.arange(0,1,0.077)
     # n_cycles[np.logical_and((frequencies>10), (frequencies<=20))] = 3
 #labellist = ['atlleft-lh', 'atlright-rh','medialtempright-rh','medialtempleft-lh']
 
-exclude_wbmedial=False   
-exclude_ROIs=True
+exclude_wbmedial=True   
+exclude_ROIs=False
 
 ntimes=25
 nbands=4
