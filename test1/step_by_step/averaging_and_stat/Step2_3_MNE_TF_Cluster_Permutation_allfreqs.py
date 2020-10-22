@@ -49,7 +49,7 @@ inv_fname = 'InverseOperator_EMEG-inv.fif'
 
 # get indices for subjects to be processed from command line input
 # 
-print sys.argv
+print (sys.argv)
 p_inds = [0]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
@@ -57,9 +57,9 @@ for ss in sys.argv[1:]:
 subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
 p_list=[0.01,0.05,0.045,0.04,0.03,0.025,0.01,0.008,0.005,0.002,0.001,0.0005,0.0001]
-print "subject_inds:"
-print subject_inds
-print "No rejection"
+print ("subject_inds:")
+print (subject_inds)
+print ("No rejection")
 
 list_all = ['meg10_0378/101209/', 
 'meg10_0390/101214/',
@@ -106,8 +106,8 @@ ll = [0]
 for ss in p_inds:
  ll.append(p_list[ss])
 
-print "ll:"
-print ll
+print ("ll:")
+print (ll)
 
 
 
@@ -157,7 +157,7 @@ for p_threshold in ll:
         	b2=0.05
         	for cc in range(ntimes):
         		b1=b2+0.0001; b2=b1+0.02-0.0001
-        		print b1; print b2
+        		print (b1); print (b2)
         		Xc1=np.abs(stc_cncrt.copy().crop(b1,b2).mean().data.squeeze())
         		Xa1=np.abs(stc_abs.copy().crop(b1,b2).mean().data.squeeze())
 #        		X[:,cc,ii]=np.subtract(Xc1,Xa1)#np.subtract(np.abs(Xc1-1),np.abs(Xa1-1))#np.log(np.divide(Xc,Xa))#
