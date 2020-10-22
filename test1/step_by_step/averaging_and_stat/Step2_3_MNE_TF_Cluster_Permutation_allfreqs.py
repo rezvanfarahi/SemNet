@@ -28,6 +28,7 @@ import joblib
 import numpy as np
 import mne
 import os
+import os.path
 import scipy
 from mne import ( spatial_tris_connectivity, grade_to_tris)
 from mne.stats import (spatio_temporal_cluster_1samp_test, summarize_clusters_stc)
@@ -41,8 +42,11 @@ subjects_dir = '/imaging/rf02/TypLexMEG/'    # where your MRI subdirectories are
 out_path = '/imaging/rf02/TypLexMEG/icaanalysis_results/stc/permutation/power/masked_ROIs_oct2020/20ms_wins/' #
 if not os.path.exists(out_path):
     os.makedirs(out_path)
-
+uvttest_path='/imaging/rf02/TypLexMEG/icaanalysis_results/stc/UVttest/power/masked_ROIs_oct2020/20ms_wins/'
 label_path = '/imaging/rf02/TypLexMEG/fsaverage/label'
+
+if not os.path.exists(uvttest_path):
+    os.makedirs(uvttest_path)
 
 inv_path = '/imaging/rf02/TypLexMEG/'
 inv_fname = 'InverseOperator_EMEG-inv.fif'
@@ -219,7 +223,7 @@ for p_threshold in ll:
 
     #    good_cluster_inds = np.where(cluster_p_values < 0.05)[0]
     #    print cluster_p_values.min()
-        tstep2=0.1
+        tstep2=0.02
         tmin2=0.05
         clus_p_values=(p_threshold/0.05)*cluster_p_values
                 
@@ -229,8 +233,10 @@ for p_threshold in ll:
         fsave_vertices = [np.arange(10242), np.arange(10242)]
         if good_cluster_inds.size>0:
             p_thresh=np.max(cluster_p_values[good_cluster_inds])#cluster_p_values.min()+0.000001
-                
-        if cluster_p_values.min()<=1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
+        tmin1=50
+        tstep1=20
+        vertices_to = [np.arange(10242), np.arange(10242)]        
+        if cluster_p_values.min()<=0.1:#clus_p_values.min()<=0.01 and cluster_p_values.min()<=0.1:
             #print p_thresh
             p_thr=cluster_p_values.min()
             good_cluster_inds = np.where(cluster_p_values <=p_thr)[0]      
@@ -248,10 +254,13 @@ for p_threshold in ll:
             for cc in range(good_cluster_inds.shape[0]):
                 Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
             
-            tmin1=50
-            tstep1=100
-            vertices_to = [np.arange(10242), np.arange(10242)]
+            
             matx_stc = mne.SourceEstimate(Matx, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
             out_file2=out_path + 'Per_sw_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_'+b+'_ica_Subtract_Power2_ratio_normori_eq_50_550_20ms_sx_ms' + str(max_step) 
             matx_stc.save(out_file2)
+        
+        out_file_ttest=uvttest_path + 'UVTtest_t_Power2_ratio_normori_eq_50_550_20ms_'+b
+        if not os.path.isfile(out_file_ttest):
+            tval_stc = mne.SourceEstimate(T_obs.T, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
+            tval_stc.save(out_file_ttest)
 
