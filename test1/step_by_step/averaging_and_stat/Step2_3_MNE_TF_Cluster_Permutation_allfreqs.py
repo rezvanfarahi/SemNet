@@ -102,7 +102,7 @@ subjects=['SS1_Meg10_0378',
 'SS21_Meg11_0147'
 ]
 
-ll = []
+ll = [0]
 for ss in p_inds:
  ll.append(p_list[ss])
 
