@@ -43,12 +43,15 @@ import copy
 # Set parameters
 exclude_wbmedial=True
 exclude_ROIs=False
+win_20ms=True
 if exclude_wbmedial:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/glm/' # root
 if exclude_ROIs:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/masked_ROIs/evoked/glm/' # root
 uvttest_path = '/imaging/rf02/Semnet/semnet4semloc/stc/uvttest/evoked/glm/' # root
-
+if win_20ms:
+    out_path=out_path+'win_20ms/'
+    uvttest_path=uvttest_path+'win_20ms/'
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 if not os.path.exists(uvttest_path):
@@ -148,7 +151,7 @@ n_levels=len(semtasks)
 all_nconds=[len(event_names['semloc']),len(event_names['semnet1']),len(event_names['semnet2'])]
 nconds=copy.deepcopy(all_nconds[0])
 factor_levels = [n_levels,n_levels]  # number of levels in each factor
-grand_tstep=100
+grand_tstep=20
 grand_tmin=350
 grand_tmax=751-grand_tstep
 n_times=len(list(np.arange(grand_tmin,grand_tmax,grand_tstep)))

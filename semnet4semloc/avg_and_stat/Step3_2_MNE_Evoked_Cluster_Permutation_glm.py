@@ -43,7 +43,7 @@ import copy
 # Set parameters
 exclude_wbmedial=True
 exclude_ROIs=False
-win_20ms=False
+win_20ms=True
 if exclude_wbmedial:
     out_path = '/imaging/rf02/Semnet/semnet4semloc/stc/permutation/evoked/glm/' # root
 if exclude_ROIs:
@@ -151,7 +151,7 @@ n_levels=len(semtasks)
 all_nconds=[len(event_names['semloc']),len(event_names['semnet1']),len(event_names['semnet2'])]
 nconds=copy.deepcopy(all_nconds[0])
 factor_levels = [n_levels,n_levels]  # number of levels in each factor
-grand_tstep=100
+grand_tstep=20
 grand_tmin=350
 grand_tmax=751-grand_tstep
 n_times=len(list(np.arange(grand_tmin,grand_tmax,grand_tstep)))
