@@ -5,9 +5,16 @@ close all
 addpath(genpath("/Users/rezvanh/Documents/PhD/boundedline_pkg"))
 addpath(genpath("/Users/rezvanh/Documents/PhD/shadedErrorBar"))
 %ref for shaded area: https://uk.mathworks.com/matlabcentral/answers/180829-shade-area-between-graphs
+
 %refs for standard error bar: 
-%1 within subject error bar; % http://www.cogsci.nl/blog/tutorials/156-an-easy-way-to-create-graphs-with-within-subject-error-bars
-%2 cross-subject error bar; 
+%1 within subject error bar; easy ref: http://www.cogsci.nl/blog/tutorials/156-an-easy-way-to-create-graphs-with-within-subject-error-bars
+%main ref: http://www.tqmp.org/RegularArticles/vol01-1/p042/p042.pdf
+
+%2 cross-subject error bar; var1 corresponding to semloc, 
+%then I treated task2,3 as one (same semnet subjs) and found
+%one var23 for them, then computed pooled variance: https://en.wikipedia.org/wiki/Pooled_variance
+%also useful for pooled var- answer2: https://stats.stackexchange.com/questions/231027/combining-samples-based-off-mean-and-standard-error
+%combined standard error is based on pooled variance
 
 inpath='/Users/rezvanh/Documents/PhD/manuscripts/semloc_july2020/semnet4semloc/';
 filenames={'SemLoc_SD_500wins.mat','SemNet_SD_500wins.mat','SemNet_LD_500wins.mat'};

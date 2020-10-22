@@ -38,7 +38,7 @@ data_path = '/imaging/rf02/TypLexMEG/' # root directory for your MEG data
 os.chdir(data_path)
 subjects_dir = '/imaging/rf02/TypLexMEG/'    # where your MRI subdirectories are
 # where event-files are
-out_path = '/imaging/rf02/TypLexMEG/icaanalysis_results/stc/permutation/power/masked_ROIs_oct2020/' #
+out_path = '/imaging/rf02/TypLexMEG/icaanalysis_results/stc/permutation/power/masked_ROIs_oct2020/20ms_wins/' #
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 
@@ -50,13 +50,13 @@ inv_fname = 'InverseOperator_EMEG-inv.fif'
 # get indices for subjects to be processed from command line input
 # 
 print sys.argv
-p_inds = []
+p_inds = [0]
 for ss in sys.argv[1:]:
    p_inds.append( int( ss ) )
 
 subject_inds=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16] # removed
 #p_inds=[0,1,2,3,4,5,6,7,8,9,10]
-p_list=[0.01,0.05,0.045,0.04,0.03,0.025,0.01,0.008,0.005,0.002,0.001,0.0005,0.0001]
+p_list=[0.001,0.05,0.045,0.04,0.03,0.025,0.01,0.008,0.005,0.002,0.001,0.0005,0.0001]
 print "subject_inds:"
 print subject_inds
 print "No rejection"
@@ -128,7 +128,7 @@ n_cycles[frequencies<=20] += np.arange(0,1,0.077)
 exclude_wbmedial=False   
 exclude_ROIs=True
 
-ntimes=5
+ntimes=25
 nbands=4
 nverts=20484
 nsubjs=17
@@ -156,7 +156,7 @@ for p_threshold in ll:
         	"""
         	b2=0.05
         	for cc in range(ntimes):
-        		b1=b2+0.0001; b2=b1+0.1-0.0001
+        		b1=b2+0.0001; b2=b1+0.02-0.0001
         		print b1; print b2
         		Xc1=np.abs(stc_cncrt.copy().crop(b1,b2).mean().data.squeeze())
         		Xa1=np.abs(stc_abs.copy().crop(b1,b2).mean().data.squeeze())
@@ -211,7 +211,7 @@ for p_threshold in ll:
         n_subjects=17
         t_threshold = -sstats.distributions.t.ppf(p_threshold/2., n_subjects - 1)
         print('Clustering.')
-        max_step=5
+        max_step=1
         T_obs, clusters, cluster_p_values, H0 = clu = spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=4, threshold=t_threshold,n_permutations=n_permutations,tail=0,t_power=1, step_down_p=0.05, spatial_exclude=spatial_exclude, max_step=max_step)
         
         #    Now select the clusters that are sig. at p < 0.05 (note that this value
@@ -237,13 +237,13 @@ for p_threshold in ll:
             stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep2, p_thresh=cluster_p_values.min()+0.000001, vertices=fsave_vertices, subject='fsaverage')
             #t_stc = mne.SourceEstimate(T_obs, vertices=fsave_vertices, tmin=tmin2, tstep=tstep2, subject='average', verbose=None)
             
-            out_file1=out_path + 'Per_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_'+b+'_ica_Subtract_Power2_ratio_ico_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
+            out_file1=out_path + 'Per_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_'+b+'_ica_Subtract_Power2_ratio_ico_normori_eq_50_550_20ms_sx_ms' + str(max_step) 
             stc_all_cluster_vis.save(out_file1)
             #out_file2=data_path + 'Permutation_TypLex_Subtract_Coherence_Beta_150_350_' + label_name[0:-3]
             #clu_beta.save(out_file2)
             
             
-            Matx=np.zeros((20484,ntimes*nbands))
+            Matx=np.zeros((20484,ntimes))
             T=np.divide(T_obs,np.absolute(T_obs))
             for cc in range(good_cluster_inds.shape[0]):
                 Matx[clusters[good_cluster_inds[cc]][1],clusters[good_cluster_inds[cc]][0]]=T[clusters[good_cluster_inds[cc]][0],clusters[good_cluster_inds[cc]][1]]
@@ -252,6 +252,6 @@ for p_threshold in ll:
             tstep1=100
             vertices_to = [np.arange(10242), np.arange(10242)]
             matx_stc = mne.SourceEstimate(Matx, vertices=vertices_to,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
-            out_file2=out_path + 'Per_sw_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_'+b+'_ica_Subtract_Power2_ratio_normori_eq_50_550_100ms_sx_ms' + str(max_step) 
+            out_file2=out_path + 'Per_sw_clusp'+str(p_threshold)[2:]+'_p'+str(cluster_p_values.min())[2:]+'_SL_'+b+'_ica_Subtract_Power2_ratio_normori_eq_50_550_20ms_sx_ms' + str(max_step) 
             matx_stc.save(out_file2)
 
