@@ -2,8 +2,8 @@ clear
 clc
 close all
 % addpath('/home/rf02/rezvan/test1/BCT/2015_01_25 BCT')
-in_path='C:\Users\rf02\Documents\Rezvan\PhDproject\semnet\rezvan\rezvan\rezvan_meg_final_meglab007\data\';%'/imaging/rf02/TypLexMEG/';
-
+%in_path='C:\Users\rf02\Documents\Rezvan\PhDproject\semnet\rezvan\rezvan\rezvan_meg_final_meglab007\data\';%'/imaging/rf02/TypLexMEG/';
+in_path='/home/rf02/PC_backup/PhDproject/semnet/rezvan/rezvan/rezvan_meg_final_meglab007/data';
 list_all = {'MEG_0032_MEG16002_29_2_18_11_1_LDblock.mat',
     'MEG0034_MEG16002_41_2_19_13_57_LDblock.mat',
     'MEG16_0035_2_MEG16002_26_2_22_17_46_LDblock.mat',
