@@ -3,7 +3,10 @@ clc
 close all
 % addpath('/home/rf02/rezvan/test1/BCT/2015_01_25 BCT')
 %in_path='C:\Users\rf02\Documents\Rezvan\PhDproject\semnet\rezvan\rezvan\rezvan_meg_final_meglab007\data\';%'/imaging/rf02/TypLexMEG/';
-in_path='/home/rf02/PC_backup/PhDproject/semnet/rezvan/rezvan/rezvan_meg_final_meglab007/data';
+in_path='/home/rf02/PC_backup/PhDproject/semnet/rezvan/rezvan/rezvan_meg_final_meglab007/data/';
+load('/imaging/rf02/semnet_git/SemNet/semnet4semloc/word_concrete_matchedca50_2.mat')
+load('/imaging/rf02/semnet_git/SemNet/semnet4semloc/word_eabs_matchedca50_2.mat')
+
 list_all = {'MEG_0032_MEG16002_29_2_18_11_1_LDblock.mat',
     'MEG0034_MEG16002_41_2_19_13_57_LDblock.mat',
     'MEG16_0035_2_MEG16002_26_2_22_17_46_LDblock.mat',
@@ -27,8 +30,8 @@ list_all = {'MEG_0032_MEG16002_29_2_18_11_1_LDblock.mat',
 
 
 n_subj=length(list_all);
-rtmat=zeros(n_subj,6);
-crrate=zeros(n_subj,6);
+rtmat=zeros(n_subj,8);
+crrate=zeros(n_subj,8);
 checkbads=zeros(n_subj,3,500);
 p=[];
 for cnt=1:n_subj
@@ -89,6 +92,20 @@ for cnt=1:n_subj
     
     fname=[in_path,list_all{cnt}];
     load(fname)
+    con_ind=zeros(length(wordlist),1);
+    abs_ind=zeros(length(wordlist),1);
+    for con_cnt=1:length(con_list)
+        thiscon=find(strcmp(wordlist,con_list(con_cnt)));
+        con_ind(thiscon)=1;
+    end
+    for abs_cnt=1:length(eabs_list)
+        thisabs=find(strcmp(wordlist,eabs_list(abs_cnt)));
+        abs_ind(thisabs)=1;
+    end
+    
+    respmat(con_ind==1,6)=20;%concrete
+    respmat(abs_ind==1,6)=21;%emot abstract
+    
     [aa,bb]=sort(wordlist);
     respmats=respmat(bb,:);
     respmatsg=respmats(goods==1,:);
@@ -101,6 +118,8 @@ for cnt=1:n_subj
     emotmat=respmat_cr(respmat_cr(:,6)==4,:);rtmat(cnt,4)=mean(emotmat(:,2));crrate(cnt,4)=size(emotmat,1)/(50-sum(c(:,2)==4));%
     neutmat=respmat_cr(respmat_cr(:,6)==5,:);rtmat(cnt,5)=mean(neutmat(:,2));crrate(cnt,5)=size(neutmat,1)/(50-sum(c(:,2)==5));%(50-sum(c(:,2)==5));
     pwmat=respmat_cr(respmat_cr(:,6)==6,:);rtmat(cnt,6)=mean(pwmat(:,2));crrate(cnt,6)=size(pwmat,1)/(50-pwbads);%(50-audbads);%(50-sum(c(:,2)==6));
+    
+    conmat=respmat_cr(respmat_cr(:,6)==20,:);rtmat(cnt,7)=mean(conmat(:,2));crrate(cnt,7)=size(conmat,1)/(50-visbads);%50;%(50-audbads);%
     
    
 end
