@@ -110,24 +110,25 @@ for cnt=1:n_subj
     respmats=respmat(bb,:);
     respmatsg=respmats(goods==1,:);
 %     checkbads(cnt,:,:)=respmatsg(:,[3,6])';
-    respmat_cr=respmatsg(respmatsg(:,3)==1,:);
+    respmat_cr=respmats(respmats(:,3)==1,:);
     
-    vismat=respmat_cr(respmat_cr(:,6)==1,:);rtmat(cnt,1)=mean(vismat(:,2));crrate(cnt,1)=size(vismat,1)/(50-visbads);%50;%(50-audbads);%
-    audmat=respmat_cr(respmat_cr(:,6)==2,:);rtmat(cnt,2)=mean(audmat(:,2));crrate(cnt,2)=size(audmat,1)/(50-audbads);%(50-audbads);%(50-sum(c(:,2)==2));
-    hndmat=respmat_cr(respmat_cr(:,6)==3,:);rtmat(cnt,3)=mean(hndmat(:,2));crrate(cnt,3)=size(hndmat,1)/(50-hndbads);%(50-audbads);%(50-sum(c(:,2)==3));
-    emotmat=respmat_cr(respmat_cr(:,6)==4,:);rtmat(cnt,4)=mean(emotmat(:,2));crrate(cnt,4)=size(emotmat,1)/(50-sum(c(:,2)==4));%
-    neutmat=respmat_cr(respmat_cr(:,6)==5,:);rtmat(cnt,5)=mean(neutmat(:,2));crrate(cnt,5)=size(neutmat,1)/(50-sum(c(:,2)==5));%(50-sum(c(:,2)==5));
-    pwmat=respmat_cr(respmat_cr(:,6)==6,:);rtmat(cnt,6)=mean(pwmat(:,2));crrate(cnt,6)=size(pwmat,1)/(50-pwbads);%(50-audbads);%(50-sum(c(:,2)==6));
-    
-    conmat=respmat_cr(respmat_cr(:,6)==20,:);rtmat(cnt,7)=mean(conmat(:,2));crrate(cnt,7)=size(conmat,1)/(50-visbads);%50;%(50-audbads);%
-    
+%     vismat=respmat_cr(respmat_cr(:,6)==1,:);rtmat(cnt,1)=mean(vismat(:,2));crrate(cnt,1)=size(vismat,1)/(50-visbads);%50;%(50-audbads);%
+%     audmat=respmat_cr(respmat_cr(:,6)==2,:);rtmat(cnt,2)=mean(audmat(:,2));crrate(cnt,2)=size(audmat,1)/(50-audbads);%(50-audbads);%(50-sum(c(:,2)==2));
+%     hndmat=respmat_cr(respmat_cr(:,6)==3,:);rtmat(cnt,3)=mean(hndmat(:,2));crrate(cnt,3)=size(hndmat,1)/(50-hndbads);%(50-audbads);%(50-sum(c(:,2)==3));
+%     emotmat=respmat_cr(respmat_cr(:,6)==4,:);rtmat(cnt,4)=mean(emotmat(:,2));crrate(cnt,4)=size(emotmat,1)/(50-sum(c(:,2)==4));%
+%     neutmat=respmat_cr(respmat_cr(:,6)==5,:);rtmat(cnt,5)=mean(neutmat(:,2));crrate(cnt,5)=size(neutmat,1)/(50-sum(c(:,2)==5));%(50-sum(c(:,2)==5));
+%     pwmat=respmat_cr(respmat_cr(:,6)==6,:);rtmat(cnt,6)=mean(pwmat(:,2));crrate(cnt,6)=size(pwmat,1)/(50-pwbads);%(50-audbads);%(50-sum(c(:,2)==6));
+%     
+    conmat=respmat_cr(respmat_cr(:,6)==20,:);rtmat(cnt,7)=mean(conmat(:,2));crrate(cnt,7)=size(conmat,1)/50;%50;%(50-audbads);%
+    absmat=respmat_cr(respmat_cr(:,6)==21,:);rtmat(cnt,8)=mean(absmat(:,2));crrate(cnt,8)=size(absmat,1)/50;%50;%(50-audbads);%
+
    
 end
 % [h,p(1)]=ttest(rtmat(:,1)-rtmat(:,2));%vis aud
 % [h,p(2)]=ttest(rtmat(:,1)-rtmat(:,3));%vis hnd
 % [h,p(3)]=ttest(rtmat(:,2)-rtmat(:,3));%aud hnd
 % [h,p(4)]=ttest(rtmat(:,2)-rtmat(:,4));%aud hnd
-rtmat=rtmat(:,[1,2,3,6]);
+rtmat=rtmat(:,[7,8]);
 prt=eye(size(rtmat,2),size(rtmat,2));
 for ii=1:size(rtmat,2)
     for jj=setdiff(1:size(rtmat,2),ii)
@@ -135,7 +136,7 @@ for ii=1:size(rtmat,2)
 prt(ii,jj)=signrank(rtmat(:,ii)-rtmat(:,jj));
     end
 end
-crrate=crrate(:,[1,2,3,6]);
+crrate=crrate(:,[7,8]);
 per=eye(size(crrate,2),size(crrate,2));
 
 for ii=1:size(crrate,2)
@@ -146,11 +147,11 @@ per(ii,jj)=signrank(crrate(:,ii)-crrate(:,jj));
 end
 % end
 % rtmat=rtmat(:,[1,2,3,6]);
-boxplot(rtmat,'notch','on','labels',{'Visual','Auditory','Hand Action','Pseudowords'})%,'boxstyle','filled')
+boxplot(rtmat,'notch','on','labels',{'Concrete','Abstract'})%,'boxstyle','filled')
 
 % boxplot(rtmat,'notch','on','labels',{'Visual','Auditory','Hand Action','Emotional Abs','Neutral Abs','Pseudowords'})%,'boxstyle','filled')
 
 figure,
 % boxplot(crrate,'notch','on','labels',{'Visual','Auditory','Hand Action','Emotional Abs','Neutral Abs','Pseudowords'})%,'boxstyle','filled')
-boxplot(crrate,'notch','on','labels',{'Visual','Auditory','Hand Action','Pseudowords'})%,'boxstyle','filled')
+boxplot(crrate,'notch','on','labels',{'Concrete','Abstract'})%,'boxstyle','filled')
 
