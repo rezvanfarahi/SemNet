@@ -24,7 +24,7 @@ list_all = {'MEG_0032_MEG16002_29_2_18_11_1_LDblock.mat',
     'MEG16_0086_MEG16002_29_4_22_15_43_LDblock.mat',
     'MEG16_0097_MEG16002_23_5_12_11_41_LDblock.mat',
     'MEG16_0122_MEG16002_22_7_7_9_27_LDblock.mat',
-    'Meg16_0123_MEG16002_23_7_8_9_41_LDblock.mat',
+    %'Meg16_0123_MEG16002_23_7_8_9_41_LDblock.mat',
     'MEG16_0125_MEG16002_24_7_12_15_48_LDblock.mat',
     };
 
