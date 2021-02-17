@@ -57,7 +57,7 @@ chlabels = {
 
 };
 input_path='/imaging/rf02/Semnet/semnet4semloc/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/centre_of_mass/';%'/imaging/rf02/TypLexMEG/dcm/maxCTF/';%'/imaging/rf02/TypLexMEG/dcm/dipole/';
-outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_LD_500wins_unsigned.mat';
+outpath_anova='/imaging/rf02/Semnet/semnet4semloc/dcm/SemNet_SD_500wins_unsigned.mat';
 
 list_all =  {%'/meg16_0030', not needed for LD
             '/meg16_0032', 
@@ -90,7 +90,7 @@ for cnt=1:length(list_all)
     
     % create data array
     %--------------------------------------------------------------------------
-    fname_a='_Semnet_ConEmot_LD_oldreg_unsigned_Evoked_5ROIs_mean_maxCTF_forDCM_avg';%'_Semnet_ConEmot_SL_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
+    fname_a='_Semnet_ConEmot_SemDec_oldreg_unsigned_Evoked_5ROIs_mean_maxCTF_forDCM_avg';%'_Semnet_ConEmot_SL_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
     
     fname_in=[input_path,list_all{cnt},fname_a,'.mat'];
     this_dir=input_path;%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/avg_50verts_dipole/';
