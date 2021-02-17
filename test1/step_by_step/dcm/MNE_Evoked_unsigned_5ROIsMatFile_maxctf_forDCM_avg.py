@@ -318,7 +318,7 @@ for ii, meg in enumerate(ll):
                     # Load data
         srcin='/imaging/rf02/TypLexMEG/fsaverage/bem/fsaverage_dist-ico-5-src.fif'
         src_avg = mne.read_source_spaces(srcin)
-        fname = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700' 
+        fname = data_path + meg + 'firstMorphed_ico_SemLoc_ica_'+event_name+'_Source_Evoked_m500_700' 
         this_stc = mne.read_source_estimate(fname)  
         tmin1=-500
         tstep1=1
@@ -349,7 +349,7 @@ for ii, meg in enumerate(ll):
             vertices_test = [np.arange(10242), np.arange(10242)]
             thisstc_tolabel_test = mne.SourceEstimate(thisstc_testdata, vertices=vertices_test,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
             thisstc_labeltest=mne.stc_to_label(thisstc_tolabel_test, src_avg,smooth=False)[0]
-            testlabel_path=data_path+'dcm/testDCMctflabs/'+'subject'+str(ii)+'_'+event_name+'_'+this_label.name
+            testlabel_path=data_path+'dcm/testDCMctflabs_unsigned/'+'subject'+str(ii)+'_'+event_name+'_'+this_label.name
             thisstc_labeltest.save(testlabel_path)
             #            conabs_mat[this_labelc,:,event_no]=ini_tc.copy()#(ini_tc-np.min(ini_tc))/(np.max(ini_tc)-np.min(ini_tc))zscore(ini_tc)#
             conabs_mat[this_labelc,:,event_no]=mne.extract_label_time_course(this_stc,thisstc_labeltest,src_avg,mode='mean_flip')
@@ -361,8 +361,10 @@ for ii, meg in enumerate(ll):
 #        cona=np.corrcoef(abs_mat[:,550:750])#con2[0]+con2[0].transpose(1,0,2)
 #        cons[ii,:,:]=np.squeeze(conc-cona)
     X[ii,:,:,:]=conabs_mat
-    out_file=out_path + meg[:10] + '_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg.mat'
+    out_file=out_path + meg[:10] + '_SemLoc_unsigned_Evoked_5ROIs_mean_maxCTF_forDCM_avg.mat'
     scio.savemat(out_file,{'conabs_mat':conabs_mat})
+out_fileX=out_path+"SN4SL_SemLoc_unsigned_conabs_mat_all_oldreg.npy"
+np.save(out_fileX,X)
 import matplotlib.pyplot as plt
 plt.close("all")
 for ii in range(len(labellist)):
