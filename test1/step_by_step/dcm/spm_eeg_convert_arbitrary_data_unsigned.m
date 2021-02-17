@@ -88,7 +88,7 @@ for cnt=1:length(list_all)
     
     % create data array
     %--------------------------------------------------------------------------
-    fname_a='_SemLoc_unsigned_Evoked_5ROIs_mean_maxCTF_forDCM_avg';%'_TypLex_SL_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
+    fname_a='_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_TypLex_SL_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_maxCTF_mean_forDCM_avg';%'_SemLoc_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg_aifg';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_cmass_forDCM';%'_SemLoc_Evoked_5ROIs_maxCTF_forDCM_avg';%'_SemLoc_Evoked_5ROIs_relctfdip_avgnoflip_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_dipole_pifg_avg_snr3_exttc_allverts_avg';%'_SemLoc_Evoked_5ROIs_meanCTF_50verts_aifg_forDCM_avg';%_SemLoc_Evoked_5ROIs_meanCTF_forDCM_avg.mat
                                                                    
     fname_in=[input_path,list_all{cnt},fname_a,'.mat'];
     this_dir=input_path;%'/imaging/rf02/TypLexMEG/dcm/5ROIs_hubvsfull/avg_50verts_dipole/';
