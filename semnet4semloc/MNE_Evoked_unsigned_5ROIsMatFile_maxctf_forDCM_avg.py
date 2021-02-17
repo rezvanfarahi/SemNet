@@ -315,7 +315,7 @@ for ii, meg in enumerate(ll):
             testlabel_path=out_path+'/'+'SN4SL_oldreg_SemDec_unsigned_subject'+str(ii)+'_'+event_name+'_'+this_label.name
             thisstc_labeltest.save(testlabel_path)
             #            conabs_mat[this_labelc,:,event_no]=ini_tc.copy()#(ini_tc-np.min(ini_tc))/(np.max(ini_tc)-np.min(ini_tc))zscore(ini_tc)#
-            conabs_mat[this_labelc,:,event_no]=mne.extract_label_time_course(this_stc,thisstc_labeltest,src_avg,mode='mean_flip')
+            conabs_mat[this_labelc,:,event_no]=mne.extract_label_time_course(this_stc,thisstc_labeltest,src_avg,mode='mean')
 #    labels_tcb[ii,:,:,:]=conabs_mat.copy()
 #        wnw_mat=np.concatenate((np.expand_dims(cncrt_mat,2),np.expand_dims(abs_mat,2)),2)
 #        con=mne.connectivity.spectral_connectivity(data=cncrt_mat[np.newaxis,:,550:750],method='coh',sfreq=1000.,mode='multitaper',fmin=1.,fmax=45.,mt_adaptive=True,faverage=True)
@@ -324,7 +324,7 @@ for ii, meg in enumerate(ll):
 #        cona=np.corrcoef(abs_mat[:,550:750])#con2[0]+con2[0].transpose(1,0,2)
 #        cons[ii,:,:]=np.squeeze(conc-cona)
     X[ii,:,:,:]=conabs_mat.copy()
-    out_file=out_path + meg[:11] + '_Semnet_ConEmot_SemDec_oldreg_unsigned_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg.mat'
+    out_file=out_path + meg[:11] + '_Semnet_ConEmot_SemDec_oldreg_unsigned_Evoked_5ROIs_mean_maxCTF_forDCM_avg.mat'
     scio.savemat(out_file,{'conabs_mat':conabs_mat})
 out_fileX=out_path+"SN4SL_SemDec_unsigned_conabs_mat_all_oldreg.npy"
 np.save(out_fileX,X)
@@ -360,7 +360,7 @@ for jj in range(len(labellist)):
 #    src_avg = mne.read_source_spaces(srcin)
 #    fname = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_Concrete_Source_Evoked_m300_600' 
 #    stc_allc = mne.read_source_estimate(fname)
-#    thislabel_tcc=mne.extract_label_time_course(stc_allc, thislabel,src, mode='mean_flip') 
+#    thislabel_tcc=mne.extract_label_time_course(stc_allc, thislabel,src, mode='mean') 
 #    labels_tcc[ii,:,thislabelc]=thislabel_tcc.copy()
 #    
 ##        cl1=stc_allc.in_label(thislabel).data
@@ -370,7 +370,7 @@ for jj in range(len(labellist)):
 #    
 #    fname = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_Abstract_Source_Evoked_m300_600'  
 #    stc_alla = mne.read_source_estimate(fname)
-#    thislabel_tca=mne.extract_label_time_course(stc_alla, thislabel,src, mode='mean_flip')
+#    thislabel_tca=mne.extract_label_time_course(stc_alla, thislabel,src, mode='mean')
 #    labels_tca[ii,:,thislabelc]=thislabel_tca.copy()
 #
 #labelsa_forsign=np.squeeze(np.mean(labels_tca,axis=0)) #size time x ROI
@@ -385,7 +385,7 @@ for jj in range(len(labellist)):
 #        fname = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_Concrete_Source_Evoked_m300_600' 
 #        stc_allc = mne.read_source_estimate(fname)
 #        thislabel_tcc=mne.extract_label_time_course(stc_allc, thislabel,src, mode='pca_flip') 
-#        #        thislabel_signtc=mne.extract_label_time_course(stc_allc, thislabel,src, mode='mean_flip')
+#        #        thislabel_signtc=mne.extract_label_time_course(stc_allc, thislabel,src, mode='mean')
 #        Pc=np.polyfit(np.linspace(50,200,150),thislabel_tcc[0,550:600],1)[0]
 #        #        Pct=np.polyfit(np.linspace(50,200,150),thislabel_signtc[0,550:600],1)[0]
 #        if np.corrcoef(np.squeeze(thislabel_tcc),labelsc_forsign[:,thislabelc])[0,1]>=0:#np.corrcoef(thislabel_tcc,thislabel_signtc)[0,1]>=0:#np.sign(Pc)==np.sign(Pct):
@@ -403,7 +403,7 @@ for jj in range(len(labellist)):
 #        fname = data_path + meg + 'firstMorphed_ico_signed_SemLoc_ica_Abstract_Source_Evoked_m300_600'  
 #        stc_alla = mne.read_source_estimate(fname)
 #        thislabel_tca=mne.extract_label_time_course(stc_alla, thislabel,src, mode='pca_flip')
-#        #        thislabel_signta=mne.extract_label_time_course(stc_alla, thislabel,src, mode='mean_flip')
+#        #        thislabel_signta=mne.extract_label_time_course(stc_alla, thislabel,src, mode='mean')
 #        Pa=np.polyfit(np.linspace(50,200,150),thislabel_tca[0,550:600],2)[0]
 #        #        Pat=np.polyfit(np.linspace(50,200,150),thislabel_signta[0,550:600],2)[0]
 #        if np.corrcoef(np.squeeze(thislabel_tca),labelsa_forsign[:,thislabelc])[0,1]>=0:#np.corrcoef(thislabel_tca,thislabel_signta)[0,1]>=0:#np.sign(Pa)==np.sign(Pat):
