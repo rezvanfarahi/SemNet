@@ -239,7 +239,7 @@ for p_threshold in ll:
     effects={'contrast':np.hstack((np.asarray([1, 1, 1])[np.newaxis,:],np.ones((1,Ns[1]))*2/Ns[1] )),#this is for the main effect
     'interaction':np.hstack((np.eye(3)-np.mean(np.eye(3)),np.zeros((3,Ns[1]))))}    
     for effect_name in effect_names:
-        f_thresh = 2 #f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
+        f_thresh = -stats.distributions.t.ppf(p_threshold/2., Nsubj - 1)#2.1 #f_threshold_mway_rm(n_subjects, factor_levels, this_effect, pthresh)
         #NOTEE! stat_fun will have to return a 1-D array 
         def stat_fun(*args): #this function swaps Ncond and Nsub in X_list; that is the input dimension that anova requires
             cond1=args[0].copy()#cond1 is Nsub x Ntime x Nv
