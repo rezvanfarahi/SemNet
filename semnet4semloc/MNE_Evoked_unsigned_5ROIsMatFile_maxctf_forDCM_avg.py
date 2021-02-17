@@ -312,7 +312,7 @@ for ii, meg in enumerate(ll):
             vertices_test = [np.arange(10242), np.arange(10242)]
             thisstc_tolabel_test = mne.SourceEstimate(thisstc_testdata, vertices=vertices_test,tmin=1e-3 * tmin1, tstep=1e-3 * tstep1, subject='fsaverage')
             thisstc_labeltest=mne.stc_to_label(thisstc_tolabel_test, src_avg,smooth=False)[0]
-            testlabel_path=out_path+'/'+'SN4SL_oldreg_LD_subject'+str(ii)+'_'+event_name+'_'+this_label.name
+            testlabel_path=out_path+'/'+'SN4SL_oldreg_LD_unsigned_subject'+str(ii)+'_'+event_name+'_'+this_label.name
             thisstc_labeltest.save(testlabel_path)
             #            conabs_mat[this_labelc,:,event_no]=ini_tc.copy()#(ini_tc-np.min(ini_tc))/(np.max(ini_tc)-np.min(ini_tc))zscore(ini_tc)#
             conabs_mat[this_labelc,:,event_no]=mne.extract_label_time_course(this_stc,thisstc_labeltest,src_avg,mode='mean_flip')
@@ -324,9 +324,9 @@ for ii, meg in enumerate(ll):
 #        cona=np.corrcoef(abs_mat[:,550:750])#con2[0]+con2[0].transpose(1,0,2)
 #        cons[ii,:,:]=np.squeeze(conc-cona)
     X[ii,:,:,:]=conabs_mat.copy()
-    out_file=out_path + meg[:11] + '_Semnet_ConEmot_LD_oldreg_Signed_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg.mat'
+    out_file=out_path + meg[:11] + '_Semnet_ConEmot_LD_oldreg_unsigned_Evoked_5ROIs_meanflip_maxCTF_forDCM_avg.mat'
     scio.savemat(out_file,{'conabs_mat':conabs_mat})
-out_fileX=out_path+"SN4SL_LD_conabs_mat_all_oldreg.npy"
+out_fileX=out_path+"SN4SL_LD_unsigned_conabs_mat_all_oldreg.npy"
 np.save(out_fileX,X)
 import matplotlib.pyplot as plt
 plt.close("all")
