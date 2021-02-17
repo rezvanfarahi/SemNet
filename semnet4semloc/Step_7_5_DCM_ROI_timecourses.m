@@ -39,6 +39,7 @@ for ii=1:3
     end
     
 end
+X=abs(X);
 Xm=mean(X(:,:,:,:),4);
 X25=zeros(size(Xm));
 X75=zeros(size(Xm));
@@ -65,7 +66,7 @@ for ii=1:nroi
             v3=(nsubj3-1)*var(nval3);
             v23=(nsubj2+nsubj3-1)*var(nval23);
             varpool=(v1+v23)/(nsubj-2);
-            Xerr(ii,jj,kk)=1.96*sqrt(varpool/nsubj);
+            Xerr(ii,jj,kk)=sqrt(varpool/nsubj);%1.96*
 %             if kk<18
 %                 Xerr(ii,jj,kk)=std(squeeze(X(ii,jj,kk,:))-subavg+gavg1)/sqrt(nsubj);
 %             elseif kk<36
