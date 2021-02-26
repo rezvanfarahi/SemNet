@@ -78,7 +78,6 @@ for ii=1:nroi
     end
 end
 %% plot ERP- no error bar
-% Xm=squeeze(X(:,:,:,8));
 for ii=1:5
     figure();
     conmat=squeeze(Xm(ii,:,1));
